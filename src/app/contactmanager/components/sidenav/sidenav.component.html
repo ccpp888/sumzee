@@ -1,0 +1,47 @@
+<mat-sidenav-container class="app-sidenav-container">
+  <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10"
+               [opened]="!isScreenSmall()"
+               [mode]="isScreenSmall() ? 'over' : 'side'">
+    <mat-toolbar color="primary">
+        <mat-icon>school</mat-icon>&nbsp;&nbsp;Options
+    </mat-toolbar>
+
+    <mat-nav-list>
+      
+      <mat-list-item>
+         <a matLine>
+           <mat-icon>filter_1</mat-icon>&nbsp;&nbsp;Number bonds 10
+         </a>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+          <a matLine>
+            <mat-icon>filter_2</mat-icon>&nbsp;&nbsp;Number bonds 100
+          </a>
+       </mat-list-item>
+       <mat-divider></mat-divider>
+       <mat-list-item>
+          <a matLine>
+            <mat-icon>filter_3</mat-icon>&nbsp;&nbsp; Two times table 
+          </a>
+       </mat-list-item>
+       <mat-divider></mat-divider>
+       <mat-list-item>
+          <a matLine>
+            <mat-icon>filter_4</mat-icon>&nbsp;&nbsp; Three times table 
+          </a>
+       </mat-list-item>
+       <mat-divider></mat-divider>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <div class="app-sidenav-content">
+    <app-toolbar (toggleSidenav)="sidenav.toggle()"></app-toolbar>
+    <div class="wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</mat-sidenav-container>

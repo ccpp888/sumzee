@@ -1,0 +1,19 @@
+.example-card {
+    max-width: 300px;
+  }
+  
+  .example-header-image {
+    background-image: url('assets/images/1-2-3.png');
+    background-size: cover;
+  }
+
+  .title-text {
+    font-weight: bold;
+    font-size: large;
+  }   
+
+  mat-card img { 
+    object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+    width: 300px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    height: 150px;
+  }
