@@ -1,8 +1,18 @@
 <mat-toolbar color="primary">
 
-  <button mat-button class="sidenav-toggle" (click)="toggleSidenav.emit()">
+  <button mat-button class="sidenav-toggle">
     <mat-icon>menu</mat-icon>
   </button>
 
-  <span>SUMZEE - Fun with numbers!</span>
+  <span>SUMZEE</span>
+
+  <span class="example-spacer"></span>
+
+  <button mat-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>Menu
+  </button>
+  <mat-menu #menu="matMenu">    
+    <button mat-menu-item (click)="toggleTheme.emit()">Toggle theme</button>    
+  </mat-menu>
+
 </mat-toolbar>
