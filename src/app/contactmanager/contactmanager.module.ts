@@ -12,7 +12,7 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { BondsComponent } from './bonds/bonds.component';
+import { BondsComponent } from './components/bonds/bonds.component';
 
 
 const routes: Routes = [
