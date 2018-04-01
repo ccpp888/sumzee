@@ -13,14 +13,14 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BondsComponent } from './components/bonds/bonds.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 const routes: Routes = [
   { path: '', component: ContactmanagerAppComponent,
-    children: [
-      { path: ':id', component: MainContentComponent },
+    children: [      
       { path: 'bonds', component: BondsComponent },
-      { path: '', component: MainContentComponent }
+      { path: 'menu', component: MenuComponent }
     ] },
   { path: '**', redirectTo: '' }
 ];
@@ -37,6 +37,6 @@ const routes: Routes = [
   providers: [
     UserService    
   ],
-  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, BondsComponent]
+  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, BondsComponent, MenuComponent]
 })
 export class ContactmanagerModule { }
