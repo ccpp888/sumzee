@@ -24,12 +24,15 @@
       <mat-grid-tile>
         <form class="example-form">          
             <mat-form-field class="example-full-width">
-            <input matInput type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>
-          </mat-form-field>
+            <input matInput type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>            
+            <!--<mat-error *ngIf="hasBondError">Please enter a valid email address</mat-error>           -->
+          </mat-form-field>          
         </form>
-        <div *ngIf="alertIncorrect" > 
-          Incorrect
+
+        <div *ngIf="hasBondError" class="fontless"> 
+          <mat-error>Try again</mat-error>           
         </div>
+        
       </mat-grid-tile>
 
       <mat-grid-tile>

@@ -13,7 +13,7 @@ export class BondsComponent implements OnInit {
   generatedNumber: number;
   guess: number;
 
-  alertIncorrect: boolean = false;
+  hasBondError: boolean = false;
 
   constructor() { }
 
@@ -24,10 +24,11 @@ export class BondsComponent implements OnInit {
   guessit() : boolean {
     console.log("In guessit guess=%d", this.guess);
     if (this.generatedNumber + this.guess == this.bondNumber) {
-      this.alertIncorrect = false;
+      this.hasBondError = false;
       return true;
     }
-    this.alertIncorrect = true;
+    this.hasBondError = true;
+    console.log("hasBondError=%s",this.hasBondError);
     return false;    
  }
 
