@@ -1,3 +1,57 @@
-<p>
-  bonds works!
-</p>
+<mat-card>
+  
+    <mat-card-title>Number bonds to 10</mat-card-title>
+    <mat-card-subtitle>...enter the missing number</mat-card-subtitle>        
+        
+
+  <mat-card-content>
+
+    <mat-grid-list cols="5" rowHeight="2:1">
+      <mat-grid-tile>
+        <div class="fontlarge">
+          <span>{{generatedNumber}} </span>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <div class="fontlarge">
+          <span>+</span>
+        </div>
+      </mat-grid-tile>
+
+      <!--<mat-form-field class="example-full-width mat-elevation-z10">-->
+
+      <mat-grid-tile>
+        <form class="example-form">          
+            <mat-form-field class="example-full-width">
+            <input matInput type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>
+          </mat-form-field>
+        </form>
+        <div *ngIf="alertIncorrect" > 
+          Incorrect
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <div class="fontlarge">
+          <span> =&nbsp;&nbsp;&nbsp;10</span>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <button mat-fab (click)='guessit()'>Go</button>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+  </mat-card-content>
+
+  <!--
+  <mat-card-actions>
+    <div class="centred">
+      <button mat-fab>Go!</button>
+    </div>
+  </mat-card-actions>
+-->
+
+</mat-card>

@@ -21,8 +21,8 @@ const routes: Routes = [
     children: [      
       { path: 'bonds', component: BondsComponent },
       { path: 'menu', component: MenuComponent }
-    ] },
-  { path: '**', redirectTo: '' }
+    ] },    
+  { path: '**', redirectTo: 'menu' }
 ];
 
 @NgModule({

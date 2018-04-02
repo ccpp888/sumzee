@@ -51,7 +51,12 @@
   <div class="app-sidenav-content">
     <app-toolbar (toggleTheme)="toggleTheme()"></app-toolbar>
     <div class="wrapper">
-      <router-outlet></router-outlet>
+      
+        <div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">
+          <router-outlet></router-outlet>
+          
+      </div>
+
     </div>
   </div>
 
