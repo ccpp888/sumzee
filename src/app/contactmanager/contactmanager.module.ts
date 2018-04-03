@@ -8,12 +8,11 @@ import { FormsModule } from '@angular/forms';
 
 import { ContactmanagerAppComponent } from './contactmanager-app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { MainContentComponent } from './components/main-content/main-content.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BondsComponent } from './components/bonds/bonds.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { SuccessDialogComponent } from './components/bonds/success-dialog.component';
 
 
 const routes: Routes = [
@@ -22,6 +21,7 @@ const routes: Routes = [
       { path: 'bonds', component: BondsComponent },
       { path: 'menu', component: MenuComponent }
     ] },    
+  { path: 'brefresh', redirectTo: 'bonds' },
   { path: '**', redirectTo: 'menu' }
 ];
 
@@ -34,9 +34,16 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  providers: [
-    UserService    
+  providers: [],
+  declarations: [ContactmanagerAppComponent, 
+    ToolbarComponent,     
+    SidenavComponent, 
+    BondsComponent, 
+    MenuComponent, 
+    SuccessDialogComponent
   ],
-  declarations: [ContactmanagerAppComponent, ToolbarComponent, MainContentComponent, SidenavComponent, BondsComponent, MenuComponent]
+  entryComponents: [
+    SuccessDialogComponent
+  ]
 })
 export class ContactmanagerModule { }
