@@ -1,18 +1,24 @@
-<mat-grid-list cols="3">
+<div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">
+
+  <mat-grid-list cols="3">
+
     <mat-grid-tile>
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
-  
+
           <mat-card-title class="title-text">
-            <mat-icon>filter_1</mat-icon>&nbsp;&nbsp;Number bonds to 10</mat-card-title>          
+            <mat-icon>filter_1</mat-icon>&nbsp;&nbsp;Number bonds to 10</mat-card-title>
         </mat-card-header>
         <img mat-card-image src="/assets/images/numbers3.png">
-                
+
         <mat-card-actions>
-            <a routerLink="/contactmanager/bonds"><button mat-raised-button class="fontlarge">PLAY</button></a>
+          <a routerLink="/contactmanager/bonds">
+            <button mat-raised-button class="fontlarge">PLAY</button>
+          </a>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
+
     <mat-grid-tile>
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
@@ -20,43 +26,80 @@
             <mat-icon>filter_2</mat-icon>&nbsp;&nbsp;Number bonds to 100</mat-card-title>
           <!--<mat-card-subtitle>Fun with numbers!</mat-card-subtitle>-->
         </mat-card-header>
-        <img mat-card-image src="/assets/images/numbers1.png">
-        
+        <img mat-card-image src="/assets/images/numbers2.png">
+
         <mat-card-actions>
-          <button mat-raised-button class="fontlarge">PLAY</button>
+          <a routerLink="/contactmanager/bonds100">
+            <button mat-raised-button class="fontlarge">PLAY</button>
+          </a>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
-  
+
     <mat-grid-tile>
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
           <mat-card-title class="title-text">
-            <mat-icon>filter_3</mat-icon>&nbsp;&nbsp;Two times table</mat-card-title>
-          <!--<mat-card-subtitle>Fun with numbers!</mat-card-subtitle>-->
+            <mat-icon>filter_3</mat-icon>&nbsp;&nbsp;Number bonds to 1000</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="/assets/images/numbers1.png">
+        <mat-card-actions>
+          <a routerLink="/contactmanager/bonds1000">
+            <button mat-raised-button class="fontlarge">PLAY</button>
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon>filter_4</mat-icon>&nbsp;&nbsp;Two times table</mat-card-title>          
         </mat-card-header>
         <img mat-card-image src="/assets/images/numbers2.png">
-        
+
         <mat-card-actions>
-          <button mat-raised-button class="fontlarge">PLAY</button>
+          <a routerLink="/contactmanager/table2">
+            <button mat-raised-button class="fontlarge">PLAY</button>
+          </a>
         </mat-card-actions>
       </mat-card>
-  
+
     </mat-grid-tile>
-  
+
     <mat-grid-tile>
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
-  
+
           <mat-card-title class="title-text">
-            <mat-icon>filter_4</mat-icon>&nbsp;&nbsp;Three times table</mat-card-title>
+            <mat-icon>filter_5</mat-icon>&nbsp;&nbsp;Three times table</mat-card-title>
           <!--<mat-card-subtitle>Fun with numbers!</mat-card-subtitle>-->
         </mat-card-header>
-        <img mat-card-image src="/assets/images/numbers3.png">
-       
+        <img mat-card-image src="/assets/images/numbers1.png">
+
         <mat-card-actions>
           <button mat-raised-button class="fontlarge">PLAY</button>
         </mat-card-actions>
       </mat-card>
     </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-card class="example-card mat-elevation-z24">
+      <mat-card-header>
+
+        <mat-card-title class="title-text">
+          <mat-icon>filter_6</mat-icon>&nbsp;&nbsp;Four times table</mat-card-title>
+        <!--<mat-card-subtitle>Fun with numbers!</mat-card-subtitle>-->
+      </mat-card-header>
+      <img mat-card-image src="/assets/images/numbers3.png">
+
+      <mat-card-actions>
+        <button mat-raised-button class="fontlarge">PLAY</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+
   </mat-grid-list>
+
+</div>

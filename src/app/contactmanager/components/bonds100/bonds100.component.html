@@ -1,8 +1,8 @@
 <mat-card>
-  
-    <mat-card-title>Number bonds to 10</mat-card-title>
-    <mat-card-subtitle>...enter the missing number</mat-card-subtitle>        
-        
+
+  <mat-card-title>Number bonds to 100</mat-card-title>
+  <mat-card-subtitle>...enter the missing number</mat-card-subtitle>
+
 
   <mat-card-content>
 
@@ -22,22 +22,22 @@
       <!--<mat-form-field class="example-full-width mat-elevation-z10">-->
 
       <mat-grid-tile>
-        <form class="example-form">          
-            <mat-form-field class="example-full-width">
-            <input matInput type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>            
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input matInput type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()" />
             <!--<mat-error *ngIf="hasBondError">Please enter a valid email address</mat-error>           -->
-          </mat-form-field>          
+          </mat-form-field>
         </form>
 
-        <div *ngIf="hasBondError" class="fontless"> 
-          <mat-error>Try again</mat-error>           
+        <div *ngIf="hasBondError" class="fontless">
+          <mat-error>Try again</mat-error>
         </div>
-        
+
       </mat-grid-tile>
 
       <mat-grid-tile>
         <div class="fontlarge">
-          <span> =&nbsp;&nbsp;&nbsp;10</span>
+          <span> =&nbsp;&nbsp;&nbsp;100</span>
         </div>
       </mat-grid-tile>
 
@@ -51,16 +51,18 @@
 
 </mat-card>
 
+<!--
 <div>&nbsp;</div>
 
 <mat-card>
 
-    <mat-card-content>
-        <mat-grid-list cols="1" [rowHeight]="40">
-<mat-grid-tile>
+  <mat-card-content>
+    <mat-grid-list cols="1" [rowHeight]="40">
+      <mat-grid-tile>
         <button mat-raised-button color="primary" (click)='returnToMenu()'>Try another game</button>
       </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card-content>
-  
+    </mat-grid-list>
+  </mat-card-content>
+
 </mat-card>
+-->

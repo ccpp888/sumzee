@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { SuccessDialogComponent } from './success-dialog.component';
+import { SuccessDialogComponent } from '../bonds/success-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-bonds',
-  templateUrl: './bonds.component.html',
-  styleUrls: ['./bonds.component.scss']
+  selector: 'app-bonds100',
+  templateUrl: './bonds100.component.html',
+  styleUrls: ['./bonds100.component.scss']
 })
+export class Bonds100Component implements OnInit {
 
-export class BondsComponent implements OnInit {
-
-  bondNumber: number = 10;
+  bondNumber: number = 100;
   generatedNumber: number;
   guess: number;
 
@@ -21,9 +21,10 @@ export class BondsComponent implements OnInit {
   constructor(private dialog: MatDialog, public router: Router) { }
 
   ngOnInit() {
-    this.generatedNumber = Math.floor(Math.random() * 10);
+    this.generatedNumber = Math.floor(Math.random() * 100);
     this.guess = null;
   }
+  
 
   guessit(): void {
     console.log("In guessit guess=%d", this.guess);

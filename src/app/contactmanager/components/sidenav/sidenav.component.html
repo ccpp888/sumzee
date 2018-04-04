@@ -24,22 +24,34 @@
           <mat-icon>filter_1</mat-icon>&nbsp;&nbsp;Number bonds 10
         </a>
       </mat-list-item>
-      <mat-divider></mat-divider>
+
       <mat-list-item>
-        <a matLine>
+        <a matLine routerLink="/contactmanager/bonds100">
           <mat-icon>filter_2</mat-icon>&nbsp;&nbsp;Number bonds 100
         </a>
       </mat-list-item>
-      <mat-divider></mat-divider>
+
       <mat-list-item>
-        <a matLine>
-          <mat-icon>filter_3</mat-icon>&nbsp;&nbsp; Two times table
+        <a matLine routerLink="/contactmanager/bonds1000">
+          <mat-icon>filter_3</mat-icon>&nbsp;&nbsp;Number bonds 1000
         </a>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
+        <a matLine routerLink="/contactmanager/table2">
+          <mat-icon>filter_4</mat-icon>&nbsp;&nbsp; Two times table
+        </a>
+      </mat-list-item>
+
+      <mat-list-item>
         <a matLine>
-          <mat-icon>filter_4</mat-icon>&nbsp;&nbsp; Three times table
+          <mat-icon>filter_5</mat-icon>&nbsp;&nbsp; Three times table
+        </a>
+      </mat-list-item>
+
+      <mat-list-item>
+        <a matLine>
+          <mat-icon>filter_6</mat-icon>&nbsp;&nbsp; Four times table
         </a>
       </mat-list-item>
       <mat-divider></mat-divider>
@@ -52,11 +64,11 @@
     <app-toolbar (toggleTheme)="toggleTheme()"></app-toolbar>
     <div class="wrapper">
       
-        <div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">
+        <!--<div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">-->
           <router-outlet></router-outlet>
           
-      </div>
-
+      <!--</div>-->
+      
     </div>
   </div>
 

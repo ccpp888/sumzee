@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class SuccessDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<SuccessDialogComponent>, public router: Router) { }
+  constructor(public dialogRef: MatDialogRef<SuccessDialogComponent>) { }
 
   closeDialog() {
     console.log("In closeDialog")
