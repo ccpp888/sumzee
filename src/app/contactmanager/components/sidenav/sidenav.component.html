@@ -1,7 +1,7 @@
 <mat-sidenav-container class="app-sidenav-container" [class.dark-theme]="isDarkTheme">
   <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10" [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
     <mat-toolbar color="primary">
-      <mat-icon>school</mat-icon>&nbsp;&nbsp;Options
+      <div class="titlefont2">Options</div>
     </mat-toolbar>
 
     <mat-nav-list>
@@ -9,7 +9,7 @@
 
       <mat-list-item>
         <a matLine routerLink="/contactmanager/menu">
-          <mat-icon>apps</mat-icon>&nbsp;&nbsp;Main Menu
+          <mat-icon>list</mat-icon>&nbsp;&nbsp;Main Menu
         </a>
       </mat-list-item>
 
@@ -21,37 +21,37 @@
 
       <mat-list-item>
         <a matLine routerLink="/contactmanager/bonds">
-          <mat-icon>filter_1</mat-icon>&nbsp;&nbsp;Number bonds 10
+          <mat-icon>chevron_right</mat-icon>&nbsp;&nbsp;Number bonds 10
         </a>
       </mat-list-item>
 
       <mat-list-item>
         <a matLine routerLink="/contactmanager/bonds100">
-          <mat-icon>filter_2</mat-icon>&nbsp;&nbsp;Number bonds 100
+          <mat-icon>chevron_right</mat-icon>&nbsp;&nbsp;Number bonds 100
         </a>
       </mat-list-item>
 
       <mat-list-item>
         <a matLine routerLink="/contactmanager/bonds1000">
-          <mat-icon>filter_3</mat-icon>&nbsp;&nbsp;Number bonds 1000
+          <mat-icon>chevron_right</mat-icon>&nbsp;&nbsp;Number bonds 1000
         </a>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item>
         <a matLine routerLink="/contactmanager/table2">
-          <mat-icon>filter_4</mat-icon>&nbsp;&nbsp; Two times table
+          <mat-icon>chevron_right</mat-icon><mat-icon>filter_2</mat-icon>&nbsp;&nbsp; Times table
         </a>
       </mat-list-item>
 
       <mat-list-item>
-        <a matLine>
-          <mat-icon>filter_5</mat-icon>&nbsp;&nbsp; Three times table
+        <a matLine routerLink="/contactmanager/table3">
+          <mat-icon>chevron_right</mat-icon><mat-icon>filter_3</mat-icon>&nbsp;&nbsp; Times table
         </a>
       </mat-list-item>
 
       <mat-list-item>
-        <a matLine>
-          <mat-icon>filter_6</mat-icon>&nbsp;&nbsp; Four times table
+        <a matLine routerLink="/contactmanager/table4">
+          <mat-icon>chevron_right</mat-icon><mat-icon>filter_4</mat-icon>&nbsp;&nbsp; Times table
         </a>
       </mat-list-item>
       <mat-divider></mat-divider>

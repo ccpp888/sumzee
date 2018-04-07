@@ -9,6 +9,14 @@
     font-size: 30px;
   }
 
+  .input-group-lg {
+    width: 100%;    
+    font: 100 46px/0.8 'Comic Sans MS', Helvetica, sans-serif;       
+    padding:6px;    
+    border: 5px solid #ffeb3b;
+    outline: none;
+  }
+
   .example-width {
     width: 80%;
     font-size: 35px;
@@ -32,6 +40,24 @@
     align-content: center;
 }
 
+.input-box {
+  width: 145px;
+}
+
+.left {
+  float:left;
+  width:75%;
+  margin:0px auto;
+  padding:0px;
+}
+
+.right {
+  float:right;
+  width:25%;
+  margin:0px auto;
+  padding:0px;
+}
+
 .material-icons.green600 { color: #32CD32; }
 .material-icons.red600 { color: #FB0F00; }
 .material-icons.md-48 { font-size: 48px; }
@@ -42,5 +68,7 @@
   color: #303f9f;
 }
 
-
-	
+.comicfont {
+  font-family: 'Comic Sans MS', Helvetica, sans-serif;   
+  color: #303f9f;   
+}

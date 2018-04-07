@@ -1,6 +1,6 @@
 <mat-card>
 
-  <mat-card-title class="cookiefont">Two times table</mat-card-title>
+  <mat-card-title class="comicfont">Two times table</mat-card-title>
   <mat-card-subtitle>...enter the missing number</mat-card-subtitle>
 
 
@@ -8,13 +8,13 @@
 
     <mat-grid-list cols="3" rowHeight="2:1">
       <mat-grid-tile>
-        <div class="fontlarge">
+        <div class="fontlarge2">
           <span>{{timesNumber}} </span>
         </div>
-        <div class="fontlarge">
+        <div class="fontlarge2">
           <span>x</span>
         </div>
-        <div class="fontlarge">
+        <div class="fontlarge2">
           <span> {{generatedNumber}} </span>
         </div>
         <div class="fontlarge">
@@ -27,14 +27,15 @@
 
         <form class="example-form">
           <mat-form-field class="example-full-width">
-            <input matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()" />            
+            <input #iguess matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()" />            
           </mat-form-field>
         </form>
+      
 
         <div><span>&nbsp;&nbsp;&nbsp;</span></div>
 
         <!-- we want to check isInError && touched -->
-        <div *ngIf="showError" class="fontless">          
+        <div *ngIf="showError() && iguess.dirty" class="fontless">          
             <i class="material-icons red600 md-36">cancel</i>
             <mat-error>Try again</mat-error>        
           </div>      

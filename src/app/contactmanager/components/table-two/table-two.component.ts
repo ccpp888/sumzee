@@ -16,7 +16,7 @@ export class TableTwoComponent implements OnInit {
   timesNumber: number = 2;
   generatedNumber: number;
   guess: number;
-  initd: boolean;
+  //initd: boolean;
 
   isInError: boolean = false;
   guessedCorrectly: boolean = false;
@@ -29,16 +29,16 @@ export class TableTwoComponent implements OnInit {
     this.guess = null;
     this.isInError = false;
     this.guessedCorrectly = false;
-    this.initd = true;
+    //this.initd = true;
 
-    console.log("In ngOnInit() initd=%s", this.initd)
+    //console.log("In ngOnInit() initd=%s", this.initd)
   }
 
   //replace with touched check on form
   //return true if guess is a number, or false if NaN (init)
   showError(): boolean {
     console.log("In showError guess=%s", this.guess);  
-    if (this.isInError && (this.guess != null)) {
+    if (this.isInError) {
       console.log("In showError returning true");  
       return true;
     }
@@ -48,7 +48,7 @@ export class TableTwoComponent implements OnInit {
 
   guessit(): void {
     console.log("In guessit guess=%d", this.guess);
-    this.initd = false;
+    //this.initd = false;
     if (this.generatedNumber * this.timesNumber == this.guess) {
       this.isInError = false;
       this.guessedCorrectly = true;
@@ -79,7 +79,7 @@ export class TableTwoComponent implements OnInit {
   }
 
   onEnterCorrectGuess(): void {
-    console.log("In onEnterCorrectGuess guess=%d", this.guess);
+    console.log("In onEnterCorrectGuess guess=%d", this.guess);    
     this.ngOnInit();
   }
 

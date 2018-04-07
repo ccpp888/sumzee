@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MaterialModule } from '../shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ContactmanagerAppComponent } from './contactmanager-app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -17,6 +17,9 @@ import { Bonds100Component } from './components/bonds100/bonds100.component';
 import { Bonds1000Component } from './components/bonds1000/bonds1000.component';
 import { TableTwoComponent } from './components/table-two/table-two.component';
 import { Table2DialogComponent } from './components/table-two/table2-dialog.component';
+import { TableThreeComponent } from './components/table-three/table-three.component';
+import { TableFourComponent } from './components/table-four/table-four.component';
+import { Table3DialogComponent } from './components/table-three/table3-dialog.component';
 
 
 const routes: Routes = [
@@ -26,6 +29,8 @@ const routes: Routes = [
       { path: 'bonds100', component: Bonds100Component },
       { path: 'bonds1000', component: Bonds1000Component },
       { path: 'table2', component: TableTwoComponent },
+      { path: 'table3', component: TableThreeComponent },
+      { path: 'table4', component: TableFourComponent },
       { path: 'menu', component: MenuComponent }
     ] },    
   { path: 'brefresh', redirectTo: 'bonds' },
@@ -39,6 +44,7 @@ const routes: Routes = [
     MaterialModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   providers: [],
@@ -49,11 +55,12 @@ const routes: Routes = [
     Bonds100Component, 
     Bonds1000Component,
     MenuComponent, 
-    SuccessDialogComponent, TableTwoComponent, Table2DialogComponent    
+    SuccessDialogComponent, TableTwoComponent, Table2DialogComponent, TableThreeComponent, TableFourComponent, Table3DialogComponent    
   ],
   entryComponents: [
     SuccessDialogComponent,
-    Table2DialogComponent
+    Table2DialogComponent,
+    Table3DialogComponent
   ]
 })
 export class ContactmanagerModule { }
