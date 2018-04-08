@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from './success-dialog.component';
@@ -19,6 +19,12 @@ export class BondsComponent implements OnInit {
   hasBondError: boolean = false;
 
   constructor(private dialog: MatDialog, public router: Router) { }
+
+  @ViewChildren('input') vc;
+  
+  ngAfterViewInit() {            
+       this.vc.first.nativeElement.focus();
+   }
 
   ngOnInit() {
     this.generatedNumber = Math.floor(Math.random() * 10);

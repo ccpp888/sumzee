@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
 import {InputTextModule} from 'primeng/inputtext';
@@ -26,11 +26,10 @@ function matchesExpected(exp: number): ValidatorFn {
 
 export class TableTwoComponent implements OnInit {
 
-  timesNumber: number = 3;
+  timesNumber: number = 2;
   generatedNumber: number;
 
-  guessForm: FormGroup;
-  //guess: number;
+  guessForm: FormGroup;  
   expected: number;
 
   validationMessage = 'Try again';
@@ -39,6 +38,12 @@ export class TableTwoComponent implements OnInit {
   guessedCorrectly: boolean;
   
   constructor(private fb: FormBuilder, private router: Router, private dialog: MatDialog) { }
+
+  @ViewChildren('input') vc;
+
+  ngAfterViewInit() {
+    this.vc.first.nativeElement.focus();
+  }
 
   ngOnInit() {    
 

@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card >
   
     <mat-card-title class="comicfont">Number bonds to 10</mat-card-title>
     <mat-card-subtitle>...enter the missing number</mat-card-subtitle>        
@@ -6,7 +6,7 @@
 
   <mat-card-content>
 
-    <mat-grid-list cols="5" rowHeight="2:1">
+    <mat-grid-list cols="5" >
       <mat-grid-tile>
         <div class="fontlarge">
           <span>{{generatedNumber}} </span>
@@ -19,13 +19,10 @@
         </div>
       </mat-grid-tile>
 
-      <!--<mat-form-field class="example-full-width mat-elevation-z10">-->
-
-      <mat-grid-tile>
+      <mat-grid-tile >
         <form class="example-form">          
-            <mat-form-field class="example-full-width">
-            <input matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>            
-            <!--<mat-error *ngIf="hasBondError">Please enter a valid email address</mat-error>           -->
+            <mat-form-field class="example-full-width fontlarge">
+            <input #input matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>                        
           </mat-form-field>          
         </form>
 

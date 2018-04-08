@@ -6,11 +6,11 @@
   
   .example-full-width {
     width: 100%;
-    font-size: 30px;
+    font: 100 35px/0.8 'Comic Sans MS', Helvetica, sans-serif;      
   }
 
   .fontlarge {
-    font-size: 35px;
+    font: 100 35px/0.8 'Comic Sans MS', Helvetica, sans-serif;          
   }
 
   .fontless {
@@ -19,4 +19,8 @@
 
   div.centred {    
     align-content: center;
+}
+
+mat-card {  
+  height: 100%;
 }

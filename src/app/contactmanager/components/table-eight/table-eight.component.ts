@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
-import {InputTextModule} from 'primeng/inputtext';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { Router } from '@angular/router';
 import { Table3DialogComponent } from '../table-three/table3-dialog.component';
@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material';
 
 function matchesExpected(exp: number): ValidatorFn {
 
-  return (c: AbstractControl) : {[key: string]: boolean} | null => {
+  return (c: AbstractControl): { [key: string]: boolean } | null => {
 
     if (c.value != undefined && (isNaN(c.value) || c.value != exp)) {
       console.log('== func returning true (in error) ==');
@@ -26,21 +26,26 @@ function matchesExpected(exp: number): ValidatorFn {
 
 export class TableEightComponent implements OnInit {
 
-  timesNumber: number = 3;
+  timesNumber: number = 8;
   generatedNumber: number;
 
   guessForm: FormGroup;
-  //guess: number;
   expected: number;
 
   validationMessage = 'Try again';
   errorMessage: string;
 
   guessedCorrectly: boolean;
-  
+
   constructor(private fb: FormBuilder, private router: Router, private dialog: MatDialog) { }
 
-  ngOnInit() {    
+  @ViewChildren('input') vc;
+
+  ngAfterViewInit() {
+    this.vc.first.nativeElement.focus();
+  }
+
+  ngOnInit() {
 
     console.log('**** In ngOnInit ***');
     this.guessedCorrectly = false;
@@ -50,37 +55,37 @@ export class TableEightComponent implements OnInit {
     this.guessForm = this.fb.group({
       result: ['', matchesExpected(this.expected)],
     })
-       
+
     const guessControl = this.guessForm.get('result');
-     guessControl.statusChanges   
-                 .subscribe(value => this.resetError(guessControl));
-    
-   }
+    guessControl.statusChanges
+      .subscribe(value => this.resetError(guessControl));
+
+  }
 
   setMessage(c: AbstractControl): void {
-    this.errorMessage='';
-      if ((c.touched || c.dirty) && c.errors) {
-        this.errorMessage = this.validationMessage;
-        this.guessedCorrectly = false;
+    this.errorMessage = '';
+    if ((c.touched || c.dirty) && c.errors) {
+      this.errorMessage = this.validationMessage;
+      this.guessedCorrectly = false;
+    }
+    else {
+      console.log('setMessage found control NOT in error - we can open dialog from here!')
+      if (this.guessedCorrectly) {
+        this.ngOnInit();
       }
       else {
-        console.log('setMessage found control NOT in error - we can open dialog from here!')        
-        if (this.guessedCorrectly) {
-          this.ngOnInit();
-        }
-        else {
-          this.guessedCorrectly = true;
-        }
+        this.guessedCorrectly = true;
       }
+    }
   }
 
   resetError(c: AbstractControl): void {
-    this.errorMessage='';
+    this.errorMessage = '';
     console.log('In resetError')
-      
+
   }
 
-  save() {    
+  save() {
     console.log("--- in save() which is onSubmit ---");
     const guessControl = this.guessForm.get('result');
     this.setMessage(guessControl)

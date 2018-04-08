@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
@@ -20,8 +20,15 @@ export class Bonds1000Component implements OnInit {
 
   constructor(private dialog: MatDialog, public router: Router) { }
 
+  @ViewChildren('input') vc;
+  
+  ngAfterViewInit() {            
+       this.vc.first.nativeElement.focus();
+   }
+
   ngOnInit() {
-    this.generatedNumber = Math.round((Math.random()*(900-100)+100)/100)*100;
+    //this.generatedNumber = Math.round((Math.random()*(900-100)+100)/100)*100;
+    this.generatedNumber = Math.floor(Math.random() * 1000);
     this.guess = null;
   }
   
