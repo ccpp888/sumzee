@@ -20,6 +20,9 @@ import { Table2DialogComponent } from './components/table-two/table2-dialog.comp
 import { TableThreeComponent } from './components/table-three/table-three.component';
 import { TableFourComponent } from './components/table-four/table-four.component';
 import { Table3DialogComponent } from './components/table-three/table3-dialog.component';
+import { TableSixComponent } from './components/table-six/table-six.component';
+import { TableSevenComponent } from './components/table-seven/table-seven.component';
+import { TableEightComponent } from './components/table-eight/table-eight.component';
 
 
 const routes: Routes = [
@@ -31,6 +34,9 @@ const routes: Routes = [
       { path: 'table2', component: TableTwoComponent },
       { path: 'table3', component: TableThreeComponent },
       { path: 'table4', component: TableFourComponent },
+      { path: 'table6', component: TableSixComponent },
+      { path: 'table7', component: TableSevenComponent },
+      { path: 'table8', component: TableEightComponent },
       { path: 'menu', component: MenuComponent }
     ] },    
   { path: 'brefresh', redirectTo: 'bonds' },
@@ -55,7 +61,7 @@ const routes: Routes = [
     Bonds100Component, 
     Bonds1000Component,
     MenuComponent, 
-    SuccessDialogComponent, TableTwoComponent, Table2DialogComponent, TableThreeComponent, TableFourComponent, Table3DialogComponent    
+    SuccessDialogComponent, TableTwoComponent, Table2DialogComponent, TableThreeComponent, TableFourComponent, Table3DialogComponent, TableSixComponent, TableSevenComponent, TableEightComponent    
   ],
   entryComponents: [
     SuccessDialogComponent,

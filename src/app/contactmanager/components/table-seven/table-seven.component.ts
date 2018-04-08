@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from
 import {InputTextModule} from 'primeng/inputtext';
 
 import { Router } from '@angular/router';
-import { Table3DialogComponent } from './table3-dialog.component';
+import { Table3DialogComponent } from '../table-three/table3-dialog.component';
 import { MatDialog } from '@angular/material';
 
 function matchesExpected(exp: number): ValidatorFn {
@@ -20,13 +20,13 @@ function matchesExpected(exp: number): ValidatorFn {
 }
 
 @Component({
-  templateUrl: './table-three.component.html',
-  styleUrls: ['./table-three.component.scss']
+  templateUrl: './table-seven.component.html',
+  styleUrls: ['./table-seven.component.scss']
 })
 
-export class TableThreeComponent implements OnInit {
+export class TableSevenComponent implements OnInit {
 
-  timesNumber: number = 3;
+  timesNumber: number = 7;
   generatedNumber: number;
 
   guessForm: FormGroup;

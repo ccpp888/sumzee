@@ -1,105 +1,102 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { MatDialog, ErrorStateMatcher } from '@angular/material';
-import { SuccessDialogComponent } from '../bonds/success-dialog.component';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+
+import {InputTextModule} from 'primeng/inputtext';
+
 import { Router } from '@angular/router';
 import { Table2DialogComponent } from './table2-dialog.component';
+import { MatDialog } from '@angular/material';
+
+function matchesExpected(exp: number): ValidatorFn {
+
+  return (c: AbstractControl) : {[key: string]: boolean} | null => {
+
+    if (c.value != undefined && (isNaN(c.value) || c.value != exp)) {
+      console.log('== func returning true (in error) ==');
+      return { 'expected': true }
+    }
+    return null;
+  }
+}
 
 @Component({
-  selector: 'app-table-two',
   templateUrl: './table-two.component.html',
   styleUrls: ['./table-two.component.scss']
 })
 
 export class TableTwoComponent implements OnInit {
 
-  timesNumber: number = 2;
+  timesNumber: number = 3;
   generatedNumber: number;
-  guess: number;
-  //initd: boolean;
 
-  isInError: boolean = false;
-  guessedCorrectly: boolean = false;
+  guessForm: FormGroup;
+  //guess: number;
+  expected: number;
 
-  //constructor(private dialog: MatDialog, public router: Router, private defaultMatcher: ErrorStateMatcher) { }
-  constructor(private dialog: MatDialog, public router: Router) { }
+  validationMessage = 'Try again';
+  errorMessage: string;
 
-  ngOnInit() {
-    this.generatedNumber = Math.floor(Math.random() * 10);
-    this.guess = null;
-    this.isInError = false;
+  guessedCorrectly: boolean;
+  
+  constructor(private fb: FormBuilder, private router: Router, private dialog: MatDialog) { }
+
+  ngOnInit() {    
+
+    console.log('**** In ngOnInit ***');
     this.guessedCorrectly = false;
-    //this.initd = true;
+    this.errorMessage = '';
+    this.generatedNumber = Math.floor(Math.random() * 10);
+    this.expected = this.timesNumber * this.generatedNumber;
+    this.guessForm = this.fb.group({
+      result: ['', matchesExpected(this.expected)],
+    })
+       
+    const guessControl = this.guessForm.get('result');
+     guessControl.statusChanges   
+                 .subscribe(value => this.resetError(guessControl));
+    
+   }
 
-    //console.log("In ngOnInit() initd=%s", this.initd)
+  setMessage(c: AbstractControl): void {
+    this.errorMessage='';
+      if ((c.touched || c.dirty) && c.errors) {
+        this.errorMessage = this.validationMessage;
+        this.guessedCorrectly = false;
+      }
+      else {
+        console.log('setMessage found control NOT in error - we can open dialog from here!')        
+        if (this.guessedCorrectly) {
+          this.ngOnInit();
+        }
+        else {
+          this.guessedCorrectly = true;
+        }
+      }
   }
 
-  //replace with touched check on form
-  //return true if guess is a number, or false if NaN (init)
-  showError(): boolean {
-    console.log("In showError guess=%s", this.guess);  
-    if (this.isInError) {
-      console.log("In showError returning true");  
-      return true;
-    }
-    console.log("In showError returning false");  
-    return false;
+  resetError(c: AbstractControl): void {
+    this.errorMessage='';
+    console.log('In resetError')
+      
   }
 
-  guessit(): void {
-    console.log("In guessit guess=%d", this.guess);
-    //this.initd = false;
-    if (this.generatedNumber * this.timesNumber == this.guess) {
-      this.isInError = false;
-      this.guessedCorrectly = true;
-    }
-    else {
-      this.isInError = true;
-      this.guess = null;
-    }
-    console.log("isInError=%s", this.isInError);
-  }
-
-  //will need to return boolean if using in validation
-  onEnter(): void {
-    console.log("In onEnter guess=%d", this.guess);
-
-    if (this.guessedCorrectly) {
-      console.log("In onEnter calling ngOnInit [guessedCorrectly=true]");
-      this.ngOnInit();
-    }
-    //CHECK DIRTY
-    //if (this.initd) {
-    //  console.log("In onEnter returning [initd=true]");
-    //  return;
-   // }
-
-    console.log("In onEnter calling guessit");
-    this.guessit();
-  }
-
-  onEnterCorrectGuess(): void {
-    console.log("In onEnterCorrectGuess guess=%d", this.guess);    
-    this.ngOnInit();
+  save() {    
+    console.log("--- in save() which is onSubmit ---");
+    const guessControl = this.guessForm.get('result');
+    this.setMessage(guessControl)
   }
 
   openTableDialog(): void {
 
+    console.log('In table3 open dialog');
     let dialogRef = this.dialog.open(Table2DialogComponent, {
-      height: '750px',
-      width: '500px',
+      height: '775px',
+      width: '1000px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
-
-      if (result) {
-        console.log("if(result) called == true, calling ngOnInit");
-        //this.ngOnInit();
-      }
     });
-
   }
 
 }
-

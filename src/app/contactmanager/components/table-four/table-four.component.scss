@@ -1,0 +1,42 @@
+.example-form {
+    min-width: 85px;
+    max-width: 85px;
+    width: 80%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+    font-size: 30px;
+  }
+
+  .input-group-lg {
+    width: 100%;    
+    font: 100 46px/0.8 'Comic Sans MS', Helvetica, sans-serif;       
+    padding:6px;    
+    border: 5px solid #ffeb3b;
+    outline: none;
+  }
+
+  .example-width {
+    width: 80%;
+    font-size: 35px;
+  }
+
+.input-box {
+  width: 145px;
+}
+
+.left {
+  float:left;
+  width:75%;
+  margin:0px auto;
+  padding:0px;
+}
+
+.right {
+  float:right;
+  width:25%;
+  margin:0px auto;
+  padding:0px;
+}
+

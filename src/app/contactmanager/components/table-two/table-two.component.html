@@ -1,72 +1,78 @@
 <mat-card>
 
-  <mat-card-title class="comicfont">Two times table</mat-card-title>
-  <mat-card-subtitle>...enter the missing number</mat-card-subtitle>
-
-
-  <mat-card-content>
-
-    <mat-grid-list cols="3" rowHeight="2:1">
-      <mat-grid-tile>
-        <div class="fontlarge2">
-          <span>{{timesNumber}} </span>
-        </div>
-        <div class="fontlarge2">
-          <span>x</span>
-        </div>
-        <div class="fontlarge2">
-          <span> {{generatedNumber}} </span>
-        </div>
-        <div class="fontlarge">
-          <span>=</span>
-        </div>
-
-      </mat-grid-tile>
-     
-      <mat-grid-tile>
-
-        <form class="example-form">
-          <mat-form-field class="example-full-width">
-            <input #iguess matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()" />            
-          </mat-form-field>
-        </form>
-      
-
-        <div><span>&nbsp;&nbsp;&nbsp;</span></div>
-
-        <!-- we want to check isInError && touched -->
-        <div *ngIf="showError() && iguess.dirty" class="fontless">          
-            <i class="material-icons red600 md-36">cancel</i>
-            <mat-error>Try again</mat-error>        
-          </div>      
+    <mat-card-title class="comicfont">Two times table</mat-card-title>
+    <mat-card-subtitle>...enter the missing number</mat-card-subtitle>
+  
+    <mat-card-content>
+  
+      <mat-grid-list cols="3" rowHeight="2:1">
+  
+        <mat-grid-tile>
+          <div class="fontlarge">
+            <span>{{timesNumber}} </span>
+          </div>
+          <div class="fontlarge">
+            <span>x</span>
+          </div>
+          <div class="fontlarge">
+            <span> {{generatedNumber}} </span>
+          </div>
+          <div class="fontlarge">
+            <span>=</span>
+          </div>
+  
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          
+          <span>
+  
+          <form class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
+            
+            <div class="input-box">
+  
+              <div class="left">
+                <input class="input-group-lg" autofocus placeholder="?" type="text" formControlName="result" [readOnly]="guessedCorrectly"/>
+              </div>
+  
+              <div class="right">             
+                <span *ngIf="errorMessage">
+                  <img src="/assets/images/md-cross-32.png">
+                </span>
+              </div>
+  
+            </div>
+          </form>
   
           <div *ngIf="guessedCorrectly" class="fontless">          
               <i class="material-icons green600 md-36">assignment_turned_in</i>
               <mat-hint>Well done</mat-hint>        
             </div>
-
-      </mat-grid-tile>
-
-      <mat-grid-tile>
-        <button mat-fab (click)='guessit()'>Go</button>
-      </mat-grid-tile>
-
-    </mat-grid-list>
-
-  </mat-card-content>
-
-</mat-card>
-
-<div>&nbsp;</div>
-
-<mat-card>
-
-  <mat-card-content>
-    <mat-grid-list cols="1" [rowHeight]="40">
-      <mat-grid-tile>
-        <button mat-raised-button color="accent" (click)='openTableDialog()'>Help sheet</button>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-content>
-
-</mat-card>
+  
+          </span>
+  
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <button mat-fab (click)=save() [disabled]="!guessForm.valid"> Next </button>
+        </mat-grid-tile>
+  
+      </mat-grid-list>
+  
+    </mat-card-content>
+  
+  </mat-card>
+  
+  <div>&nbsp;</div>
+  
+  <mat-card>
+    
+      <mat-card-content>
+        <mat-grid-list cols="1" [rowHeight]="40">
+          <mat-grid-tile>
+            <button mat-raised-button color="accent" (click)='openTableDialog()'>Help sheet</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    
+    </mat-card>
