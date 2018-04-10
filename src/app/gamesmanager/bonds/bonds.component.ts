@@ -51,7 +51,7 @@ export class BondsComponent implements OnInit {
   }
 
   returnToMenu() {
-    this.router.navigateByUrl("/contactmanager/menu");
+    this.router.navigateByUrl("/gamesmanager/menu");
   }
 
   openSuccessDialog(): void {

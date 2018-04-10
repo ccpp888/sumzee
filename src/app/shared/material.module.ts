@@ -34,6 +34,7 @@ import {
     MatStepperModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
+import { FocusDirective } from './focus.directive';
 
 @NgModule({
     imports: [
@@ -104,7 +105,8 @@ import { CdkTableModule } from '@angular/cdk/table';
         MatToolbarModule,
         MatTooltipModule,
         CdkTableModule
-    ]
+    ],
+    declarations: [FocusDirective]
 })
 export class MaterialModule
 {

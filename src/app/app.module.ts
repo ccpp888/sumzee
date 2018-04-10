@@ -7,9 +7,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: 'contactmanager', loadChildren: './contactmanager/contactmanager.module#ContactmanagerModule' },  
-  { path: 'demo', loadChildren: './demo/demo.module#DemoModule' },
-  { path: '**', redirectTo: 'contactmanager' }
+  { path: 'gamesmanager', loadChildren: './gamesmanager/gamesmanager.module#GamesmanagerModule' },    
+  { path: '**', redirectTo: 'gamesmanager' }
 ];
 
 @NgModule({
@@ -18,7 +17,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule,  
     RouterModule.forRoot(routes)
   ],
   providers: [],

@@ -21,7 +21,7 @@
 
       <mat-grid-tile >
         <form class="example-form">          
-            <mat-form-field class="example-full-width fontlarge">
+            <mat-form-field class="example-full-width">
             <input #input matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>                        
           </mat-form-field>          
         </form>
@@ -34,12 +34,12 @@
 
       <mat-grid-tile>
         <div class="fontlarge">
-          <span> =&nbsp;&nbsp;&nbsp;10</span>
+          <span> =&nbsp;&nbsp;&nbsp;&nbsp;10</span>
         </div>
       </mat-grid-tile>
 
       <mat-grid-tile>
-        <button mat-fab (click)='guessit()'>Go</button>
+        <button mat-fab (click)='onEnter()'>Go</button>
       </mat-grid-tile>
 
     </mat-grid-list>

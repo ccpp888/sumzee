@@ -6,27 +6,27 @@ import { MaterialModule } from '../shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ContactmanagerAppComponent } from './contactmanager-app.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { GamesmanagerAppComponent } from './gamesmanager-app.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BondsComponent } from './components/bonds/bonds.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { SuccessDialogComponent } from './components/bonds/success-dialog.component';
-import { Bonds100Component } from './components/bonds100/bonds100.component';
-import { Bonds1000Component } from './components/bonds1000/bonds1000.component';
-import { TableTwoComponent } from './components/table-two/table-two.component';
-import { Table2DialogComponent } from './components/table-two/table2-dialog.component';
-import { TableThreeComponent } from './components/table-three/table-three.component';
-import { TableFourComponent } from './components/table-four/table-four.component';
-import { Table3DialogComponent } from './components/table-three/table3-dialog.component';
-import { TableSixComponent } from './components/table-six/table-six.component';
-import { TableSevenComponent } from './components/table-seven/table-seven.component';
-import { TableEightComponent } from './components/table-eight/table-eight.component';
+import { BondsComponent } from './bonds/bonds.component';
+import { MenuComponent } from './menu/menu.component';
+import { SuccessDialogComponent } from './bonds/success-dialog.component';
+import { Bonds100Component } from './bonds100/bonds100.component';
+import { Bonds1000Component } from './bonds1000/bonds1000.component';
+import { TableTwoComponent } from './table-two/table-two.component';
+import { Table2DialogComponent } from './table-two/table2-dialog.component';
+import { TableThreeComponent } from './table-three/table-three.component';
+import { TableFourComponent } from './table-four/table-four.component';
+import { Table3DialogComponent } from './table-three/table3-dialog.component';
+import { TableSixComponent } from './table-six/table-six.component';
+import { TableSevenComponent } from './table-seven/table-seven.component';
+import { TableEightComponent } from './table-eight/table-eight.component';
 
 
 const routes: Routes = [
-  { path: '', component: ContactmanagerAppComponent,
+  { path: '', component: GamesmanagerAppComponent,
     children: [      
       { path: 'bonds', component: BondsComponent },
       { path: 'bonds100', component: Bonds100Component },
@@ -54,7 +54,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [],
-  declarations: [ContactmanagerAppComponent, 
+  declarations: [GamesmanagerAppComponent, 
     ToolbarComponent,     
     SidenavComponent, 
     BondsComponent, 
@@ -69,4 +69,4 @@ const routes: Routes = [
     Table3DialogComponent
   ]
 })
-export class ContactmanagerModule { }
+export class GamesmanagerModule { }

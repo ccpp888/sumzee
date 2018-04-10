@@ -6,13 +6,13 @@ import { SuccessDialogComponent } from '../bonds/success-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-bonds1000',
-  templateUrl: './bonds1000.component.html',
-  styleUrls: ['./bonds1000.component.scss']
+  selector: 'app-bonds100',
+  templateUrl: './bonds100.component.html',
+  styleUrls: ['./bonds100.component.scss']
 })
-export class Bonds1000Component implements OnInit {
+export class Bonds100Component implements OnInit {
 
-  bondNumber: number = 1000;
+  bondNumber: number = 100;
   generatedNumber: number;
   guess: number;
 
@@ -27,8 +27,7 @@ export class Bonds1000Component implements OnInit {
    }
 
   ngOnInit() {
-    //this.generatedNumber = Math.round((Math.random()*(900-100)+100)/100)*100;
-    this.generatedNumber = Math.floor(Math.random() * 1000);
+    this.generatedNumber = Math.floor(Math.random() * 100);
     this.guess = null;
   }
   
@@ -53,7 +52,7 @@ export class Bonds1000Component implements OnInit {
   }
 
   returnToMenu() {
-    this.router.navigateByUrl("/contactmanager/menu");
+    this.router.navigateByUrl("/gamesmanager/menu");
   }
 
   openSuccessDialog(): void {
