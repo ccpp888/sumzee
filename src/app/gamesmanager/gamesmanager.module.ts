@@ -17,12 +17,10 @@ import { Bonds100Component } from './bonds100/bonds100.component';
 import { Bonds1000Component } from './bonds1000/bonds1000.component';
 import { TableTwoComponent } from './table-two/table-two.component';
 import { Table2DialogComponent } from './table-two/table2-dialog.component';
-import { TableThreeComponent } from './table-three/table-three.component';
-import { TableFourComponent } from './table-four/table-four.component';
-import { Table3DialogComponent } from './table-three/table3-dialog.component';
-import { TableSixComponent } from './table-six/table-six.component';
-import { TableSevenComponent } from './table-seven/table-seven.component';
-import { TableEightComponent } from './table-eight/table-eight.component';
+
+import { TableGenericComponent } from './table-generic/table-generic.component';
+import { TableChoiceComponent } from './table-generic/table-choice.component';
+import { TableDialogComponent } from './table-generic/table-dialog.component';
 
 
 const routes: Routes = [
@@ -32,11 +30,8 @@ const routes: Routes = [
       { path: 'bonds100', component: Bonds100Component },
       { path: 'bonds1000', component: Bonds1000Component },
       { path: 'table2', component: TableTwoComponent },
-      { path: 'table3', component: TableThreeComponent },
-      { path: 'table4', component: TableFourComponent },
-      { path: 'table6', component: TableSixComponent },
-      { path: 'table7', component: TableSevenComponent },
-      { path: 'table8', component: TableEightComponent },
+      { path: 'tablec', component: TableChoiceComponent },
+      { path: 'table/:id', component: TableGenericComponent },
       { path: 'menu', component: MenuComponent }
     ] },    
   { path: 'brefresh', redirectTo: 'bonds' },
@@ -61,12 +56,11 @@ const routes: Routes = [
     Bonds100Component, 
     Bonds1000Component,
     MenuComponent, 
-    SuccessDialogComponent, TableTwoComponent, Table2DialogComponent, TableThreeComponent, TableFourComponent, Table3DialogComponent, TableSixComponent, TableSevenComponent, TableEightComponent    
+    SuccessDialogComponent, TableTwoComponent, Table2DialogComponent, TableGenericComponent, TableChoiceComponent, TableDialogComponent    
   ],
   entryComponents: [
     SuccessDialogComponent,
-    Table2DialogComponent,
-    Table3DialogComponent
+    Table2DialogComponent    
   ]
 })
 export class GamesmanagerModule { }

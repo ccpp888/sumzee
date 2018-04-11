@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from
 
 import { InputTextModule } from 'primeng/inputtext';
 
-import { Router } from '@angular/router';
-import { Table2DialogComponent } from './table2-dialog.component';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../bonds/success-dialog.component';
 import { DOCUMENT } from '@angular/platform-browser';
@@ -26,13 +25,13 @@ function matchesExpected(exp: number): ValidatorFn {
 }
 
 @Component({
-  templateUrl: './table-two.component.html',
-  styleUrls: ['./table-two.component.scss']
+  templateUrl: './table-generic.component.html',
+  styleUrls: ['./table-generic.component.scss']
 })
 
-export class TableTwoComponent implements OnInit {
+export class TableGenericComponent implements OnInit {
 
-  timesNumber: number = 2;
+  timesNumber: number;
   generatedNumber: number;
 
   guessForm: FormGroup;
@@ -45,11 +44,21 @@ export class TableTwoComponent implements OnInit {
 
   guessControl: AbstractControl;
 
-  constructor(private fb: FormBuilder, private router: Router, private dialog: MatDialog, private renderer: Renderer, @Inject(DOCUMENT) document) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private renderer: Renderer, @Inject(DOCUMENT) document) { }
 
   ngOnInit() {
 
-    console.log('* In ngOnInit *');
+    console.log('* In ngOnInit of TableGenericComponent *');
+
+    const param = this.route.snapshot.paramMap.get('id');
+        if (param) {            
+            console.log("param=="+param);
+            let id = +param //cast to number from string
+            this.timesNumber = id;
+        }
+        else {
+          console.error("no param for id found");
+        }
 
     this.guessedCorrectly = false;
     this.errorMessage = '';
@@ -66,8 +75,8 @@ export class TableTwoComponent implements OnInit {
 
     this.setFocusOnInput();
 
-    const element = this.renderer.selectRootElement('#input1');
-    setTimeout(() => element.focus(), 0);
+    //const element = this.renderer.selectRootElement('#input1');
+    //setTimeout(() => element.focus(), 0);
   }
 
 

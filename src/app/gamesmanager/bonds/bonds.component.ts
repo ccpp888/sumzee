@@ -20,12 +20,6 @@ export class BondsComponent implements OnInit {
 
   constructor(private dialog: MatDialog, public router: Router) { }
 
-  @ViewChildren('input') vc;
-  
-  ngAfterViewInit() {            
-       this.vc.first.nativeElement.focus();
-   }
-
   ngOnInit() {
     this.generatedNumber = Math.floor(Math.random() * 10);
     this.guess = null;
