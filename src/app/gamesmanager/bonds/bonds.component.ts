@@ -1,27 +1,43 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, Renderer } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from './success-dialog.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FailureDialogComponent } from './failure-dialog.component';
 
 @Component({
   selector: 'app-bonds',
   templateUrl: './bonds.component.html',
-  styleUrls: ['./bonds.component.scss']
+  styleUrls: []
 })
 
 export class BondsComponent implements OnInit {
 
-  bondNumber: number = 10;
+  bondNumber: number;
   generatedNumber: number;
   guess: number;
 
   hasBondError: boolean = false;
 
-  constructor(private dialog: MatDialog, public router: Router) { }
+  constructor(private dialog: MatDialog, private route: ActivatedRoute, public router: Router, private renderer: Renderer) { }
 
   ngOnInit() {
-    this.generatedNumber = Math.floor(Math.random() * 10);
+
+    console.log("* In ngOnInit *");
+    
+    this.setFocusOnInput();
+
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      console.log("BondsComponent param[id]==%s", param);
+      let id = +param //cast to number from string
+      this.bondNumber = id;
+    }
+    else {
+      console.error("no param for id found");
+    }
+
+    this.generatedNumber = Math.floor(Math.random() * this.bondNumber);
     this.guess = null;
   }
 
@@ -34,6 +50,7 @@ export class BondsComponent implements OnInit {
     else {
       this.hasBondError = true;
       this.guess = null;
+      this.openFailureDialog();
     }
     console.log("hasBondError=%s", this.hasBondError);
   }
@@ -48,23 +65,38 @@ export class BondsComponent implements OnInit {
     this.router.navigateByUrl("/gamesmanager/menu");
   }
 
+  setFocusOnInput() {
+    console.log("In setFocusOnInput");    
+    const element = this.renderer.selectRootElement('#input1');
+    setTimeout(() => element.focus(), 0);    
+  }
+
   openSuccessDialog(): void {
 
     let dialogRef = this.dialog.open(SuccessDialogComponent, {
-      height: '300px',
-      width: '250px',            
+      height: '260px',
+      width: '200px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("openSuccessDialog result==true");
+        this.ngOnInit();        
+      }
+    });
+  }
+
+  openFailureDialog(): void {
+
+    let dialogRef = this.dialog.open(FailureDialogComponent, {
+      height: '260px',
+      width: '200px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-
       if (result) {
-        console.log("if(result) called == true, calling ngOnInit");
-        this.ngOnInit();
-          
+        console.log("openFailureDialog result==true");
+        this.setFocusOnInput();
       }
     });
-
   }
-
 }

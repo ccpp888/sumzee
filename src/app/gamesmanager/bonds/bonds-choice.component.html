@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-title class="comicfont">Click on the number bond you wish to play...</mat-card-title>
+  <mat-card-content>
+
+    <mat-grid-list cols="13">
+      <mat-grid-tile>
+        <button mat-fab (click)="routeToBonds(10)">10</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-fab color="primary" (click)="routeToBonds(20)">20</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-fab (click)="routeToBonds(50)">50</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-fab color="primary" (click)="routeToBonds(100)">100</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-fab (click)="routeToBonds(500)">500</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-fab color="primary" (click)="routeToBonds(1000)">1000</button>
+      </mat-grid-tile>
+      
+    </mat-grid-list>
+
+  </mat-card-content>
+
+</mat-card>

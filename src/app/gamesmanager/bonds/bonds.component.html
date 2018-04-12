@@ -1,12 +1,12 @@
-<mat-card >
-  
-    <mat-card-title class="comicfont">Number bonds to 10</mat-card-title>
-    <mat-card-subtitle>...enter the missing number</mat-card-subtitle>        
-        
+<mat-card>
+
+  <mat-card-title class="comicfont">Number bonds to {{bondNumber}}</mat-card-title>
+  <mat-card-subtitle>...enter the missing number</mat-card-subtitle>
 
   <mat-card-content>
 
-    <mat-grid-list cols="5" >
+    <mat-grid-list cols="5">
+
       <mat-grid-tile>
         <div class="fontlarge">
           <span>{{generatedNumber}} </span>
@@ -19,28 +19,46 @@
         </div>
       </mat-grid-tile>
 
-      <mat-grid-tile >
-        <form class="example-form">          
-            <mat-form-field class="example-full-width">
-            <input #input matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" (keyup.enter)="onEnter()"/>                        
-          </mat-form-field>          
+      <mat-grid-tile>
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <input #input1 id="input1" matInput autofocus type="number" placeholder="?" [(ngModel)]="guess" name="guess" cssSelector="#input1"
+              (keyup.enter)="onEnter()" />
+          </mat-form-field>
         </form>
+      </mat-grid-tile>
 
-        <div *ngIf="hasBondError" class="fontless"> 
-          <mat-error>Try again</mat-error>           
+      <!-- <mat-grid-tile>
+        <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
+          <mat-form-field class="fontlarge2">
+            <input id="input1" matInput cssSelector="#input1" type="number" autocomplete="off" placeholder="?" formControlName="result"
+            />
+          </mat-form-field>
+        </form>
+      </mat-grid-tile> -->
+
+      <mat-grid-tile>
+        <div class="fontlarge">
+          <span>=</span>
         </div>
-        
       </mat-grid-tile>
 
       <mat-grid-tile>
         <div class="fontlarge">
-          <span> =&nbsp;&nbsp;&nbsp;&nbsp;10</span>
+          <span> {{bondNumber}} </span>
         </div>
       </mat-grid-tile>
 
-      <mat-grid-tile>
-        <button mat-fab (click)='onEnter()'>Go</button>
-      </mat-grid-tile>
+      <!-- <mat-grid-tile>
+        <div *ngIf="errorMessage" class="fontless">
+          <i class="material-icons red600 md-36">error</i>
+          <mat-error>{{errorMessage}}</mat-error>
+        </div>
+        <div *ngIf="guessedCorrectly" class="fontless">
+          <i class="material-icons green600 md-36">assignment_turned_in</i>
+          <mat-hint>Well done</mat-hint>
+        </div>
+      </mat-grid-tile> -->
 
     </mat-grid-list>
 
@@ -52,12 +70,12 @@
 
 <mat-card>
 
-    <mat-card-content>
-        <mat-grid-list cols="1" [rowHeight]="40">
-<mat-grid-tile>
-        <button mat-raised-button color="primary" (click)='returnToMenu()'>Try another game</button>
+  <mat-card-content>
+    <mat-grid-list cols="1" [rowHeight]="40">
+      <mat-grid-tile>        
+          <button mat-raised-button color="accent" type='submit' (click)="onEnter()">Go</button>                  
       </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card-content>
-  
+    </mat-grid-list>
+  </mat-card-content>
+
 </mat-card>

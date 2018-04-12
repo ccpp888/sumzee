@@ -7,6 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../bonds/success-dialog.component';
 import { DOCUMENT } from '@angular/platform-browser';
+import { HelpDialogComponent } from './help-dialog.component';
 
 function matchesExpected(exp: number): ValidatorFn {
 
@@ -15,10 +16,10 @@ function matchesExpected(exp: number): ValidatorFn {
     if (c.value == undefined || c.value == '') {
       return null;
     }
-    
+
     if ((isNaN(c.value) || c.value != exp)) {
       console.log('In matchesExpected func returning true (in error) ==');
-      return { 'expected': true }      
+      return { 'expected': true }
     }
     return null;
   }
@@ -44,21 +45,21 @@ export class TableGenericComponent implements OnInit {
 
   guessControl: AbstractControl;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private renderer: Renderer, @Inject(DOCUMENT) document) { }
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: ActivatedRoute, private router: Router, private renderer: Renderer, @Inject(DOCUMENT) document) { }
 
   ngOnInit() {
 
     console.log('* In ngOnInit of TableGenericComponent *');
 
     const param = this.route.snapshot.paramMap.get('id');
-        if (param) {            
-            console.log("param=="+param);
-            let id = +param //cast to number from string
-            this.timesNumber = id;
-        }
-        else {
-          console.error("no param for id found");
-        }
+    if (param) {
+      console.log("param==" + param);
+      let id = +param //cast to number from string
+      this.timesNumber = id;
+    }
+    else {
+      console.error("no param for id found");
+    }
 
     this.guessedCorrectly = false;
     this.errorMessage = '';
@@ -69,9 +70,9 @@ export class TableGenericComponent implements OnInit {
     })
 
     this.guessControl = this.guessForm.get('result');
-        
+
     this.guessControl.statusChanges
-       .subscribe(value => this.resetError(this.guessControl));
+      .subscribe(value => this.resetError(this.guessControl));
 
     this.setFocusOnInput();
 
@@ -81,9 +82,9 @@ export class TableGenericComponent implements OnInit {
 
 
   setFocusOnInput() {
-    console.log("In reset & setFocusOnInput");    
+    console.log("In reset & setFocusOnInput");
     const element = this.renderer.selectRootElement('#input1');
-    setTimeout(() => element.focus(), 0);    
+    setTimeout(() => element.focus(), 0);
   }
 
   checkInError(c: AbstractControl): void {
@@ -92,14 +93,14 @@ export class TableGenericComponent implements OnInit {
     if (c.pristine) {
       console.log('checkInError found pristine');
       this.errorMessage = 'Enter a number';
-      this.setFocusOnInput();      
+      this.setFocusOnInput();
       return;
     }
 
     if ((c.touched || c.dirty) && c.errors) {
       console.log('checkInError is in error');
       this.errorMessage = this.validationMessage;
-      this.guessedCorrectly = false;      
+      this.guessedCorrectly = false;
       this.setFocusOnInput();
     }
     else {
@@ -111,10 +112,10 @@ export class TableGenericComponent implements OnInit {
         console.log("checkInError setting guessedCorrectly, disabling");
         this.guessedCorrectly = true;
         //disable user input
-        this.guessControl.disable();   
+        this.guessControl.disable();
         //focus on submit button
         document.getElementById('go1').focus();
-        
+
       }
     }
   }
@@ -123,7 +124,7 @@ export class TableGenericComponent implements OnInit {
    * Called from subscribing to form input status changes, this resets the errorMessage
    * to '' if the input field is empty/valid: this handles the case where user deletes
    * an incorrect guess to try again.
-   */   
+   */
   resetError(c: AbstractControl): void {
     console.log('In resetError');
     if (c.valid || c.pristine) {
@@ -135,11 +136,26 @@ export class TableGenericComponent implements OnInit {
   save() {
     console.log("In save() - which is onSubmit");
     const guessControl = this.guessForm.get('result');
-    this.checkInError(guessControl);    
+    this.checkInError(guessControl);
   }
 
   returnToMenu() {
     this.router.navigateByUrl("/gamesmanager/menu");
   }
+
+  openDialog(): void {
+
+    let dialogRef = this.dialog.open(HelpDialogComponent, {
+      height: '825px',
+      width: '1050px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("openDialog result==true");
+        
+      }
+    });
+  }
+
 
 }
