@@ -1,35 +1,36 @@
-<mat-card>
+<div (click)="refocus()">
+  <mat-card>
 
     <mat-card-title class="comicfont">{{timesNumber}} times table</mat-card-title>
     <mat-card-subtitle>...enter the missing number</mat-card-subtitle>
-  
+
     <mat-card-content>
-  
+
       <mat-grid-list cols="6">
         <mat-grid-tile>
           <div class="fontlarge">
             <span>{{timesNumber}} </span>
           </div>
         </mat-grid-tile>
-  
+
         <mat-grid-tile>
           <div class="fontlarge">
             <span>x</span>
           </div>
         </mat-grid-tile>
-  
+
         <mat-grid-tile>
           <div class="fontlarge">
             <span> {{generatedNumber}} </span>
           </div>
         </mat-grid-tile>
-  
+
         <mat-grid-tile>
           <div class="fontlarge">
             <span>=</span>
           </div>
         </mat-grid-tile>
-  
+
         <mat-grid-tile>
           <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
             <mat-form-field class="fontlarge2">
@@ -37,9 +38,9 @@
               />
             </mat-form-field>
           </form>
-  
+
         </mat-grid-tile>
-  
+
         <mat-grid-tile>
           <div *ngIf="errorMessage" class="fontless">
             <i class="material-icons red600 md-36">error</i>
@@ -50,17 +51,17 @@
             <mat-hint>Well done</mat-hint>
           </div>
         </mat-grid-tile>
-  
+
       </mat-grid-list>
-  
+
     </mat-card-content>
-  
+
   </mat-card>
-  
+
   <div>&nbsp;</div>
-  
+
   <mat-card>
-  
+
     <mat-card-content>
       <mat-grid-list cols="1" [rowHeight]="40">
         <mat-grid-tile>
@@ -69,5 +70,7 @@
         </mat-grid-tile>
       </mat-grid-list>
     </mat-card-content>
-  
+
   </mat-card>
+
+</div>

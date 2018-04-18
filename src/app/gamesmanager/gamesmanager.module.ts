@@ -18,6 +18,8 @@ import { SuccessDialogComponent } from './bonds/success-dialog.component';
 import { FailureDialogComponent } from './bonds/failure-dialog.component';
 import { BondsChoiceComponent } from './bonds/bonds-choice.component';
 import { HelpDialogComponent } from './table-generic/help-dialog.component';
+import { DecimalsComponent } from './decimals/decimals.component';
+import { CongratsDialogComponent } from './decimals/congrats-dialog.component';
 
 
 const routes: Routes = [
@@ -26,6 +28,7 @@ const routes: Routes = [
       { path: 'bondsc', component: BondsChoiceComponent },         
       { path: 'bonds/:id', component: BondsComponent },         
       { path: 'tablec', component: TableChoiceComponent },
+      { path: 'decimals', component: DecimalsComponent },
       { path: 'table/:id', component: TableGenericComponent },
       { path: 'menu', component: MenuComponent }
     ] },      
@@ -52,12 +55,13 @@ const routes: Routes = [
     SuccessDialogComponent, 
     TableGenericComponent, 
     TableChoiceComponent, 
-    FailureDialogComponent, HelpDialogComponent
+    FailureDialogComponent, HelpDialogComponent, DecimalsComponent, CongratsDialogComponent
   ],
   entryComponents: [
     SuccessDialogComponent,
     FailureDialogComponent,
-    HelpDialogComponent
+    HelpDialogComponent,
+    CongratsDialogComponent
   ]
 })
 export class GamesmanagerModule { }

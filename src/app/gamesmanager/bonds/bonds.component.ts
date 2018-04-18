@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from './success-dialog.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FailureDialogComponent } from './failure-dialog.component';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-bonds',
@@ -43,6 +44,11 @@ export class BondsComponent implements OnInit {
 
   guessit(): void {
     console.log("In guessit guess=%d", this.guess);
+
+    if (isNull(this.guess)) {
+      return; //no dialog for empty input (keep focus)
+    }
+
     if (this.generatedNumber + this.guess == this.bondNumber) {
       this.hasBondError = false;
       this.openSuccessDialog();
