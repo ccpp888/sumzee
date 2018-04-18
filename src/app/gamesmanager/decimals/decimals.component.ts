@@ -120,7 +120,7 @@ export class DecimalsComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        //7 for 8 correct
+        //for 8 correct
         if (DecimalsComponent.count > 7) {
           this.openCongratsDialog();
         }

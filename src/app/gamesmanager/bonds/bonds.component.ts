@@ -5,6 +5,7 @@ import { SuccessDialogComponent } from './success-dialog.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FailureDialogComponent } from './failure-dialog.component';
 import { isNull } from 'util';
+import { CongratsDialogComponent } from '../decimals/congrats-dialog.component';
 
 @Component({
   selector: 'app-bonds',
@@ -13,6 +14,9 @@ import { isNull } from 'util';
 })
 
 export class BondsComponent implements OnInit {
+
+  static count: number = 0;
+  static alreadyGenerated: number[] = [];
 
   bondNumber: number;
   generatedNumber: number;
@@ -28,6 +32,9 @@ export class BondsComponent implements OnInit {
     
     this.setFocusOnInput();
 
+    BondsComponent.count++;
+    console.log("* static count=" + BondsComponent.count);
+
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
       console.log("BondsComponent param[id]==%s", param);
@@ -38,7 +45,21 @@ export class BondsComponent implements OnInit {
       console.error("no param for id found");
     }
 
-    this.generatedNumber = Math.floor(Math.random() * this.bondNumber);
+    //Avoid generating a number already guessed
+    let alreadyGen = true;
+    while (alreadyGen) {
+      this.generatedNumber = Math.floor(Math.random() * this.bondNumber);
+
+      if (BondsComponent.alreadyGenerated.includes(this.generatedNumber)) {
+        console.log("Trying again - already generated number="+this.generatedNumber);
+      }
+      else {
+        alreadyGen = false;        
+        BondsComponent.alreadyGenerated.push(this.generatedNumber);
+      }
+    }
+    
+    //console.log("alreadyGenerated list="+BondsComponent.alreadyGenerated.toString());    
     this.guess = null;
   }
 
@@ -51,7 +72,13 @@ export class BondsComponent implements OnInit {
 
     if (this.generatedNumber + this.guess == this.bondNumber) {
       this.hasBondError = false;
-      this.openSuccessDialog();
+      //for 8 correct
+      if (BondsComponent.count > 7) {
+        this.openCongratsDialog();
+      }
+      else {
+        this.openSuccessDialog();
+      }      
     }
     else {
       this.hasBondError = true;
@@ -102,6 +129,20 @@ export class BondsComponent implements OnInit {
       if (result) {
         console.log("openFailureDialog result==true");
         this.setFocusOnInput();
+      }
+    });
+  }
+
+  openCongratsDialog(): void {
+
+    let dialogRef = this.dialog.open(CongratsDialogComponent, {
+      height: '500px',
+      width: '700px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("openSuccessDialog result==true");
+        this.router.navigateByUrl("/gamesmanager/menu");        
       }
     });
   }

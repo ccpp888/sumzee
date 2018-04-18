@@ -9,6 +9,7 @@ import { SuccessDialogComponent } from '../bonds/success-dialog.component';
 import { DOCUMENT } from '@angular/platform-browser';
 import { HelpDialogComponent } from './help-dialog.component';
 import { isNull } from 'util';
+import { CongratsDialogComponent } from '../decimals/congrats-dialog.component';
 
 function matchesExpected(exp: number): ValidatorFn {
 
@@ -32,6 +33,9 @@ function matchesExpected(exp: number): ValidatorFn {
 })
 
 export class TableGenericComponent implements OnInit {
+
+  static count: number = 0;
+  static alreadyGenerated: number[] = [];
 
   timesNumber: number;
   generatedNumber: number;
@@ -62,9 +66,23 @@ export class TableGenericComponent implements OnInit {
       console.error("no param for id found");
     }
 
+
+    //Avoid generating a number already guessed
+    let alreadyGen = true;
+    while (alreadyGen) {
+      this.generatedNumber = Math.floor(Math.random() * 12);
+
+      if (TableGenericComponent.alreadyGenerated.includes(this.generatedNumber)) {
+        console.log("Trying again - already generated number=" + this.generatedNumber);
+      }
+      else {
+        alreadyGen = false;
+        TableGenericComponent.alreadyGenerated.push(this.generatedNumber);
+      }
+    }
+
     this.guessedCorrectly = false;
-    this.errorMessage = '';
-    this.generatedNumber = Math.floor(Math.random() * 10);
+    this.errorMessage = '';    
     this.expected = this.timesNumber * this.generatedNumber;
     this.guessForm = this.fb.group({
       result: ['', matchesExpected(this.expected)],
@@ -76,6 +94,9 @@ export class TableGenericComponent implements OnInit {
       .subscribe(value => this.resetError(this.guessControl));
 
     this.setFocusOnInput();
+
+    TableGenericComponent.count++;
+    console.log("* static count=" + TableGenericComponent.count);
   }
 
 
@@ -112,7 +133,12 @@ export class TableGenericComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        this.ngOnInit();
+        if (TableGenericComponent.count > 7) {
+          this.openCongratsDialog();
+        }
+        else {
+          this.ngOnInit();
+        }
       }
       else {
         console.log("checkInError setting guessedCorrectly, disabling");
@@ -158,10 +184,23 @@ export class TableGenericComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log("openDialog result==true");
-        
+
       }
     });
   }
 
+  openCongratsDialog(): void {
+
+    let dialogRef = this.dialog.open(CongratsDialogComponent, {
+      height: '500px',
+      width: '700px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("openSuccessDialog result==true");
+        this.router.navigateByUrl("/gamesmanager/menu");
+      }
+    });
+  }
 
 }
