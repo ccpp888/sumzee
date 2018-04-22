@@ -20,6 +20,10 @@ import { BondsChoiceComponent } from './bonds/bonds-choice.component';
 import { HelpDialogComponent } from './table-generic/help-dialog.component';
 import { DecimalsComponent } from './decimals/decimals.component';
 import { CongratsDialogComponent } from './decimals/congrats-dialog.component';
+import { AdditionComponent } from './addition/addition.component';
+import { SubtractionComponent } from './subtraction/subtraction.component';
+import { DivisionComponent } from './division/division.component';
+import { MultiplicationComponent } from './multiplication/multiplication.component';
 
 
 const routes: Routes = [
@@ -30,6 +34,9 @@ const routes: Routes = [
       { path: 'tablec', component: TableChoiceComponent },
       { path: 'decimals', component: DecimalsComponent },
       { path: 'table/:id', component: TableGenericComponent },
+      { path: 'add', component: AdditionComponent },
+      { path: 'subtract', component: SubtractionComponent },
+      { path: 'divide', component: DivisionComponent },
       { path: 'menu', component: MenuComponent }
     ] },      
   { path: '**', redirectTo: 'menu' }
@@ -55,7 +62,7 @@ const routes: Routes = [
     SuccessDialogComponent, 
     TableGenericComponent, 
     TableChoiceComponent, 
-    FailureDialogComponent, HelpDialogComponent, DecimalsComponent, CongratsDialogComponent
+    FailureDialogComponent, HelpDialogComponent, DecimalsComponent, CongratsDialogComponent, AdditionComponent, SubtractionComponent, DivisionComponent, MultiplicationComponent
   ],
   entryComponents: [
     SuccessDialogComponent,

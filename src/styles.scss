@@ -25,10 +25,20 @@ body {
     margin: 0;
 }
 
+.shrink-symbol {
+  width: 50%  
+}
+
 .fontlarge {
     font: 100 30px/0.8 'Comic Sans MS', Helvetica, sans-serif;      
     margin: 30px;
  }
+
+ .fontlarge2 {
+  font-family: 'Comic Sans MS', Helvetica, sans-serif;      
+  font-size: 30px;    
+  width: 100%;
+}
 
  .fontless {
     font-size: 16px;

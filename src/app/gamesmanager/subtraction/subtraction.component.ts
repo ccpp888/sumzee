@@ -1,18 +1,16 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, ViewChildren, Renderer, ViewChild, ElementRef, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+
+import { InputTextModule } from 'primeng/inputtext';
+
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { FormGroup, AbstractControl, FormBuilder, ValidatorFn } from '@angular/forms';
+import { SuccessDialogComponent } from '../bonds/success-dialog.component';
 import { isNull } from 'util';
-import { CongratsDialogComponent } from './congrats-dialog.component';
-import { Router } from '@angular/router';
-
-
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+import { CongratsDialogComponent } from '../decimals/congrats-dialog.component';
 
 function matchesExpected(exp: number): ValidatorFn {
 
-  console.log('In matchesExpected expecting ==' + exp);
   return (c: AbstractControl): { [key: string]: boolean } | null => {
 
     if (c.value == undefined || c.value == '') {
@@ -27,19 +25,19 @@ function matchesExpected(exp: number): ValidatorFn {
   }
 }
 
-@Component({
-  selector: 'app-decimals',
-  templateUrl: './decimals.component.html',
-  styleUrls: ['./decimals.component.scss']
-})
+function roundnum(num) {
+  return Math.round(num / 50) * 50;
+}
 
-export class DecimalsComponent implements OnInit {
+@Component({
+  selector: 'app-subtraction',
+  templateUrl: './subtraction.component.html',
+  styleUrls: []
+})
+export class SubtractionComponent implements OnInit {
 
   static count: number = 0;
-  title: string;
-
-  wholeNumbers: number[] = [25, 50, 75, 125, 150, 175];
-  decimals: number[] = [0.25, 0.5, 0.75, 1.25, 1.5, 1.75, 2.25, 2.5];
+  static alreadyGenerated: number[] = [];
 
   number1: number;
   number2: number;
@@ -53,30 +51,21 @@ export class DecimalsComponent implements OnInit {
   validationMessage = 'Try again';
   errorMessage: string;
 
-
   constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, public router: Router) { }
 
   ngOnInit() {
 
-    console.log("* In ngOnInit *");
+    console.log("* SubtractionComponent : in ngOnInit *");
 
-    DecimalsComponent.count++;
-    console.log("* static count=" + DecimalsComponent.count);
+    SubtractionComponent.count++;    
 
-    if (DecimalsComponent.count > 3) {
-      this.number1 = this.decimals[getRandomInt(1, 8) - 1];
-      this.number2 = this.decimals[getRandomInt(1, 8) - 1];
-      this.title = 'Now, its real decimals!'
+    this.number1 = Math.floor(Math.random() * 1000) + 100;
+    this.number2 = Math.floor(Math.random() * 100) + 1;
 
-    }
-    else {
-      this.number1 = this.wholeNumbers[getRandomInt(1, 6) - 1];
-      this.number2 = this.wholeNumbers[getRandomInt(1, 6) - 1];
-      this.title = 'Preparing for decimals, lets start with whole numbers...'
-    }
-
-    this.expected = this.number1 + this.number2;
-
+    //round to nearest 50 (easier)
+    this.number1 = roundnum(this.number1);
+    
+    this.expected = this.number1 - this.number2;
     this.guessedCorrectly = false;
     this.errorMessage = '';
 
@@ -93,6 +82,12 @@ export class DecimalsComponent implements OnInit {
 
   }
 
+  refocus() {
+    if (this.guessedCorrectly) {
+      this.setFocusOnInput();
+    }
+  }
+
   setFocusOnInput() {
     console.log("In reset & setFocusOnInput");
     const element = this.renderer.selectRootElement('#input1');
@@ -101,10 +96,12 @@ export class DecimalsComponent implements OnInit {
 
   checkInError(c: AbstractControl): void {
     this.errorMessage = '';
-
+    
     console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
+    console.log('isNaN(c.value)=%s, isNull(c.value)=%s, c.value=%s', isNaN(c.value), isNull(c.value), (c.value==''));
+    console.log('c.value=%s', c.value);
 
-    if (c.pristine || isNaN(c.value) || isNull(c.value)) {
+    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value=='')) {    
       console.log('checkInError found pristine');
       this.errorMessage = 'Enter a number';
       this.setFocusOnInput();
@@ -120,8 +117,7 @@ export class DecimalsComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        //for 8 correct
-        if (DecimalsComponent.count > 7) {
+        if (SubtractionComponent.count > 7) {
           this.openCongratsDialog();
         }
         else {
@@ -135,10 +131,11 @@ export class DecimalsComponent implements OnInit {
         this.guessControl.disable();
         //focus on submit button
         document.getElementById('go1').focus();
+
       }
     }
   }
-
+  
   resetError(c: AbstractControl): void {
     console.log('In resetError');
     if (c.valid || c.pristine) {
@@ -153,6 +150,11 @@ export class DecimalsComponent implements OnInit {
     this.checkInError(guessControl);
   }
 
+  returnToMenu() {
+    this.router.navigateByUrl("/gamesmanager/menu");
+  }
+
+
   openCongratsDialog(): void {
 
     let dialogRef = this.dialog.open(CongratsDialogComponent, {
@@ -162,9 +164,10 @@ export class DecimalsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log("openSuccessDialog result==true");
-        this.router.navigateByUrl("/gamesmanager/menu");        
+        this.router.navigateByUrl("/gamesmanager/menu");
       }
     });
   }
 
 }
+
