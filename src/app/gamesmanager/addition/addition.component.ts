@@ -40,6 +40,7 @@ export class AdditionComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  maxCorrect: number = 8;
   number1: number;
   number2: number;
   expected: number;
@@ -56,12 +57,12 @@ export class AdditionComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log("* AdditionComponent : in ngOnInit *");
+    console.log("* AdditionComponent : in ngOnInit, count=="+AdditionComponent.count);
 
     AdditionComponent.count++;    
 
     this.number1 = Math.floor(Math.random() * 1000) + 100;
-    this.number2 = Math.floor(Math.random() * 10000) + 1000;
+    this.number2 = Math.floor(Math.random() * 8000) + 1000;
 
     //round to nearest 50 (easier)
     this.number1 = roundnum(this.number1);
@@ -117,7 +118,8 @@ export class AdditionComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        if (AdditionComponent.count > 7) {
+        if (AdditionComponent.count >= this.maxCorrect) {
+          AdditionComponent.count=0;
           this.openCongratsDialog();
         }
         else {

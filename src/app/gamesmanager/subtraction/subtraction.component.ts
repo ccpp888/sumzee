@@ -39,6 +39,7 @@ export class SubtractionComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  maxCorrect: number = 8;
   number1: number;
   number2: number;
   expected: number;
@@ -117,7 +118,8 @@ export class SubtractionComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        if (SubtractionComponent.count > 7) {
+        if (SubtractionComponent.count >= this.maxCorrect) {
+          SubtractionComponent.count=0;
           this.openCongratsDialog();
         }
         else {

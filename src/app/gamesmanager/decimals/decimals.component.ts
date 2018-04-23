@@ -41,6 +41,7 @@ export class DecimalsComponent implements OnInit {
   wholeNumbers: number[] = [25, 50, 75, 125, 150, 175];
   decimals: number[] = [0.25, 0.5, 0.75, 1.25, 1.5, 1.75, 2.25, 2.5];
 
+  maxCorrect: number = 8;
   number1: number;
   number2: number;
   expected: number;
@@ -121,7 +122,8 @@ export class DecimalsComponent implements OnInit {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
         //for 8 correct
-        if (DecimalsComponent.count > 7) {
+        if (DecimalsComponent.count >= this.maxCorrect) {
+          DecimalsComponent.count=0;
           this.openCongratsDialog();
         }
         else {

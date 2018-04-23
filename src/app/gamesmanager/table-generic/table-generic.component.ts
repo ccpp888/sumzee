@@ -37,6 +37,7 @@ export class TableGenericComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  maxCorrect: number = 8;
   timesNumber: number;
   generatedNumber: number;
 
@@ -133,7 +134,8 @@ export class TableGenericComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        if (TableGenericComponent.count > 7) {
+        if (TableGenericComponent.count >= this.maxCorrect) {
+          TableGenericComponent.count=0;
           this.openCongratsDialog();
         }
         else {

@@ -40,6 +40,7 @@ export class DivisionComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  maxCorrect: number = 8;
   number1: number;
   number2: number;
   expected: number;
@@ -133,7 +134,8 @@ export class DivisionComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        if (DivisionComponent.count > 7) {
+        if (DivisionComponent.count >= this.maxCorrect) {
+          DivisionComponent.count=0;
           this.openCongratsDialog();
         }
         else {

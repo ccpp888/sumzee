@@ -18,6 +18,7 @@ export class BondsComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  maxCorrect: number = 8;
   bondNumber: number;
   generatedNumber: number;
   guess: number;
@@ -73,7 +74,8 @@ export class BondsComponent implements OnInit {
     if (this.generatedNumber + this.guess == this.bondNumber) {
       this.hasBondError = false;
       //for 8 correct
-      if (BondsComponent.count > 7) {
+      if (BondsComponent.count >= this.maxCorrect) {
+        BondsComponent.count=0;
         this.openCongratsDialog();
       }
       else {
