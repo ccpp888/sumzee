@@ -26,7 +26,7 @@
       </mat-list-item>
 
       <mat-divider></mat-divider>
-      
+
       <mat-list-item>
         <a matLine routerLink="/gamesmanager/tablec">
           <mat-icon>tag_faces</mat-icon>&nbsp;&nbsp; Times tables&nbsp;&nbsp;
@@ -67,6 +67,23 @@
 
       <mat-divider></mat-divider>
 
+      <mat-list-item>
+        <a matLine routerLink="/gamesmanager/countdown">
+          <mat-icon>notifications</mat-icon>&nbsp;&nbsp; Timed sums&nbsp;&nbsp;
+        </a>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item>
+        <a matLine routerLink="/gamesmanager/timed">
+          <mat-icon>alarm</mat-icon>&nbsp;&nbsp; Timer challenge&nbsp;&nbsp;
+        </a>
+      </mat-list-item>
+     
+
+      <mat-divider></mat-divider>
+
     </mat-nav-list>
 
   </mat-sidenav>
@@ -74,12 +91,12 @@
   <div class="app-sidenav-content">
     <app-toolbar (toggleTheme)="toggleTheme()"></app-toolbar>
     <div class="wrapper">
-      
-        <!--<div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">-->
-          <router-outlet></router-outlet>
-          
+
+      <!--<div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">-->
+      <router-outlet></router-outlet>
+
       <!--</div>-->
-      
+
     </div>
   </div>
 

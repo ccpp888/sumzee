@@ -26,8 +26,8 @@ function matchesExpected(exp: number): ValidatorFn {
 }
 
 
-function roundnum(num) {
-  return Math.round(num / 50) * 50;
+function roundnum(num, rounder) {
+  return Math.round(num / rounder) * rounder;
 }
 
 @Component({
@@ -40,11 +40,13 @@ export class AdditionComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  title: string;
   maxCorrect: number = 8;
   number1: number;
   number2: number;
   expected: number;
   actual: number;
+  difficulty: number;
   guessedCorrectly: boolean;
 
   guessForm: FormGroup;
@@ -53,20 +55,50 @@ export class AdditionComponent implements OnInit {
   validationMessage = 'Try again';
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, public router: Router) { }
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
 
-    console.log("* AdditionComponent : in ngOnInit, count=="+AdditionComponent.count);
+    console.log("* AdditionComponent : in ngOnInit, count==" + AdditionComponent.count);
 
-    AdditionComponent.count++;    
+    AdditionComponent.count++;
 
-    this.number1 = Math.floor(Math.random() * 1000) + 100;
-    this.number2 = Math.floor(Math.random() * 8000) + 1000;
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      console.log("param==" + param);
+      let id = +param //cast to number from string
+      this.difficulty = id;
+    }
+    else {
+      console.error("no param for id found");
+    }
 
-    //round to nearest 50 (easier)
-    this.number1 = roundnum(this.number1);
-    this.number2 = roundnum(this.number2);
+
+    if (this.difficulty == 1) {
+      //easy
+      this.title = 'easier sums';
+
+      this.number1 = Math.floor(Math.random() * 10) + 1;
+      this.number2 = Math.floor(Math.random() * 100) + 10;
+
+    } else if (this.difficulty == 2) {
+      //tricky
+      this.title = 'tricky sums';
+
+      this.number1 = Math.floor(Math.random() * 1000) + 100;
+      this.number2 = Math.floor(Math.random() * 8000) + 1000;
+
+      //round to nearest 50
+      this.number1 = roundnum(this.number1, 50);
+      this.number2 = roundnum(this.number2, 50);
+    } else {
+      //hardest
+      this.title = 'hardest sums!';
+
+      this.number1 = Math.floor(Math.random() * 100) + 10;
+      this.number2 = Math.floor(Math.random() * 8000) + 1000;
+    }
+
 
     this.expected = this.number1 + this.number2;
     this.guessedCorrectly = false;
@@ -102,7 +134,7 @@ export class AdditionComponent implements OnInit {
 
     console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
 
-    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value=='')) {   
+    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value == '')) {
       console.log('checkInError found pristine');
       this.errorMessage = 'Enter a number';
       this.setFocusOnInput();
@@ -119,7 +151,7 @@ export class AdditionComponent implements OnInit {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
         if (AdditionComponent.count >= this.maxCorrect) {
-          AdditionComponent.count=0;
+          AdditionComponent.count = 0;
           this.openCongratsDialog();
         }
         else {
@@ -174,6 +206,11 @@ export class AdditionComponent implements OnInit {
         this.router.navigateByUrl("/gamesmanager/menu");
       }
     });
+  }
+
+  public ngOnDestroy() {
+    console.log("* AdditionComponent in ngOnDestory *");
+    AdditionComponent.count = 0;
   }
 
 }

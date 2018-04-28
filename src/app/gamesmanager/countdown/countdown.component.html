@@ -1,0 +1,103 @@
+<mat-card>
+
+    <mat-card-title class="comicfont">Timed Sums!</mat-card-title>
+    <mat-card-subtitle>...enter a number before the time is up</mat-card-subtitle>
+  
+    <mat-card-content>
+    
+      <mat-grid-list cols="1" [rowHeight]="40">
+  
+        <mat-grid-tile>
+  
+          <div class="comicfont">
+            <div>
+              <h1>Countdown:
+                <span class="countdown-font"> {{countdown}} </span>
+              </h1>
+            </div>
+            <!-- <div>
+                  <button (click)="startCountdownTimer()" class="btn btn-success">Start</button>
+                </div> -->
+          </div>
+  
+        </mat-grid-tile>
+  
+      </mat-grid-list>
+    </mat-card-content>
+  
+  </mat-card>
+  
+  <div>&nbsp;</div>
+  
+  <mat-card>
+  
+  
+  
+    <mat-card-content>
+  
+      <mat-grid-list cols="6" [rowHeight]="160">
+  
+        <mat-grid-tile>
+          <div class="fontlarge">
+            <span>{{number1}} </span>
+          </div>
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <div class="fontlarge">
+            <span>+</span>
+          </div>
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <div class="fontlarge">
+            <span>{{number2}} </span>
+          </div>
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <div class="fontlarge">
+            <span>=</span>
+          </div>
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
+            <mat-form-field class="fontlarge2">
+              <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" formControlName="actual" />
+            </mat-form-field>
+          </form>
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+          <div *ngIf="errorMessage" class="fontless">
+            <i class="material-icons red600 md-36">error</i>
+            <mat-error>{{errorMessage}}</mat-error>
+          </div>
+          <div *ngIf="guessedCorrectly" class="fontless">
+            <i class="material-icons green600 md-36">assignment_turned_in</i>
+            <mat-hint>Well done</mat-hint>
+          </div>
+        </mat-grid-tile>
+  
+      </mat-grid-list>
+  
+    </mat-card-content>
+  
+  </mat-card>
+  
+  <div>&nbsp;</div>
+  
+  <mat-card>
+  
+    <mat-card-content>
+      <mat-grid-list cols="1" [rowHeight]="40">
+        <mat-grid-tile>
+          <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>
+          <button mat-raised-button color="primary" class="r-position" (click)="returnToMenu()">Main menu</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  
+  
+  </mat-card>

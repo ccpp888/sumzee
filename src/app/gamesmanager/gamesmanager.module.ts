@@ -24,6 +24,11 @@ import { AdditionComponent } from './addition/addition.component';
 import { SubtractionComponent } from './subtraction/subtraction.component';
 import { DivisionComponent } from './division/division.component';
 import { MultiplicationComponent } from './multiplication/multiplication.component';
+import { AdditionChoiceComponent } from './addition/addition-choice.component';
+import { TimedComponent } from './timed/timed.component';
+import { TimesupDialogComponent } from './countdown/timesup-dialog.component';
+import { CountdownComponent } from './countdown/countdown.component';
+import { ResultDialogComponent } from './timed/result-dialog.component';
 
 
 const routes: Routes = [
@@ -34,9 +39,12 @@ const routes: Routes = [
       { path: 'tablec', component: TableChoiceComponent },
       { path: 'decimals', component: DecimalsComponent },
       { path: 'table/:id', component: TableGenericComponent },
-      { path: 'add', component: AdditionComponent },
+      { path: 'add', component: AdditionChoiceComponent },
+      { path: 'add/:id', component: AdditionComponent },
       { path: 'subtract', component: SubtractionComponent },
       { path: 'divide', component: DivisionComponent },
+      { path: 'timed', component: TimedComponent },
+      { path: 'countdown', component: CountdownComponent },
       { path: 'menu', component: MenuComponent }
     ] },      
   { path: '**', redirectTo: 'menu' }
@@ -62,13 +70,15 @@ const routes: Routes = [
     SuccessDialogComponent, 
     TableGenericComponent, 
     TableChoiceComponent, 
-    FailureDialogComponent, HelpDialogComponent, DecimalsComponent, CongratsDialogComponent, AdditionComponent, SubtractionComponent, DivisionComponent, MultiplicationComponent
+    FailureDialogComponent, HelpDialogComponent, DecimalsComponent, CongratsDialogComponent, AdditionComponent, SubtractionComponent, DivisionComponent, MultiplicationComponent, AdditionChoiceComponent, TimedComponent, TimesupDialogComponent, CountdownComponent, ResultDialogComponent
   ],
   entryComponents: [
     SuccessDialogComponent,
     FailureDialogComponent,
     HelpDialogComponent,
-    CongratsDialogComponent
+    CongratsDialogComponent,
+    TimesupDialogComponent,
+    ResultDialogComponent
   ]
 })
 export class GamesmanagerModule { }

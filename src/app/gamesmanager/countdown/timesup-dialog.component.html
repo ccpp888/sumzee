@@ -1,0 +1,30 @@
+<div class="centered">
+
+  <div *ngIf="!correct">
+
+    <h2 mat-dialog-title class="comicfont">Time is up!</h2>
+    <mat-dialog-content>
+      <img class="dialog-img" src="/assets/images/ncross.png">
+    </mat-dialog-content>
+    <mat-dialog-content>
+      <span>&nbsp;</span>
+    </mat-dialog-content>
+
+    <button mat-button color="accent" (click)="closeDialog()">Try again</button>
+
+  </div>
+
+  <div *ngIf="correct">
+    <h2 mat-dialog-title class="comicfont">Well done!</h2>
+    <mat-dialog-content>
+      <img class="dialog-img" src="/assets/images/ntick.png">
+    </mat-dialog-content>
+    <mat-dialog-content>
+      <span>&nbsp;</span>
+    </mat-dialog-content>
+
+    <button mat-button color="primary" (click)="closeDialog()">Play again</button>
+
+  </div>
+
+</div>

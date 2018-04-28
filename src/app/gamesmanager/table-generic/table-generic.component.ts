@@ -205,4 +205,9 @@ export class TableGenericComponent implements OnInit {
     });
   }
 
+  public ngOnDestroy() {
+    console.log("* TableGenericComponent in ngOnDestory *");
+    TableGenericComponent.count = 0;
+  }
+
 }

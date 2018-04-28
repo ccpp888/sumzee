@@ -171,5 +171,10 @@ export class SubtractionComponent implements OnInit {
     });
   }
 
+  public ngOnDestroy() {
+    console.log("* SubtractionComponent in ngOnDestory *");
+    SubtractionComponent.count = 0;
+  }
+
 }
 

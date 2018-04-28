@@ -192,5 +192,10 @@ export class DivisionComponent implements OnInit {
     });
   }
 
+  public ngOnDestroy() {
+    console.log("* DivisionComponent in ngOnDestory *");
+    DivisionComponent.count = 0;
+  }
+
 }
 

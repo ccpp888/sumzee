@@ -169,4 +169,9 @@ export class DecimalsComponent implements OnInit {
     });
   }
 
+  public ngOnDestroy() {
+    console.log("* DecimalsComponent in ngOnDestory *");
+    DecimalsComponent.count = 0;
+  }
+
 }

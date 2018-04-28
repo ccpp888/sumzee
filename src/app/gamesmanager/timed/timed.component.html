@@ -1,11 +1,42 @@
 <mat-card>
 
-  <mat-card-title class="comicfont">Subtraction</mat-card-title>
-  <mat-card-subtitle>...enter the result</mat-card-subtitle>
+  <mat-card-title class="comicfont">60 Second Challenge!</mat-card-title>
+  <mat-card-subtitle>complete as many problems as possible before the time is up...</mat-card-subtitle>
+
+  <mat-card-content>
+    <!-- <mat-grid-list cols="1" [rowHeight]="40"> -->
+
+    <mat-grid-list cols="1" [rowHeight]="40">
+
+      <mat-grid-tile>
+
+        <div class="comicfont">
+          <div>
+            <h1>Countdown:
+              <span class="countdown-font"> {{countdown}} </span>
+            </h1>
+          </div>
+          <!-- <div>
+                <button (click)="startCountdownTimer()" class="btn btn-success">Start</button>
+              </div> -->
+        </div>
+
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </mat-card-content>
+
+</mat-card>
+
+<div>&nbsp;</div>
+
+<mat-card>
+
+
 
   <mat-card-content>
 
-    <mat-grid-list cols="6">
+    <mat-grid-list cols="6" [rowHeight]="160">
 
       <mat-grid-tile>
         <div class="fontlarge">
@@ -15,7 +46,7 @@
 
       <mat-grid-tile>
         <div class="fontlarge">
-          <span>-</span>
+          <span>+</span>
         </div>
       </mat-grid-tile>
 
@@ -34,11 +65,9 @@
       <mat-grid-tile>
         <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
           <mat-form-field class="fontlarge2">
-            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" formControlName="actual"
-            />
+            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" formControlName="actual" />
           </mat-form-field>
         </form>
-
       </mat-grid-tile>
 
       <mat-grid-tile>
@@ -65,9 +94,10 @@
   <mat-card-content>
     <mat-grid-list cols="1" [rowHeight]="40">
       <mat-grid-tile>
-        <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>        
+        <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
+
 
 </mat-card>

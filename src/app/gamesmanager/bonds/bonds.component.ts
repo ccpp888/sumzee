@@ -148,4 +148,9 @@ export class BondsComponent implements OnInit {
       }
     });
   }
+
+  public ngOnDestroy() {
+    console.log("* BondsComponent in ngOnDestory *");
+    BondsComponent.count = 0;
+  }
 }

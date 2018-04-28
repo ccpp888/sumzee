@@ -1,0 +1,23 @@
+<div class="centered results-background">
+
+  <div>
+    <h1 mat-dialog-title class="comicfont">Times up!</h1>
+
+    <mat-dialog-content>
+      <h2 class="comicfont">You scored:</h2>
+
+      <h2 class="results-font">{{numCorrect}}</h2>
+
+    </mat-dialog-content>
+    <mat-dialog-content>
+      <span>&nbsp;</span>
+    </mat-dialog-content>
+
+    <mat-dialog-content>
+      <div>
+        <button mat-button color="primary" (click)="closeDialog()">Play again</button>
+      </div>
+    </mat-dialog-content>
+  </div>
+
+</div>

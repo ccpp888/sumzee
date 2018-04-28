@@ -58,6 +58,20 @@ body {
   color: primary;   
 }
 
+.countdown-font {
+  font-family: 'Comic Sans MS', Helvetica, sans-serif;   
+  color: #FB0F00;   
+}
+
+.results-font {
+  font-family: 'Comic Sans MS', Helvetica, sans-serif;   
+  color: #32CD32;   
+}
+
+.results-background {
+  background-color: accent;
+}
+
 .example-form {
     min-width: 85px;
     max-width: 85px;
@@ -109,5 +123,10 @@ body {
   margin: auto;    
   align-content: center;
   text-align: center;
+}
+
+.r-position {    
+  position: absolute;
+  right: 0px;
 }
 
