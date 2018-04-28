@@ -68,9 +68,7 @@ export class CountdownComponent implements OnInit {
 
   ngOnInit() {
     console.log("* In ngInit *");
-    this.initFormAndNumbers();  
-    //this.setFocusOnInput();
-    //this.setFocusOnStartButton();
+    this.initFormAndNumbers();      
   }
 
   initFormAndNumbers() {
@@ -129,11 +127,6 @@ export class CountdownComponent implements OnInit {
     setTimeout(() => element.focus(), 0);
   }
 
-  // setFocusOnStartButton() {    
-  //   const element = this.renderer.selectRootElement('#start1');
-  //   setTimeout(() => element.focus(), 0);
-  // }
-
   checkInError(c: AbstractControl): void {
     this.errorMessage = '';
 
@@ -160,6 +153,7 @@ export class CountdownComponent implements OnInit {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
         this.initFormAndNumbers();
+        this.setFocusOnInput();
       }
       else {
         console.log("checkInError setting guessedCorrectly");
@@ -167,6 +161,7 @@ export class CountdownComponent implements OnInit {
         this.guessControl.disable();
         document.getElementById('go1').focus();
         CountdownComponent.count++;
+        this.setFocusOnInput();
         console.log("count==" + CountdownComponent.count);
       }
     }
