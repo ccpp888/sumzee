@@ -25,10 +25,10 @@ import { SubtractionComponent } from './subtraction/subtraction.component';
 import { DivisionComponent } from './division/division.component';
 import { MultiplicationComponent } from './multiplication/multiplication.component';
 import { AdditionChoiceComponent } from './addition/addition-choice.component';
-import { TimedComponent } from './timed/timed.component';
-import { TimesupDialogComponent } from './countdown/timesup-dialog.component';
+import { TimesupDialogComponent } from './timed-sums/timesup-dialog.component';
+import { ResultDialogComponent } from './countdown/result-dialog.component';
+import { TimedSumComponent } from './timed-sums/timed-sum.component';
 import { CountdownComponent } from './countdown/countdown.component';
-import { ResultDialogComponent } from './timed/result-dialog.component';
 
 
 const routes: Routes = [
@@ -43,8 +43,8 @@ const routes: Routes = [
       { path: 'add/:id', component: AdditionComponent },
       { path: 'subtract', component: SubtractionComponent },
       { path: 'divide', component: DivisionComponent },
-      { path: 'timed', component: TimedComponent },
       { path: 'countdown', component: CountdownComponent },
+      { path: 'timed', component: TimedSumComponent },
       { path: 'menu', component: MenuComponent }
     ] },      
   { path: '**', redirectTo: 'menu' }
@@ -61,7 +61,8 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [],
-  declarations: [GamesmanagerAppComponent, 
+  declarations: [
+    GamesmanagerAppComponent, 
     ToolbarComponent,     
     SidenavComponent, 
     BondsChoiceComponent,    
@@ -70,7 +71,19 @@ const routes: Routes = [
     SuccessDialogComponent, 
     TableGenericComponent, 
     TableChoiceComponent, 
-    FailureDialogComponent, HelpDialogComponent, DecimalsComponent, CongratsDialogComponent, AdditionComponent, SubtractionComponent, DivisionComponent, MultiplicationComponent, AdditionChoiceComponent, TimedComponent, TimesupDialogComponent, CountdownComponent, ResultDialogComponent
+    FailureDialogComponent, 
+    HelpDialogComponent, 
+    DecimalsComponent, 
+    CongratsDialogComponent, 
+    AdditionComponent, 
+    SubtractionComponent, 
+    DivisionComponent, 
+    MultiplicationComponent, 
+    AdditionChoiceComponent, 
+    TimedSumComponent, 
+    TimesupDialogComponent,     
+    CountdownComponent, 
+    ResultDialogComponent
   ],
   entryComponents: [
     SuccessDialogComponent,

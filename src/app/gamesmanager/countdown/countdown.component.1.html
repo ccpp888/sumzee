@@ -4,9 +4,18 @@
   <mat-card-subtitle>complete as many problems as possible before the time is up...</mat-card-subtitle>
 
   <mat-card-content>
-    <!-- <mat-grid-list cols="1" [rowHeight]="40"> -->
+   
+    <mat-grid-list cols="2" [rowHeight]="60">
 
-    <mat-grid-list cols="1" [rowHeight]="40">
+      
+
+      <mat-grid-tile>
+
+        <div class="comicfont">   
+          <button mat-fab (click)="startCountdownTimer()">Start</button>
+        </div>
+
+      </mat-grid-tile>
 
       <mat-grid-tile>
 
@@ -16,14 +25,12 @@
               <span class="countdown-font"> {{countdown}} </span>
             </h1>
           </div>
-          <!-- <div>
-                <button (click)="startCountdownTimer()" class="btn btn-success">Start</button>
-              </div> -->
         </div>
 
       </mat-grid-tile>
 
     </mat-grid-list>
+
   </mat-card-content>
 
 </mat-card>
@@ -31,8 +38,6 @@
 <div>&nbsp;</div>
 
 <mat-card>
-
-
 
   <mat-card-content>
 
@@ -95,6 +100,7 @@
     <mat-grid-list cols="1" [rowHeight]="40">
       <mat-grid-tile>
         <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>
+        <button mat-raised-button color="primary" class="r-position" (click)="returnToMenu()">Main menu</button>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>

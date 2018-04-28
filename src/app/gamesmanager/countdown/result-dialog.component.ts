@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-result-dialog',
@@ -9,12 +10,19 @@ import { MatDialogRef } from '@angular/material';
 export class ResultDialogComponent {
 
   numCorrect: number;
+  onMenu = new EventEmitter();
 
   constructor(public dialogRef: MatDialogRef<ResultDialogComponent>) { }
 
   closeDialog() {
     console.log("ResultDialogComponent closeDialog")
     this.dialogRef.close('Closing!');    
+  }
+
+  closeToMain() {
+    console.log("ResultDialogComponent closeToMain")
+    this.onMenu.emit('Menu');
+    this.dialogRef.close('Closing!');
   }
 
 }

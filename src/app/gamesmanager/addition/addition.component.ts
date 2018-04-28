@@ -25,7 +25,6 @@ function matchesExpected(exp: number): ValidatorFn {
   }
 }
 
-
 function roundnum(num, rounder) {
   return Math.round(num / rounder) * rounder;
 }
@@ -73,32 +72,28 @@ export class AdditionComponent implements OnInit {
       console.error("no param for id found");
     }
 
+    if (this.difficulty == 0) {     
+      this.title = 'Warm sums';
+      this.number1 = Math.floor(Math.random() * 10) + 1;
+      this.number2 = Math.floor(Math.random() * 20) + 1;
 
-    if (this.difficulty == 1) {
-      //easy
-      this.title = 'easier sums';
-
+    } else if (this.difficulty == 1) {     
+      this.title = 'Hot sums';
       this.number1 = Math.floor(Math.random() * 10) + 1;
       this.number2 = Math.floor(Math.random() * 100) + 10;
 
-    } else if (this.difficulty == 2) {
-      //tricky
-      this.title = 'tricky sums';
-
+    } else if (this.difficulty == 2) {      
+      this.title = 'Hotter sums';
       this.number1 = Math.floor(Math.random() * 1000) + 100;
       this.number2 = Math.floor(Math.random() * 8000) + 1000;
-
       //round to nearest 50
       this.number1 = roundnum(this.number1, 50);
       this.number2 = roundnum(this.number2, 50);
-    } else {
-      //hardest
-      this.title = 'hardest sums!';
-
+    } else {      
+      this.title = 'Hottest sums!';
       this.number1 = Math.floor(Math.random() * 100) + 10;
       this.number2 = Math.floor(Math.random() * 8000) + 1000;
     }
-
 
     this.expected = this.number1 + this.number2;
     this.guessedCorrectly = false;
@@ -107,14 +102,11 @@ export class AdditionComponent implements OnInit {
     this.guessForm = this.fb.group({
       actual: ['', matchesExpected(this.expected)],
     })
-
     this.guessControl = this.guessForm.get('actual');
-
     this.guessControl.statusChanges
       .subscribe(value => this.resetError(this.guessControl));
 
     this.setFocusOnInput();
-
   }
 
   refocus() {
@@ -159,13 +151,12 @@ export class AdditionComponent implements OnInit {
         }
       }
       else {
-        console.log("checkInError setting guessedCorrectly, disabling");
+        console.log("checkInError setting guessedCorrectly");
         this.guessedCorrectly = true;
         //disable user input
         this.guessControl.disable();
         //focus on submit button
         document.getElementById('go1').focus();
-
       }
     }
   }
@@ -184,7 +175,7 @@ export class AdditionComponent implements OnInit {
   }
 
   save() {
-    console.log("In save() - which is onSubmit");
+    console.log("In save() / onSubmit");
     const guessControl = this.guessForm.get('actual');
     this.checkInError(guessControl);
   }
@@ -192,7 +183,6 @@ export class AdditionComponent implements OnInit {
   returnToMenu() {
     this.router.navigateByUrl("/gamesmanager/menu");
   }
-
 
   openCongratsDialog(): void {
 

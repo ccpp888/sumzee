@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class GamesmanagerAppComponent implements OnInit {
 
   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public router: Router) {
-    iconRegistry.addSvgIconSet(
-      sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg'));
+    // iconRegistry.addSvgIconSet(
+    //   sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg'));
 
       this.router.navigate(['/gamesmanager/menu']);
    }
