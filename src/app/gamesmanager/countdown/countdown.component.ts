@@ -40,6 +40,7 @@ export class CountdownComponent implements OnInit {
 
   static count: number = 0;
 
+  symbol: string;
   durationInSecs: number = 60;
   countdown: number;
   
@@ -71,11 +72,34 @@ export class CountdownComponent implements OnInit {
     this.initFormAndNumbers();      
   }
 
-  initFormAndNumbers() {
-    this.number1 = Math.floor(Math.random() * 10) + 1;
-    this.number2 = Math.floor(Math.random() * 100) + 10;
+  initFormAndNumbers() {    
+    let calc = Math.floor(Math.random() * 8);
+    console.log("calc for sum type="+calc)
 
-    this.expected = this.number1 + this.number2;
+    switch(calc) {
+
+    }
+    switch (calc) {
+      case 0: {
+        this.doDivision();
+        break;
+      }
+      case 1:
+      case 2: {
+        this.doSubtraction();
+        break;
+      }
+      case 3:
+      case 4: {
+        this.doMultiplication();
+        break;
+      }
+      default: {
+        this.doAddition();
+        break;
+      }
+    }
+    
     this.guessedCorrectly = false;
     this.errorMessage = '';
 
@@ -86,6 +110,36 @@ export class CountdownComponent implements OnInit {
     this.guessControl.statusChanges
       .subscribe(value => this.resetError(this.guessControl));
 
+  }
+
+  doAddition() {
+    this.symbol = '+';
+    this.number1 = Math.floor(Math.random() * 15) + 4;
+    this.number2 = Math.floor(Math.random() * 60) + 10;
+    this.expected = this.number1 + this.number2;
+  }
+
+  doSubtraction() {
+    this.symbol = '-';
+    this.number1 = Math.floor(Math.random() * 30) + 11;
+    this.number2 = Math.floor(Math.random() * 10) + 3;
+    this.expected = this.number1 - this.number2;
+  }
+
+  doMultiplication() {
+    this.symbol = 'x';
+    this.number1 = Math.floor(Math.random() * 10) + 1;
+    this.number2 = Math.floor(Math.random() * 17) + 3;
+    this.expected = this.number1 * this.number2;
+  }
+
+  doDivision() {
+    this.symbol = '/';
+    let divisors = [2,3,4,5,6];
+    let startingPoint = Math.floor(Math.random() * 10) + 1;    
+    this.number2 = divisors[Math.floor(Math.random() * divisors.length)];
+    this.number1 = startingPoint * this.number2;    
+    this.expected = this.number1 / this.number2;
   }
 
   startCountdownTimer() {
@@ -114,6 +168,14 @@ export class CountdownComponent implements OnInit {
       console.log("--NOT guessedCorrectly or opened, calling openTimesUpDialog(false)")
       this.openResultDialog();
     }
+  }
+
+  countdownStarted() {
+    return this.started;
+  }
+
+  get count(): number {
+    return CountdownComponent.count;
   }
 
   refocus() {

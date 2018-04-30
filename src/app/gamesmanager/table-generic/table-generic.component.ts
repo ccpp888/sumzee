@@ -177,16 +177,19 @@ export class TableGenericComponent implements OnInit {
     this.router.navigateByUrl("/gamesmanager/menu");
   }
 
+  /**
+   * Display a basic matrix table help
+   */
   openDialog(): void {
 
     let dialogRef = this.dialog.open(HelpDialogComponent, {
-      height: '825px',
-      width: '1050px',
+      height: '420px',
+      width: '550px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log("openDialog result==true");
-
+        this.setFocusOnInput(); 
       }
     });
   }
@@ -194,8 +197,8 @@ export class TableGenericComponent implements OnInit {
   openCongratsDialog(): void {
 
     let dialogRef = this.dialog.open(CongratsDialogComponent, {
-      height: '500px',
-      width: '700px',
+      height: '450px',
+      width: '750px',
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {

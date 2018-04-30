@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title class="comicfont">Division - please a select a level...</mat-card-title>
+  <mat-card-content>
+
+    <mat-grid-list cols="8">      
+      <mat-grid-tile>
+        <button mat-fab (click)="routeTo(1)">hot</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-fab color="primary" (click)="routeTo(2)">hotter</button>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <button mat-fab (click)="routeTo(3)">hottest</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  </mat-card-content>
+
+</mat-card>

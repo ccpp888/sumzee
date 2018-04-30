@@ -29,6 +29,10 @@ import { TimesupDialogComponent } from './timed-sums/timesup-dialog.component';
 import { ResultDialogComponent } from './countdown/result-dialog.component';
 import { TimedSumComponent } from './timed-sums/timed-sum.component';
 import { CountdownComponent } from './countdown/countdown.component';
+import { DivChoiceComponent } from './division/div-choice.component';
+import { SubtractChoiceComponent } from './subtraction/subtract-choice.component';
+import { MultiChoiceComponent } from './multiplication/multi-choice.component';
+import { PreDialogComponent } from './timed-sums/pre-dialog.component';
 
 
 const routes: Routes = [
@@ -41,8 +45,12 @@ const routes: Routes = [
       { path: 'table/:id', component: TableGenericComponent },
       { path: 'add', component: AdditionChoiceComponent },
       { path: 'add/:id', component: AdditionComponent },
-      { path: 'subtract', component: SubtractionComponent },
-      { path: 'divide', component: DivisionComponent },
+      { path: 'subtract', component: SubtractChoiceComponent },
+      { path: 'subtract/:id', component: SubtractionComponent },
+      { path: 'divide', component: DivChoiceComponent },
+      { path: 'divide/:id', component: DivisionComponent },
+      { path: 'multiply', component: MultiChoiceComponent },
+      { path: 'multiply/:id', component: MultiplicationComponent },
       { path: 'countdown', component: CountdownComponent },
       { path: 'timed', component: TimedSumComponent },
       { path: 'menu', component: MenuComponent }
@@ -77,13 +85,18 @@ const routes: Routes = [
     CongratsDialogComponent, 
     AdditionComponent, 
     SubtractionComponent, 
+    SubtractChoiceComponent,
     DivisionComponent, 
+    DivChoiceComponent, 
     MultiplicationComponent, 
     AdditionChoiceComponent, 
     TimedSumComponent, 
     TimesupDialogComponent,     
     CountdownComponent, 
-    ResultDialogComponent
+    ResultDialogComponent, 
+    MultiplicationComponent,
+    MultiChoiceComponent,
+    PreDialogComponent
   ],
   entryComponents: [
     SuccessDialogComponent,
@@ -91,7 +104,8 @@ const routes: Routes = [
     HelpDialogComponent,
     CongratsDialogComponent,
     TimesupDialogComponent,
-    ResultDialogComponent
+    ResultDialogComponent,
+    PreDialogComponent
   ]
 })
 export class GamesmanagerModule { }

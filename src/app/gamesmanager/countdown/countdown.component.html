@@ -7,12 +7,10 @@
 
     <mat-grid-list cols="3" [rowHeight]="80">
 
-      <!-- <mat-grid-tile></mat-grid-tile> -->
-
       <mat-grid-tile>
 
         <div class="comicfont">
-          <button autofocus mat-fab (click)="startCountdownTimer()">Start</button>
+          <button autofocus mat-fab [disabled]="countdownStarted()" (click)="startCountdownTimer()">Start</button>
         </div>
 
       </mat-grid-tile>
@@ -53,7 +51,7 @@
 
       <mat-grid-tile>
         <div class="fontlarge">
-          <span>+</span>
+          <span>{{symbol}}</span>
         </div>
       </mat-grid-tile>
 
@@ -100,7 +98,9 @@
 
   <mat-card-content>
     <mat-grid-list cols="1" [rowHeight]="40">
+        
       <mat-grid-tile>
+        <span class="l-position">Correct so far: <b>{{count}}</b></span>
         <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>
         <button mat-raised-button color="primary" class="r-position" (click)="returnToMenu()">Main menu</button>
       </mat-grid-tile>

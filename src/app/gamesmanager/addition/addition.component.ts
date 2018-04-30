@@ -45,7 +45,7 @@ export class AdditionComponent implements OnInit {
   number2: number;
   expected: number;
   actual: number;
-  difficulty: number;
+  level: number;
   guessedCorrectly: boolean;
 
   guessForm: FormGroup;
@@ -62,27 +62,19 @@ export class AdditionComponent implements OnInit {
 
     AdditionComponent.count++;
 
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      console.log("param==" + param);
-      let id = +param //cast to number from string
-      this.difficulty = id;
-    }
-    else {
-      console.error("no param for id found");
-    }
+    this.setLevel();
 
-    if (this.difficulty == 0) {     
+    if (this.level == 0) {     
       this.title = 'Warm sums';
       this.number1 = Math.floor(Math.random() * 10) + 1;
       this.number2 = Math.floor(Math.random() * 20) + 1;
 
-    } else if (this.difficulty == 1) {     
+    } else if (this.level == 1) {     
       this.title = 'Hot sums';
       this.number1 = Math.floor(Math.random() * 10) + 1;
       this.number2 = Math.floor(Math.random() * 100) + 10;
 
-    } else if (this.difficulty == 2) {      
+    } else if (this.level == 2) {      
       this.title = 'Hotter sums';
       this.number1 = Math.floor(Math.random() * 1000) + 100;
       this.number2 = Math.floor(Math.random() * 8000) + 1000;
@@ -107,6 +99,18 @@ export class AdditionComponent implements OnInit {
       .subscribe(value => this.resetError(this.guessControl));
 
     this.setFocusOnInput();
+  }
+
+  setLevel() {
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      console.log("param==" + param);
+      let id = +param //cast to number from string
+      this.level = id;
+    }
+    else {
+      console.error("no param for id found");
+    }
   }
 
   refocus() {

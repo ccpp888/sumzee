@@ -40,6 +40,9 @@ export class DivisionComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  title: string;
+
+  level: number;
   maxCorrect: number = 8;
   number1: number;
   number2: number;
@@ -53,37 +56,30 @@ export class DivisionComponent implements OnInit {
   validationMessage = 'Try again';
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, public router: Router) { }
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, public router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
     console.log("* DivisionComponent : in ngOnInit *");
 
-    DivisionComponent.count++;    
+    DivisionComponent.count++;
 
-    this.number1 = Math.floor(Math.random() * 100) + 10;
-    this.number2 = Math.floor(Math.random() * 10) + 2;
+    this.setLevel();
 
-    let noMod = true;
-    let counter = 1;
-    while (noMod) {
-      if (counter==100) {
-        console.log("counter reached 100");
-        this.number2 = 1;
+    switch (this.level) {
+      case 1: {
+        this.doLevelHot();
         break;
       }
-      if (this.number1 % this.number2 == 0) {
-        noMod = false;
+      case 2: {
+        this.doLevelHotter();
+        break;
       }
-      else {
-        this.number2 = Math.floor(Math.random() * 10) + 2;
-        noMod = true;
-        counter++;
+      default: {
+        this.doLevelHottest();
+        break;
       }
     }
-
-    this.expected = this.number1 / this.number2;
-    console.log("number1=%s, number2=%s, expected=%s", this.number1, this.number2, this.expected);
 
     this.guessedCorrectly = false;
     this.errorMessage = '';
@@ -98,7 +94,89 @@ export class DivisionComponent implements OnInit {
       .subscribe(value => this.resetError(this.guessControl));
 
     this.setFocusOnInput();
+  }
 
+  doLevelHot() {
+
+    this.title = 'Hot sums';
+    this.number1 = Math.floor(Math.random() * 20) + 5;
+    this.number2 = Math.floor(Math.random() * 5) + 2;
+
+    let noMod = true;
+    let counter = 1;
+    while (noMod) {
+      if (counter == 100) {
+        console.log("** counter reached 100 **");
+        //multiple by 2 ensures even number (divisible whole number)
+        this.number1 = (Math.floor(Math.random() * 10) + 1) * 2;
+        this.number2 = 2;
+        console.log (">> reset as number1=%s, number2=%s", this.number1, this.number2);
+        break;
+      }
+      if (this.number1 % this.number2 == 0) {
+        noMod = false;
+      }
+      else {
+        this.number2 = Math.floor(Math.random() * 5) + 2;
+        noMod = true;
+        counter++;
+      }      
+    }
+    this.expected = this.number1 / this.number2;
+    console.log(">> number1=%s, number2=%s, expected=%s", this.number1, this.number2, this.expected);
+  }
+
+  doLevelHotter() {
+
+    this.title = 'Hotter sums';
+    this.number1 = Math.floor(Math.random() * 100) + 10;
+    this.number2 = Math.floor(Math.random() * 10) + 2;
+
+    let noMod = true;
+    let counter = 1;
+    while (noMod) {
+      if (counter == 200) {
+        console.log("** counter reached 200 **");
+        this.number1 = (Math.floor(Math.random() * 50)) * 2;
+        this.number2 = 2;
+        console.log (">> reset as number1=%s, number2=%s", this.number1, this.number2);        
+        break;
+      }
+      if (this.number1 % this.number2 == 0) {
+        noMod = false;
+      }
+      else {
+        this.number2 = Math.floor(Math.random() * 10) + 2;
+        noMod = true;
+        counter++;
+      }     
+    }
+    this.expected = this.number1 / this.number2;
+    console.log("number1=%s, number2=%s, expected=%s", this.number1, this.number2, this.expected);
+  }
+
+  doLevelHottest() {
+
+    this.title = 'Hottest sums';
+    let divisors = [10,20,50,100];
+    let startingPoint = Math.floor(Math.random() * 50) + 10;    
+    this.number2 = divisors[Math.floor(Math.random() * divisors.length)];
+    this.number1 = startingPoint * this.number2;
+    
+    this.expected = this.number1 / this.number2;
+    console.log("number1=%s, number2=%s, expected=%s", this.number1, this.number2, this.expected);
+  }
+
+  setLevel() {
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      console.log("param==" + param);
+      let id = +param //cast to number from string
+      this.level = id;
+    }
+    else {
+      console.error("no param for id found");
+    }
   }
 
   refocus() {
@@ -118,7 +196,7 @@ export class DivisionComponent implements OnInit {
 
     console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
 
-    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value=='')) {   
+    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value == '')) {
       console.log('checkInError found pristine');
       this.errorMessage = 'Enter a number';
       this.setFocusOnInput();
@@ -135,7 +213,7 @@ export class DivisionComponent implements OnInit {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
         if (DivisionComponent.count >= this.maxCorrect) {
-          DivisionComponent.count=0;
+          DivisionComponent.count = 0;
           this.openCongratsDialog();
         }
         else {

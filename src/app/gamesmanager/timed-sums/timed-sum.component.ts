@@ -9,8 +9,12 @@ import "rxjs/add/observable/timer";
 import "rxjs/add/operator/finally";
 import "rxjs/add/operator/takeUntil";
 import "rxjs/add/operator/map";
+import { interval } from 'rxjs/observable/interval';
+import { take } from 'rxjs/operators';
+
 import { TimesupDialogComponent } from './timesup-dialog.component';
 import { Subject } from 'rxjs/Subject';
+import { PreDialogComponent } from './pre-dialog.component';
 
 
 function matchesExpected(exp: number): ValidatorFn {
@@ -29,6 +33,38 @@ function matchesExpected(exp: number): ValidatorFn {
   }
 }
 
+
+function sequenceSubscriber(observer) {
+  const seq = ["Ready","Set","Go"];
+  let timeoutId;
+
+  console.log(">>> sequenceSubscriber emitting values");
+  // Will run through an array of numbers, emitting one value
+  // per second until it gets to the end of the array.
+  function doSequence(arr, idx) {
+    console.log("In func doSeq: idx==%s", idx);
+    timeoutId = setTimeout(() => {
+      observer.next(arr[idx]);
+      //if (idx === arr.length - 1) {
+      if (idx == arr.length - 1) {
+        console.log(">>> idx == arr.length-1, completing");
+        observer.complete();
+      } else {
+        console.log("Not complete: calling doSeq for idx==%s", idx);
+        doSequence(arr, ++idx);
+      }
+    }, 2000);
+  }
+
+  console.log(">>> sequenceSubscriber calling doSequence");
+  doSequence(seq, 0);
+
+  // Unsubscribe should clear the timeout to stop execution
+  return {unsubscribe() {
+    clearTimeout(timeoutId);
+  }};
+}
+
 @Component({
   selector: 'app-timed-sum',
   templateUrl: './timed-sum.component.html',
@@ -39,6 +75,9 @@ export class TimedSumComponent implements OnInit {
   countdown: number;
   durationInSecs:number = 10;
   
+  readyTitle: string;
+  displayReady: boolean;
+
   number1: number;
   number2: number;
   expected: number;
@@ -64,6 +103,17 @@ export class TimedSumComponent implements OnInit {
 
     console.log("* In ngInit *");
 
+    //this.displayReady = true;
+
+    this.setNumbers();
+
+    //this.startCountdownTimer();
+
+    console.log("* ngInit complete *");
+
+  }
+
+  setNumbers() {
     this.number1 = Math.floor(Math.random() * 10) + 1;
     this.number2 = Math.floor(Math.random() * 100) + 10;
 
@@ -80,11 +130,64 @@ export class TimedSumComponent implements OnInit {
       .subscribe(value => this.resetError(this.guessControl));
 
     this.setFocusOnInput();
+  }
 
-    this.startCountdownTimer();
+  ngAfterViewInit() {
+    console.log("* In ngAfterViewInit *");
+    this.openPreDialog();
 
-    console.log("* ngInit complete *");
+    //this.callSequence2();   
+    //this.displayReady = true;
 
+  }
+
+  callSequence2() {
+    let words = ['Ready', 'Set', 'Go!', ''];
+
+    const intrval = interval(1500);
+    const sequence = intrval.pipe(take(4));
+           
+    const sub = sequence
+        .finally(() => {
+          console.log('Finally callback')
+          this.displayReady = false;
+        })
+        .subscribe(i => { 
+        console.log(i); 
+        console.log(words[i]); 
+        this.readyTitle = words[i];     
+        })   
+
+      sub.unsubscribe();
+  }
+
+  callSequence() {
+    const sequence = new Observable(sequenceSubscriber);
+
+    sequence.subscribe({
+      next(str) { 
+        console.log(str); 
+        this.title = str;
+      },
+      complete() { console.log('Finished sequence'); }
+    });
+  }
+
+  openPreDialog(): void {
+    console.log("In openPreDialog()");
+    
+    let dialogRef = this.dialog.open(PreDialogComponent, {
+      height: '90px',
+      width: '200px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("dialogRef.afterClosed()");         
+        this.setFocusOnInput();       
+        this.startCountdownTimer();
+      }
+    });
   }
 
   startCountdownTimer() {
@@ -197,7 +300,11 @@ export class TimedSumComponent implements OnInit {
           this.unsubscribed = true;
           this.subscription.unsubscribe();
         }        
-        this.ngOnInit();
+        //this.ngOnInit();
+        this.setNumbers();
+        this.openPreDialog();
+              
+        
       }
     });
   }

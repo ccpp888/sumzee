@@ -25,8 +25,8 @@ function matchesExpected(exp: number): ValidatorFn {
   }
 }
 
-function roundnum(num) {
-  return Math.round(num / 50) * 50;
+function roundnum(num, roundToNearest) {
+  return Math.round(num / roundToNearest) * roundToNearest;
 }
 
 @Component({
@@ -39,6 +39,8 @@ export class SubtractionComponent implements OnInit {
   static count: number = 0;
   static alreadyGenerated: number[] = [];
 
+  title: string;
+  level: number;
   maxCorrect: number = 8;
   number1: number;
   number2: number;
@@ -52,21 +54,31 @@ export class SubtractionComponent implements OnInit {
   validationMessage = 'Try again';
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, public router: Router) { }
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, public router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
     console.log("* SubtractionComponent : in ngOnInit *");
 
-    SubtractionComponent.count++;    
+    SubtractionComponent.count++;
 
-    this.number1 = Math.floor(Math.random() * 1000) + 100;
-    this.number2 = Math.floor(Math.random() * 100) + 1;
+    this.setLevel();
 
-    //round to nearest 50 (easier)
-    this.number1 = roundnum(this.number1);
+    switch (this.level) {
+      case 1: {
+        this.doLevelHot();
+        break;
+      }
+      case 2: {
+        this.doLevelHotter();
+        break;
+      }
+      default: {
+        this.doLevelHottest();
+        break;
+      }
+    }
     
-    this.expected = this.number1 - this.number2;
     this.guessedCorrectly = false;
     this.errorMessage = '';
 
@@ -83,6 +95,42 @@ export class SubtractionComponent implements OnInit {
 
   }
 
+  setLevel() {
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      console.log("param==" + param);
+      let id = +param //cast to number from string
+      this.level = id;
+    }
+    else {
+      console.error("no param for id found");
+    }
+  }
+
+  doLevelHot() {
+    this.title = 'Hot sums';
+    this.number1 = Math.floor(Math.random() * 25) + 9;
+    this.number2 = Math.floor(Math.random() * 8) + 1;
+    this.expected = this.number1 - this.number2;
+  }
+
+  doLevelHotter() { 
+    this.title = 'Hotter sums';
+    this.number1 = Math.floor(Math.random() * 1000) + 100;
+    this.number2 = Math.floor(Math.random() * 100) + 1;
+    //round to nearest 25 (easier)
+    this.number1 = roundnum(this.number1, 25);
+    this.number2 = roundnum(this.number2, 5);
+    this.expected = this.number1 - this.number2;
+  }
+  
+  doLevelHottest() { 
+    this.title = 'Hottest sums';
+    this.number1 = Math.floor(Math.random() * 500) + 100;
+    this.number2 = Math.floor(Math.random() * 20) + 1;   
+    this.expected = this.number1 - this.number2;
+  }
+
   refocus() {
     if (this.guessedCorrectly) {
       this.setFocusOnInput();
@@ -97,12 +145,12 @@ export class SubtractionComponent implements OnInit {
 
   checkInError(c: AbstractControl): void {
     this.errorMessage = '';
-    
+
     console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
-    console.log('isNaN(c.value)=%s, isNull(c.value)=%s, c.value=%s', isNaN(c.value), isNull(c.value), (c.value==''));
+    console.log('isNaN(c.value)=%s, isNull(c.value)=%s, c.value=%s', isNaN(c.value), isNull(c.value), (c.value == ''));
     console.log('c.value=%s', c.value);
 
-    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value=='')) {    
+    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value == '')) {
       console.log('checkInError found pristine');
       this.errorMessage = 'Enter a number';
       this.setFocusOnInput();
@@ -119,7 +167,7 @@ export class SubtractionComponent implements OnInit {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
         if (SubtractionComponent.count >= this.maxCorrect) {
-          SubtractionComponent.count=0;
+          SubtractionComponent.count = 0;
           this.openCongratsDialog();
         }
         else {
@@ -137,7 +185,7 @@ export class SubtractionComponent implements OnInit {
       }
     }
   }
-  
+
   resetError(c: AbstractControl): void {
     console.log('In resetError');
     if (c.valid || c.pristine) {

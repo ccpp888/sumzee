@@ -97,11 +97,29 @@
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
           <mat-card-title class="title-text">
-            <mat-icon color="accent">block</mat-icon>&nbsp;&nbsp;Division</mat-card-title>
+            <mat-icon color="accent">clear</mat-icon>&nbsp;&nbsp;Multiplication</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <a routerLink="/gamesmanager/multiply">
+          <img mat-card-image src="/assets/images/numbers3.png">
+        </a>
+        <mat-card-actions>
+          <a routerLink="/gamesmanager/multiply">
+            <button mat-raised-button class="fontlarge">PLAY</button>
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">block</mat-icon>&nbsp;&nbsp;Division</mat-card-title>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         </mat-card-header>
         <a routerLink="/gamesmanager/divide">
-          <img mat-card-image src="/assets/images/numbers3.png">
+          <img mat-card-image src="/assets/images/numbers1.png">
         </a>
         <mat-card-actions>
           <a routerLink="/gamesmanager/divide">
@@ -115,11 +133,11 @@
         <mat-card class="example-card mat-elevation-z24">
           <mat-card-header>
             <mat-card-title class="title-text">
-              <mat-icon color="primary">notifications</mat-icon>&nbsp;&nbsp;Timed sums</mat-card-title>
+              <mat-icon color="accent">notifications</mat-icon>&nbsp;&nbsp;Timed sums</mat-card-title>
             <mat-card-subtitle>&nbsp;</mat-card-subtitle>
           </mat-card-header>
           <a routerLink="/gamesmanager/timed">
-            <img mat-card-image src="/assets/images/numbers1.png">
+            <img mat-card-image src="/assets/images/numbers3.png">
           </a>
           <mat-card-actions>
             <a routerLink="/gamesmanager/timed">
@@ -133,7 +151,7 @@
         <mat-card class="example-card mat-elevation-z24">
           <mat-card-header>
             <mat-card-title class="title-text">
-              <mat-icon color="accent">alarm</mat-icon>&nbsp;&nbsp;Countdown challenge</mat-card-title>
+              <mat-icon color="primary">alarm</mat-icon>&nbsp;&nbsp;Countdown challenge</mat-card-title>
             <mat-card-subtitle>&nbsp;</mat-card-subtitle>
           </mat-card-header>
           <a routerLink="/gamesmanager/countdown">
