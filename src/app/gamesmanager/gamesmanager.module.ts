@@ -33,6 +33,7 @@ import { DivChoiceComponent } from './division/div-choice.component';
 import { SubtractChoiceComponent } from './subtraction/subtract-choice.component';
 import { MultiChoiceComponent } from './multiplication/multi-choice.component';
 import { PreDialogComponent } from './timed-sums/pre-dialog.component';
+import { UtilsService } from '../shared/utils.service';
 
 
 const routes: Routes = [
@@ -68,7 +69,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  providers: [],
+  providers: [UtilsService],
   declarations: [
     GamesmanagerAppComponent, 
     ToolbarComponent,     

@@ -35,6 +35,7 @@ import {
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 import { FocusDirective } from './focus.directive';
+import { SumbaseComponent } from './sumbase.component';
 
 @NgModule({
     imports: [

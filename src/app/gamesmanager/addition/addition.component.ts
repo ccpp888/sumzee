@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material';
 import { SuccessDialogComponent } from '../bonds/success-dialog.component';
 import { isNull } from 'util';
 import { CongratsDialogComponent } from '../decimals/congrats-dialog.component';
+import { UtilsService } from '../../shared/utils.service';
 
 function matchesExpected(exp: number): ValidatorFn {
 
@@ -23,10 +24,6 @@ function matchesExpected(exp: number): ValidatorFn {
     }
     return null;
   }
-}
-
-function roundnum(num, rounder) {
-  return Math.round(num / rounder) * rounder;
 }
 
 @Component({
@@ -45,7 +42,6 @@ export class AdditionComponent implements OnInit {
   number2: number;
   expected: number;
   actual: number;
-  level: number;
   guessedCorrectly: boolean;
 
   guessForm: FormGroup;
@@ -54,7 +50,7 @@ export class AdditionComponent implements OnInit {
   validationMessage = 'Try again';
   errorMessage: string;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router) { }
+  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router, private utils: UtilsService) { }
 
   ngOnInit() {
 
@@ -62,34 +58,57 @@ export class AdditionComponent implements OnInit {
 
     AdditionComponent.count++;
 
-    this.setLevel();
-
-    if (this.level == 0) {     
-      this.title = 'Warm sums';
-      this.number1 = Math.floor(Math.random() * 10) + 1;
-      this.number2 = Math.floor(Math.random() * 20) + 1;
-
-    } else if (this.level == 1) {     
-      this.title = 'Hot sums';
-      this.number1 = Math.floor(Math.random() * 10) + 1;
-      this.number2 = Math.floor(Math.random() * 100) + 10;
-
-    } else if (this.level == 2) {      
-      this.title = 'Hotter sums';
-      this.number1 = Math.floor(Math.random() * 1000) + 100;
-      this.number2 = Math.floor(Math.random() * 8000) + 1000;
-      //round to nearest 50
-      this.number1 = roundnum(this.number1, 50);
-      this.number2 = roundnum(this.number2, 50);
-    } else {      
-      this.title = 'Hottest sums!';
-      this.number1 = Math.floor(Math.random() * 100) + 10;
-      this.number2 = Math.floor(Math.random() * 8000) + 1000;
+    switch (this.getLevel()) {
+      case 0: {
+        this.title = 'Warm sums';
+        this.number1 = this.utils.getRandom(1, 10);
+        this.number2 = this.utils.getRandom(1, 20);
+        break;
+      }
+      case 1: {
+        this.title = 'Hot sums';
+        this.number1 = this.utils.getRandom(1, 10);
+        this.number2 = this.utils.getRandom(10, 100);
+        break;
+      }
+      case 2: {
+        this.title = 'Hotter sums';
+        this.number1 = this.utils.getRandom(100, 1000);
+        this.number2 = this.utils.getRandom(1000, 8000);
+        //round to nearest 50
+        this.number1 = this.utils.roundnum(this.number1, 50);
+        this.number2 = this.utils.roundnum(this.number2, 50);
+        break;
+      }
+      default: {
+        this.title = 'Hottest sums!';
+        this.number1 = this.utils.getRandom(10, 100);
+        this.number2 = this.utils.getRandom(1000, 8000);
+        break;
+      }
     }
-
     this.expected = this.number1 + this.number2;
     this.guessedCorrectly = false;
     this.errorMessage = '';
+
+    this.setupForm();
+    this.setFocusOnInput();
+  }
+
+  getLevel(): number {
+
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      console.log("param==" + param);
+      let id = +param //cast to number from string
+      return id;
+    }
+    else {
+      console.error("no param for id found");
+    }
+  }
+
+  setupForm() {
 
     this.guessForm = this.fb.group({
       actual: ['', matchesExpected(this.expected)],
@@ -97,54 +116,38 @@ export class AdditionComponent implements OnInit {
     this.guessControl = this.guessForm.get('actual');
     this.guessControl.statusChanges
       .subscribe(value => this.resetError(this.guessControl));
-
-    this.setFocusOnInput();
-  }
-
-  setLevel() {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      console.log("param==" + param);
-      let id = +param //cast to number from string
-      this.level = id;
-    }
-    else {
-      console.error("no param for id found");
-    }
   }
 
   refocus() {
+
     if (this.guessedCorrectly) {
       this.setFocusOnInput();
     }
   }
 
   setFocusOnInput() {
-    console.log("In reset & setFocusOnInput");
+
     const element = this.renderer.selectRootElement('#input1');
     setTimeout(() => element.focus(), 0);
   }
 
   checkInError(c: AbstractControl): void {
-    this.errorMessage = '';
 
+    this.errorMessage = '';
     console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
 
     if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value == '')) {
-      console.log('checkInError found pristine');
       this.errorMessage = 'Enter a number';
       this.setFocusOnInput();
       return;
     }
 
     if ((c.touched || c.dirty) && c.errors) {
-      console.log('checkInError is in error');
       this.errorMessage = this.validationMessage;
       this.guessedCorrectly = false;
       this.setFocusOnInput();
     }
     else {
-      console.log('checkInError not in error')
       if (this.guessedCorrectly) {
         if (AdditionComponent.count >= this.maxCorrect) {
           AdditionComponent.count = 0;
@@ -155,11 +158,8 @@ export class AdditionComponent implements OnInit {
         }
       }
       else {
-        console.log("checkInError setting guessedCorrectly");
         this.guessedCorrectly = true;
-        //disable user input
         this.guessControl.disable();
-        //focus on submit button
         document.getElementById('go1').focus();
       }
     }
@@ -171,7 +171,7 @@ export class AdditionComponent implements OnInit {
    * an incorrect guess to try again.
    */
   resetError(c: AbstractControl): void {
-    console.log('In resetError');
+
     if (c.valid || c.pristine) {
       console.log("...resetting errorMessage");
       this.errorMessage = '';
@@ -179,12 +179,13 @@ export class AdditionComponent implements OnInit {
   }
 
   save() {
-    console.log("In save() / onSubmit");
+
     const guessControl = this.guessForm.get('actual');
     this.checkInError(guessControl);
   }
 
   returnToMenu() {
+
     this.router.navigateByUrl("/gamesmanager/menu");
   }
 
@@ -196,13 +197,13 @@ export class AdditionComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("openSuccessDialog result==true");
         this.router.navigateByUrl("/gamesmanager/menu");
       }
     });
   }
 
   public ngOnDestroy() {
+
     console.log("* AdditionComponent in ngOnDestory *");
     AdditionComponent.count = 0;
   }

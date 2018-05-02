@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-addition-choice',
   templateUrl: './addition-choice.component.html',
-  styleUrls: ['./addition-choice.component.scss']
+  styleUrls: []
 })
 export class AdditionChoiceComponent {
 

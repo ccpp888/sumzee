@@ -9,16 +9,11 @@ import { Router } from '@angular/router';
   `,
   styles: []
 })
-export class GamesmanagerAppComponent implements OnInit {
+export class GamesmanagerAppComponent {
 
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer, public router: Router) {
-    // iconRegistry.addSvgIconSet(
-    //   sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg'));
+  constructor(public router: Router) {   
 
       this.router.navigate(['/gamesmanager/menu']);
    }
-
-  ngOnInit() {
-  }
-
+  
 }

@@ -128,7 +128,7 @@ export class CountdownComponent implements OnInit {
 
   doMultiplication() {
     this.symbol = 'x';
-    this.number1 = Math.floor(Math.random() * 10) + 1;
+    this.number1 = Math.floor(Math.random() * 5) + 1;
     this.number2 = Math.floor(Math.random() * 17) + 3;
     this.expected = this.number1 * this.number2;
   }

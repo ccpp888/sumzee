@@ -59,10 +59,8 @@ export class DecimalsComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log("* In ngOnInit *");
-
     DecimalsComponent.count++;
-    console.log("* static count=" + DecimalsComponent.count);
+    console.log("ngOnInit static count=%s",DecimalsComponent.count);
 
     if (DecimalsComponent.count > 3) {
       this.number1 = this.decimals[getRandomInt(1, 8) - 1];

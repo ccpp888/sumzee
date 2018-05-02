@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-div-choice',
   templateUrl: './div-choice.component.html',
-  styleUrls: ['./div-choice.component.scss']
+  styleUrls: []
 })
 export class DivChoiceComponent {
 
   constructor(private router: Router) { }
 
   routeTo(level: number) {
-    console.log("DivChoiceComponent:difficulty="+level);
+    console.log("DivChoiceComponent:level="+level);
     this.router.navigateByUrl("/gamesmanager/divide/"+level);
   }
 

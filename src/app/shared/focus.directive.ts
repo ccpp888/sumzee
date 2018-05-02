@@ -12,8 +12,8 @@ export class FocusDirective {
     ) { }
 
     ngOnInit() {
-        console.log("In FocusDirective");
-        console.log(this.cssSelector);
+
+        console.log("In FocusDirective, cssSelector=%s", this.cssSelector);
         this.ngZone.runOutsideAngular(() => {
             setTimeout(() => {
                 this.renderer.selectRootElement(this.cssSelector).focus();
