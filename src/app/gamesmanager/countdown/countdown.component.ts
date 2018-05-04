@@ -1,34 +1,19 @@
-import { Component, OnInit, Renderer, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
+import 'rxjs/add/observable/timer';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/takeUntil';
+
+import { Component, OnInit, Renderer } from '@angular/core';
+import { AbstractControl, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CongratsDialogComponent } from '../decimals/congrats-dialog.component';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { isNull } from 'util';
 
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/timer";
-import "rxjs/add/operator/finally";
-import "rxjs/add/operator/takeUntil";
-import "rxjs/add/operator/map";
-import { Subject } from 'rxjs/Subject';
+import { SumbaseComponent } from '../../shared/sumbase.component';
+import { UtilsService } from '../../shared/utils.service';
 import { ResultDialogComponent } from './result-dialog.component';
-
-
-function matchesExpected(exp: number): ValidatorFn {
-
-  return (c: AbstractControl): { [key: string]: boolean } | null => {
-
-    if (c.value == undefined || c.value == '') {
-      return null;
-    }
-
-    if ((isNaN(c.value) || c.value != exp)) {
-      console.log('In matchesExpected func returning true (in error) ==');
-      return { 'expected': true }
-    }
-    return null;
-  }
-}
 
 @Component({
   selector: 'app-timed',
@@ -36,7 +21,7 @@ function matchesExpected(exp: number): ValidatorFn {
   styleUrls: ['./countdown.component.scss']
 })
 
-export class CountdownComponent implements OnInit {
+export class CountdownComponent extends SumbaseComponent implements OnInit {
 
   static count: number = 0;
 
@@ -49,14 +34,7 @@ export class CountdownComponent implements OnInit {
   expected: number;
   actual: number;
   difficulty: number;
-  guessedCorrectly: boolean;
-
-  guessForm: FormGroup;
-  guessControl: AbstractControl;
-
-  validationMessage = 'Try again';
-  errorMessage: string;
-
+  
   timer;
   subscription;
   subject = new Subject();
@@ -65,16 +43,18 @@ export class CountdownComponent implements OnInit {
 
   returnToMain: boolean = false;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router) { }
+  constructor(fb: FormBuilder, dialog: MatDialog, renderer: Renderer, router: Router, route: ActivatedRoute, utils: UtilsService) { 
+    super(fb, dialog, renderer,router, route, utils);
+  }
 
   ngOnInit() {
-    console.log("* In ngInit *");
+    console.log('In CountdownComponent ngInit');
     this.initFormAndNumbers();      
   }
 
   initFormAndNumbers() {    
     let calc = Math.floor(Math.random() * 8);
-    console.log("calc for sum type="+calc)
+    console.log('calc for sum type='+calc)
 
     switch(calc) {
 
@@ -100,16 +80,7 @@ export class CountdownComponent implements OnInit {
       }
     }
     
-    this.guessedCorrectly = false;
-    this.errorMessage = '';
-
-    this.guessForm = this.fb.group({
-      actual: ['', matchesExpected(this.expected)],
-    })
-    this.guessControl = this.guessForm.get('actual');
-    this.guessControl.statusChanges
-      .subscribe(value => this.resetError(this.guessControl));
-
+    super.setupForm();
   }
 
   doAddition() {
@@ -160,12 +131,12 @@ export class CountdownComponent implements OnInit {
   }
 
   endTimer() {
-    console.log("In endTimer() for guessedCorrectly=%s unsubscribed=%s", this.guessedCorrectly, this.unsubscribed)
+    console.log('In endTimer() for guessedCorrectly=%s unsubscribed=%s', this.guessedCorrectly, this.unsubscribed)
     if (this.unsubscribed) {
-      console.log("--unsubscribed")
+      console.log('--unsubscribed')
       return;
     } else {
-      console.log("--NOT guessedCorrectly or opened, calling openTimesUpDialog(false)")
+      console.log('--NOT guessedCorrectly or opened, calling openTimesUpDialog(false)')
       this.openResultDialog();
     }
   }
@@ -174,24 +145,8 @@ export class CountdownComponent implements OnInit {
     return this.started;
   }
 
-  get count(): number {
-    return CountdownComponent.count;
-  }
-
-  refocus() {
-    if (this.guessedCorrectly) {
-      this.setFocusOnInput();
-    }
-  }
-
-  setFocusOnInput() {    
-    const element = this.renderer.selectRootElement('#input1');
-    setTimeout(() => element.focus(), 0);
-  }
-
   checkInError(c: AbstractControl): void {
     this.errorMessage = '';
-
     //console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
 
     if (!this.started) {
@@ -218,36 +173,19 @@ export class CountdownComponent implements OnInit {
         this.setFocusOnInput();
       }
       else {
-        console.log("checkInError setting guessedCorrectly");
+        console.log('checkInError setting guessedCorrectly');
         this.guessedCorrectly = true;
         this.guessControl.disable();
         document.getElementById('go1').focus();
         CountdownComponent.count++;
         this.setFocusOnInput();
-        console.log("count==" + CountdownComponent.count);
+        console.log('count==' + CountdownComponent.count);
       }
     }
   }
 
-  resetError(c: AbstractControl): void {
-    console.log('In resetError');
-    if (c.valid || c.pristine) {
-      this.errorMessage = '';
-    }
-  }
-
-  save() {
-    console.log("In save()/submit");
-    const guessControl = this.guessForm.get('actual');
-    this.checkInError(guessControl);
-  }
-
-  returnToMenu() {
-    this.router.navigateByUrl("/gamesmanager/menu");
-  }
-
   openResultDialog(): void {
-    console.log("In openResultDialog()");
+    console.log('In openResultDialog()');
 
     let dialogRef = this.dialog.open(ResultDialogComponent, {
       height: '320px',
@@ -262,7 +200,7 @@ export class CountdownComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("dialogRef.afterClosed() resetting count, calling ngOnInit");
+        console.log('dialogRef.afterClosed() resetting count, calling ngOnInit');
         dialogRef.componentInstance.onMenu.unsubscribe();
         CountdownComponent.count = 0;
         if (this.returnToMain) {
@@ -274,16 +212,29 @@ export class CountdownComponent implements OnInit {
     });
   }
 
+  //running total
+  get count() {
+    return CountdownComponent.count;
+  }
+
+  getCount() {
+    return CountdownComponent.count;
+  }
+
+  resetCount() {    
+    CountdownComponent.count = 0;
+  }
+
   ngOnDestroy() {
-    console.log("= In ngOnDestroy =");
+    console.log('= In ngOnDestroy =');
     if (this.subscription == null) {
-      console.log("-- this.subscription==null");
+      console.log('-- this.subscription==null');
     } else {
-      console.log("-- unsubscribing");
+      console.log('-- unsubscribing');
       this.unsubscribed = true;
       this.subscription.unsubscribe();
     }
-    CountdownComponent.count = 0;
+    this.resetCount();
   }
 
 }

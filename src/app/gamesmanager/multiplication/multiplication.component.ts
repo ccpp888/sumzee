@@ -1,210 +1,74 @@
-import { Component, OnInit, ViewChildren, Renderer, ViewChild, ElementRef, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
-
-import { InputTextModule } from 'primeng/inputtext';
-
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Renderer } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { SuccessDialogComponent } from '../bonds/success-dialog.component';
-import { isNull } from 'util';
-import { CongratsDialogComponent } from '../decimals/congrats-dialog.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
-function matchesExpected(exp: number): ValidatorFn {
-
-  return (c: AbstractControl): { [key: string]: boolean } | null => {
-
-    if (c.value == undefined || c.value == '') {
-      return null;
-    }
-
-    if ((isNaN(c.value) || c.value != exp)) {
-      console.log('In matchesExpected func returning true (in error) ==');
-      return { 'expected': true }
-    }
-    return null;
-  }
-}
-
-function roundnum(num, rounder) {
-  return Math.round(num / rounder) * rounder;
-}
+import { SumbaseComponent } from '../../shared/sumbase.component';
+import { UtilsService } from '../../shared/utils.service';
 
 @Component({
   selector: 'app-multiplication',
-  templateUrl: './multiplication.component.html',
-  styleUrls: ['./multiplication.component.scss']
+  templateUrl: './multiplication.component.html'
 })
-export class MultiplicationComponent implements OnInit {
+export class MultiplicationComponent extends SumbaseComponent implements OnInit {
 
   static count: number = 0;
-  static alreadyGenerated: number[] = [];
-
-  title: string;
-  maxCorrect: number = 8;
-  number1: number;
-  number2: number;
-  expected: number;
-  actual: number;
-  level: number;
-  guessedCorrectly: boolean;
-
-  guessForm: FormGroup;
-  guessControl: AbstractControl;
-
-  validationMessage = 'Try again';
-  errorMessage: string;
-
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router) { }
+  
+  constructor(fb: FormBuilder, dialog: MatDialog, renderer: Renderer, router: Router, route: ActivatedRoute, utils: UtilsService) {
+    super(fb, dialog, renderer, router, route, utils);
+  }
 
   ngOnInit() {
 
-    console.log("* MultiplicationComponent : in ngOnInit, count==" + MultiplicationComponent.count);
-
+    console.log('MultiplicationComponent in ngOnInit, count=%s', MultiplicationComponent.count);
     MultiplicationComponent.count++;
 
-    this.setLevel();
-
-    if (this.level == 0) {     
-      this.title = 'Warm sums';
-      this.number1 = Math.floor(Math.random() * 5) + 1;
-      this.number2 = Math.floor(Math.random() * 10) + 1;
-
-    } else if (this.level == 1) {     
-      this.title = 'Hot sums';
-      this.number1 = Math.floor(Math.random() * 10) + 1;
-      this.number2 = Math.floor(Math.random() * 20) + 3;
-
-    } else if (this.level == 2) {      
-      this.title = 'Hotter sums';
-      this.number1 = Math.floor(Math.random() * 5) + 2;
-      this.number2 = Math.floor(Math.random() * 150) + 10;
-      //round to nearest 5     
-      this.number2 = roundnum(this.number2, 5);
-    } else {      
-      this.title = 'Hottest sums!';
-      this.number1 = Math.floor(Math.random() * 10) + 1;
-      if (this.number1==1) this.number1 = 2;
-      this.number2 = Math.floor(Math.random() * 100) + 10;
-    }
-
-    this.expected = this.number1 * this.number2;
-    this.guessedCorrectly = false;
-    this.errorMessage = '';
-
-    this.guessForm = this.fb.group({
-      actual: ['', matchesExpected(this.expected)],
-    })
-    this.guessControl = this.guessForm.get('actual');
-    this.guessControl.statusChanges
-      .subscribe(value => this.resetError(this.guessControl));
-
-    this.setFocusOnInput();
-  }
-
-  setLevel() {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      console.log("param==" + param);
-      let id = +param //cast to number from string
-      this.level = id;
-    }
-    else {
-      console.error("no param for id found");
-    }
-  }
-
-  refocus() {
-    if (this.guessedCorrectly) {
-      this.setFocusOnInput();
-    }
-  }
-
-  setFocusOnInput() {
-    console.log("In reset & setFocusOnInput");
-    const element = this.renderer.selectRootElement('#input1');
-    setTimeout(() => element.focus(), 0);
-  }
-
-  checkInError(c: AbstractControl): void {
-    this.errorMessage = '';
-
-    console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
-
-    if (c.pristine || isNaN(c.value) || isNull(c.value) || (c.value == '')) {
-      console.log('checkInError found pristine');
-      this.errorMessage = 'Enter a number';
-      this.setFocusOnInput();
-      return;
-    }
-
-    if ((c.touched || c.dirty) && c.errors) {
-      console.log('checkInError is in error');
-      this.errorMessage = this.validationMessage;
-      this.guessedCorrectly = false;
-      this.setFocusOnInput();
-    }
-    else {
-      console.log('checkInError not in error')
-      if (this.guessedCorrectly) {
-        if (MultiplicationComponent.count >= this.maxCorrect) {
-          MultiplicationComponent.count = 0;
-          this.openCongratsDialog();
-        }
-        else {
-          this.ngOnInit();
-        }
+    switch (super.getLevel()) {
+      case 0: {
+        this.title = 'Warm sums';
+        this.number1 = this.utils.getRandom(1, 5);
+        this.number2 = this.utils.getRandom(1, 10);
+        break;
       }
-      else {
-        console.log("checkInError setting guessedCorrectly");
-        this.guessedCorrectly = true;
-        //disable user input
-        this.guessControl.disable();
-        //focus on submit button
-        document.getElementById('go1').focus();
+      case 1: {
+        this.title = 'Hot sums';
+        this.number1 = this.utils.getRandom(1, 10);    
+        this.number2 = this.utils.getRandom(3, 20);    
+        break;
+      }
+      case 2: {
+        this.title = 'Hotter sums';
+        this.number1 = this.utils.getRandom(2, 5);    
+        this.number2 = this.utils.getRandom(10, 150);    
+        //round to nearest 5     
+        this.number2 = this.utils.roundnum(this.number2, 5);
+        break;
+      }
+      default: {
+        this.title = 'Hottest sums!';
+        this.number1 = this.utils.getRandom(1, 10);    
+        if (this.number1 == 1) this.number1 = 2;
+        this.number2 = this.utils.getRandom(10, 100);    
+        break;
       }
     }
+    this.expected = this.number1 * this.number2; 
+
+    super.setupForm();
+    super.setFocusOnInput();
   }
 
-  /** 
-   * Called from subscribing to form input status changes, this resets the errorMessage
-   * to '' if the input field is empty/valid: this handles the case where user deletes
-   * an incorrect guess to try again.
-   */
-  resetError(c: AbstractControl): void {
-    console.log('In resetError');
-    if (c.valid || c.pristine) {
-      console.log("...resetting errorMessage");
-      this.errorMessage = '';
-    }
+  getCount() {
+    return MultiplicationComponent.count;
   }
 
-  save() {
-    console.log("In save() / onSubmit");
-    const guessControl = this.guessForm.get('actual');
-    this.checkInError(guessControl);
-  }
-
-  returnToMenu() {
-    this.router.navigateByUrl("/gamesmanager/menu");
-  }
-
-  openCongratsDialog(): void {
-
-    let dialogRef = this.dialog.open(CongratsDialogComponent, {
-      height: '500px',
-      width: '700px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log("openSuccessDialog result==true");
-        this.router.navigateByUrl("/gamesmanager/menu");
-      }
-    });
-  }
-
-  public ngOnDestroy() {
-    console.log("* MultiplicationComponent in ngOnDestory *");
+  resetCount() {    
     MultiplicationComponent.count = 0;
+  }
+
+  ngOnDestroy() {
+    console.log('MultiplicationComponent in ngOnDestory');
+    this.resetCount();
   }
 
 }

@@ -10,4 +10,8 @@ export class UtilsService {
   getRandom(startFrom, maxNum) {
     return Math.floor(Math.random() * maxNum) + startFrom;
   }
+  
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 }

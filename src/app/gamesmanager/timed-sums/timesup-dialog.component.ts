@@ -3,8 +3,7 @@ import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-timesup-dialog',
-  templateUrl: './timesup-dialog.component.html',
-  styleUrls: ['./timesup-dialog.component.scss']
+  templateUrl: './timesup-dialog.component.html' 
 })
 export class TimesupDialogComponent  {
 
