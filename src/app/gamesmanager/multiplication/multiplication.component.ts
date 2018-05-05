@@ -6,8 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SumbaseComponent } from '../../shared/sumbase.component';
 import { UtilsService } from '../../shared/utils.service';
 
-@Component({
-  selector: 'app-multiplication',
+@Component({  
   templateUrl: './multiplication.component.html'
 })
 export class MultiplicationComponent extends SumbaseComponent implements OnInit {

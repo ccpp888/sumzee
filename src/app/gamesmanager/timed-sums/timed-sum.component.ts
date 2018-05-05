@@ -19,8 +19,7 @@ import { SumbaseComponent } from '../../shared/sumbase.component';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { Subscription } from 'rxjs/Subscription';
 
-@Component({
-  selector: 'app-timed-sum',
+@Component({  
   templateUrl: './timed-sum.component.html',
   styleUrls: ['./timed-sum.component.scss']
 })
@@ -54,7 +53,8 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
     this.expected = this.number1 + this.number2;    
   }
 
-  ngAfterViewInit() {    
+  ngAfterViewInit() {   
+    console.log('In ngAfterViewInit');
     this.openPreDialog();
   }
 
@@ -157,10 +157,8 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
           this.unsubscribed = true;
           this.subscription.unsubscribe();
         }                
-        this.setNumbers();
-        this.openPreDialog();
-              
-        
+        this.ngOnInit();
+        this.openPreDialog(); 
       }
     });
   }

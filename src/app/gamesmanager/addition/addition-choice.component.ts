@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-addition-choice',
+@Component({  
   templateUrl: './addition-choice.component.html'
 })
 export class AdditionChoiceComponent {

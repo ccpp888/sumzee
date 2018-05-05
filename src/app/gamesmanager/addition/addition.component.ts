@@ -5,10 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SumbaseComponent } from '../../shared/sumbase.component';
 import { UtilsService } from '../../shared/utils.service';
 
-@Component({
-  selector: 'app-addition',
-  templateUrl: './addition.component.html',
-  styleUrls: []
+@Component({  
+  templateUrl: './addition.component.html'
 })
 export class AdditionComponent extends SumbaseComponent implements OnInit {
 

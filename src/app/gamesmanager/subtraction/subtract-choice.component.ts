@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-subtract-choice',
-  templateUrl: './subtract-choice.component.html',
-  styleUrls: ['./subtract-choice.component.scss']
+@Component({  
+  templateUrl: './subtract-choice.component.html'
 })
 export class SubtractChoiceComponent {
 

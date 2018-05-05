@@ -11,7 +11,6 @@ import { HelpDialogComponent } from './help-dialog.component';
   templateUrl: './table-generic.component.html',
   styleUrls: ['./table-generic.component.scss']
 })
-
 export class TableGenericComponent extends SumbaseComponent implements OnInit {
 
   private static count: number = 0;

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-bonds-choice',
-  templateUrl: './bonds-choice.component.html',
-  styleUrls: []
+@Component({  
+  templateUrl: './bonds-choice.component.html'
 })
 export class BondsChoiceComponent {
 

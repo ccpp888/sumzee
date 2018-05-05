@@ -9,11 +9,9 @@ import { FailureDialogComponent } from './failure-dialog.component';
 import { SuccessDialogComponent } from './success-dialog.component';
 import { UtilsService } from '../../shared/utils.service';
 
-@Component({
-  selector: 'app-bonds',
+@Component({  
   templateUrl: './bonds.component.html'
 })
-
 export class BondsComponent extends SumbaseComponent implements OnInit {
 
   static count: number = 0;

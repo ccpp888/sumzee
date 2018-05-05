@@ -2,8 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-result-dialog',
+@Component({  
   templateUrl: './result-dialog.component.html',
   styleUrls: ['./result-dialog.component.scss']
 })

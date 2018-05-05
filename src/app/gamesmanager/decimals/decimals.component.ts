@@ -5,11 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from '../../shared/utils.service';
 import { SumbaseComponent } from '../../shared/sumbase.component';
 
-@Component({
-  selector: 'app-decimals',
+@Component({  
   templateUrl: './decimals.component.html'
 })
-
 export class DecimalsComponent extends SumbaseComponent implements OnInit {
 
   private static count: number = 0;

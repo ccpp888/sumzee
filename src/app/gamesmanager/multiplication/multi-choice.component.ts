@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-multi-choice',
-  templateUrl: './multi-choice.component.html',
-  styleUrls: ['./multi-choice.component.scss']
+@Component({  
+  templateUrl: './multi-choice.component.html'
 })
 export class MultiChoiceComponent {
   

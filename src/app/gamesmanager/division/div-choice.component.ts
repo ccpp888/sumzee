@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-div-choice',
-  templateUrl: './div-choice.component.html',
-  styleUrls: []
+@Component({  
+  templateUrl: './div-choice.component.html'
 })
 export class DivChoiceComponent {
 

@@ -6,8 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from '../../shared/utils.service';
 import { SumbaseComponent } from '../../shared/sumbase.component';
 
-@Component({
-  selector: 'app-division',
+@Component({  
   templateUrl: './division.component.html'
 })
 export class DivisionComponent extends SumbaseComponent implements OnInit {

@@ -6,8 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from '../../shared/utils.service';
 import { SumbaseComponent } from '../../shared/sumbase.component';
 
-@Component({
-  selector: 'app-subtraction',
+@Component({  
   templateUrl: './subtraction.component.html'
 })
 export class SubtractionComponent extends SumbaseComponent implements OnInit {

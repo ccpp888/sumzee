@@ -16,19 +16,17 @@ import { UtilsService } from '../../shared/utils.service';
 import { ResultDialogComponent } from './result-dialog.component';
 import { Subscription } from 'rxjs/Subscription';
 
-@Component({
-  selector: 'app-timed',
+@Component({  
   templateUrl: './countdown.component.html',
   styleUrls: ['./countdown.component.scss']
 })
-
 export class CountdownComponent extends SumbaseComponent implements OnInit {
 
   private static count: number = 0;
 
   public symbol: string;  
   public countdown: number;
-  private durationInSecs: number = 4;
+  private durationInSecs: number = 60;
   
   private timer: Observable<number>;
   private subscription: Subscription;
@@ -210,7 +208,7 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
           this.returnToMenu();
         } else {
           this.ngOnDestroy(); 
-          this.ngOnInit();          
+          this.ngOnInit();            
         }
       }
     });

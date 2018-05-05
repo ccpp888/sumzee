@@ -6,8 +6,7 @@ import { interval } from 'rxjs/observable/interval';
 import { take } from 'rxjs/operators';
 import 'rxjs/add/operator/finally';
 
-@Component({
-  selector: 'app-pre-dialog',
+@Component({ 
   templateUrl: './pre-dialog.component.html',
   styleUrls: ['./pre-dialog.component.scss']
 })

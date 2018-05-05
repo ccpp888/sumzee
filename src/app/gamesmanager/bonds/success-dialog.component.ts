@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 
-@Component({
-  selector: 'app-success-dialog',
+@Component({  
   templateUrl: './success-dialog.component.html',
   styleUrls: ['./success-dialog.component.scss']
 })

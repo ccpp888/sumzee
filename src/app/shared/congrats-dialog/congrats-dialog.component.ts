@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
-@Component({
-  selector: 'app-congrats-dialog',
+@Component({  
   templateUrl: './congrats-dialog.component.html'
 })
 export class CongratsDialogComponent implements OnInit {
