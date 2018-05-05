@@ -26,21 +26,21 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class TimedSumComponent extends SumbaseComponent implements OnInit {
 
-  countdown: number;
-  durationInSecs:number = 10;  
-  readyTitle: string;    
-  opened: boolean;
-  timer: Observable<number>;
-  subscription: Subscription;
-  subject = new Subject();
-  unsubscribed: boolean;
+  public countdown: number;
+  private durationInSecs:number = 10;  
+  private readyTitle: string;    
+  private opened: boolean;
+  private timer: Observable<number>;
+  private subscription: Subscription;
+  private subject = new Subject();
+  private unsubscribed: boolean;
 
   constructor(fb: FormBuilder, dialog: MatDialog, renderer: Renderer, router: Router, route: ActivatedRoute, utils: UtilsService) { 
     super(fb, dialog, renderer,router, route, utils);
   }
 
   ngOnInit() {
-    console.log("TimedSumComponent in ngOnInit");
+    console.log('TimedSumComponent in ngOnInit');
 
     this.setNumbers();
     this.opened = false;
@@ -59,16 +59,17 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
   }
 
   openPreDialog(): void {
-    console.log("In openPreDialog()");
+    console.log('In openPreDialog()');
     
     let dialogRef = this.dialog.open(PreDialogComponent, {
       height: '110px',
       width: '200px',
+      panelClass: 'transparent'      
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("dialogRef.afterClosed()");         
+        console.log('dialogRef.afterClosed()');         
         this.setFocusOnInput();       
         this.startCountdownTimer();
       }
@@ -90,15 +91,15 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
   }
 
   endTimer() {
-    console.log("In endTimer() for guessedCorrectly=%s unsubscribed=%s", this.guessedCorrectly, this.unsubscribed)
+    console.log('In endTimer() for guessedCorrectly=%s unsubscribed=%s', this.guessedCorrectly, this.unsubscribed)
     if (this.guessedCorrectly || this.unsubscribed) {
-      console.log("--guessedCorrectly")
+      console.log('--guessedCorrectly')
       return;      
     } else {
       if (this.opened) {
-        console.log("--already opened")
+        console.log('--already opened')
       } else {
-        console.log("--NOT guessedCorrectly or opened, calling openTimesUpDialog(false)")
+        console.log('--NOT guessedCorrectly or opened, calling openTimesUpDialog(false)')
         this.openTimesUpDialog(false);
       }
     }
@@ -125,7 +126,7 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
         //ignore re-entry
       }
       else {
-        console.log("checkInError setting guessedCorrectly, stopping timer");
+        console.log('checkInError setting guessedCorrectly, stopping timer');
         this.unsubscribed = true;
         this.subject.next(); //complete timer
         this.guessedCorrectly = true;        
@@ -136,7 +137,7 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
   }
 
   openTimesUpDialog(correct: boolean): void {
-    console.log("In openTimesUpDialog() for boolean=" + correct);
+    console.log('In openTimesUpDialog() for boolean=' + correct);
     this.opened = true;
 
     let dialogRef = this.dialog.open(TimesupDialogComponent, {
@@ -149,10 +150,10 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {             
         if (this.subscription == null) {
-          console.log("dialogRef.afterClosed - this.subscription==null");
+          console.log('dialogRef.afterClosed - this.subscription==null');
     
         } else {
-          console.log("dialogRef.afterClosed - unsubscribing");
+          console.log('dialogRef.afterClosed - unsubscribing');
           this.unsubscribed = true;
           this.subscription.unsubscribe();
         }                
@@ -174,9 +175,9 @@ export class TimedSumComponent extends SumbaseComponent implements OnInit {
 
   ngOnDestroy() {    
     if (this.subscription == null) {
-      console.log("ngOnDestroy - this.subscription==null");
+      console.log('ngOnDestroy - this.subscription==null');
     } else {
-      console.log("ngOnDestroy - unsubscribing");
+      console.log('ngOnDestroy - unsubscribing');
       this.unsubscribed = true;
       this.subscription.unsubscribe();
     }    

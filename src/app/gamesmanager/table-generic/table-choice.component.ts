@@ -11,8 +11,8 @@ export class TableChoiceComponent {
   constructor(private router: Router) { }
 
   createTable(tableNum: number) {
-    console.log("TableChoiceComponent:tableNum="+tableNum);
-    this.router.navigateByUrl("/gamesmanager/table/"+tableNum);
+    console.log('TableChoiceComponent:tableNum='+tableNum);
+    this.router.navigateByUrl('/gamesmanager/table/'+tableNum);
   }
 
 }

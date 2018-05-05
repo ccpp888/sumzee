@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 import { interval } from 'rxjs/observable/interval';
 import { take } from 'rxjs/operators';
-import "rxjs/add/operator/finally";
+import 'rxjs/add/operator/finally';
 
 @Component({
   selector: 'app-pre-dialog',
@@ -21,7 +21,7 @@ export class PreDialogComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    console.log("* In ngAfterViewInit *");
+    console.log('* In ngAfterViewInit *');
     this.displayRSG();   
   }
 
@@ -40,7 +40,7 @@ export class PreDialogComponent implements OnInit {
   }
 
   closeDialog() {
-    console.log("PreDialogComponent closeDialog")
+    console.log('PreDialogComponent closeDialog')
     this.dialogRef.close('Closing!');
   }
 

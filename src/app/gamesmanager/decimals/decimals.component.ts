@@ -12,10 +12,10 @@ import { SumbaseComponent } from '../../shared/sumbase.component';
 
 export class DecimalsComponent extends SumbaseComponent implements OnInit {
 
-  static count: number = 0;
+  private static count: number = 0;
 
-  wholeNumbers: number[] = [25, 50, 75, 125, 150, 175];
-  decimals: number[] = [0.25, 0.5, 0.75, 1.25, 1.5, 1.75, 2.25, 2.5];
+  private wholeNumbers: number[] = [25, 50, 75, 125, 150, 175];
+  private decimals: number[] = [0.25, 0.5, 0.75, 1.25, 1.5, 1.75, 2.25, 2.5];
 
   constructor(fb: FormBuilder, dialog: MatDialog, renderer: Renderer, router: Router, route: ActivatedRoute, utils: UtilsService) { 
     super(fb, dialog, renderer,router, route, utils);

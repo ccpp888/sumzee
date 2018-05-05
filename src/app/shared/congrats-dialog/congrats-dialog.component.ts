@@ -3,8 +3,7 @@ import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-congrats-dialog',
-  templateUrl: './congrats-dialog.component.html',
-  styleUrls: []
+  templateUrl: './congrats-dialog.component.html'
 })
 export class CongratsDialogComponent implements OnInit {
 
@@ -15,12 +14,11 @@ export class CongratsDialogComponent implements OnInit {
 
   ngOnInit() {
     this.r_image = Math.floor(Math.random() * 9) + 1;    
-    this.image_url = "/assets/images/dialog/" + this.r_image + ".gif";    
+    this.image_url = '/assets/images/dialog/' + this.r_image + '.gif';    
   }
 
   closeDialog() {
-    console.log("In closeDialog")
+    console.log('In closeDialog')
     this.dialogRef.close('Closing!');
   }
 }
-

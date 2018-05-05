@@ -11,7 +11,7 @@ export class MultiChoiceComponent {
   constructor(private router: Router) { }
 
   routeToAddition(level: number) {
-    console.log("AdditionChoiceComponent:level="+level);
-    this.router.navigateByUrl("/gamesmanager/multiply/"+level);
+    console.log('AdditionChoiceComponent:level='+level);
+    this.router.navigateByUrl('/gamesmanager/multiply/'+level);
   }
 }

@@ -11,7 +11,7 @@ export class HelpDialogComponent  {
   constructor(public dialogRef: MatDialogRef<HelpDialogComponent>) { }
 
   closeDialog() {
-    console.log("In closeDialog")
+    console.log('In closeDialog')
     this.dialogRef.close('Closing!');    
   }
 

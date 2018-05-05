@@ -12,7 +12,7 @@ import { UtilsService } from '../../shared/utils.service';
 })
 export class MultiplicationComponent extends SumbaseComponent implements OnInit {
 
-  static count: number = 0;
+  private static count: number = 0;
   
   constructor(fb: FormBuilder, dialog: MatDialog, renderer: Renderer, router: Router, route: ActivatedRoute, utils: UtilsService) {
     super(fb, dialog, renderer, router, route, utils);

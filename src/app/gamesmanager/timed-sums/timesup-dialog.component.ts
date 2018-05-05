@@ -12,7 +12,7 @@ export class TimesupDialogComponent  {
   constructor(public dialogRef: MatDialogRef<TimesupDialogComponent>) { }
 
   closeDialog() {
-    console.log("TimesupDialogComponent closeDialog")
+    console.log('TimesupDialogComponent closeDialog')
     this.dialogRef.close('Closing!');    
   }
 

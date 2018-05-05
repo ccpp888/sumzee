@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
 import { isNull } from 'util';
 
-import { CongratsDialogComponent } from '../gamesmanager/decimals/congrats-dialog.component';
+import { CongratsDialogComponent } from './congrats-dialog/congrats-dialog.component';
 import { UtilsService } from './utils.service';
 
 function matchesExpected(exp: number): ValidatorFn {

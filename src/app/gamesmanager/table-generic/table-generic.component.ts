@@ -14,12 +14,11 @@ import { HelpDialogComponent } from './help-dialog.component';
 
 export class TableGenericComponent extends SumbaseComponent implements OnInit {
 
-  static count: number = 0;
-  static alreadyGenerated: number[] = [];
+  private static count: number = 0;
+  private static alreadyGenerated: number[] = [];
 
-  timesNumber: number;
-  generatedNumber: number;
-
+  public timesNumber: number;
+  public generatedNumber: number;
 
   constructor(fb: FormBuilder, dialog: MatDialog, renderer: Renderer, router: Router, route: ActivatedRoute, utils: UtilsService) { 
     super(fb, dialog, renderer,router, route, utils);
@@ -45,7 +44,7 @@ export class TableGenericComponent extends SumbaseComponent implements OnInit {
       this.generatedNumber = Math.floor(Math.random() * 12);
 
       if (TableGenericComponent.alreadyGenerated.includes(this.generatedNumber)) {
-        console.log("Trying again - already generated number=" + this.generatedNumber);
+        console.log('Trying again - already generated number=' + this.generatedNumber);
       }
       else {
         alreadyGen = false;
@@ -65,7 +64,7 @@ export class TableGenericComponent extends SumbaseComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("openDialog result==true");
+        console.log('openDialog result==true');
         this.setFocusOnInput(); 
       }
     });

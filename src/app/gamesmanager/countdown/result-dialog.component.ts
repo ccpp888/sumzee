@@ -15,12 +15,12 @@ export class ResultDialogComponent {
   constructor(public dialogRef: MatDialogRef<ResultDialogComponent>) { }
 
   closeDialog() {
-    console.log("ResultDialogComponent closeDialog")
+    console.log('ResultDialogComponent closeDialog')
     this.dialogRef.close('Closing!');    
   }
 
   closeToMain() {
-    console.log("ResultDialogComponent closeToMain")
+    console.log('ResultDialogComponent closeToMain')
     this.onMenu.emit('Menu');
     this.dialogRef.close('Closing!');
   }

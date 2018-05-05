@@ -27,7 +27,9 @@
 
       </mat-grid-tile>
 
-      <mat-grid-tile></mat-grid-tile>
+      <mat-grid-tile>
+        <span class="r-position">Correct so far: <b>{{count}}</b></span>
+      </mat-grid-tile>
 
     </mat-grid-list>
 
@@ -70,7 +72,7 @@
       <mat-grid-tile>
         <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
           <mat-form-field class="fontlarge2">
-            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" formControlName="actual" />
+            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" formControlName="actual"/>
           </mat-form-field>
         </form>
       </mat-grid-tile>
@@ -100,7 +102,7 @@
     <mat-grid-list cols="1" [rowHeight]="40">
         
       <mat-grid-tile>
-        <span class="l-position">Correct so far: <b>{{count}}</b></span>
+        <button mat-raised-button color="primary" class="l-position" (click)="tryDifferentSum()">Next</button>
         <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>
         <button mat-raised-button color="primary" class="r-position" (click)="returnToMenu()">Main menu</button>
       </mat-grid-tile>

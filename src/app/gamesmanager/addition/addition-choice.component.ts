@@ -3,16 +3,15 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addition-choice',
-  templateUrl: './addition-choice.component.html',
-  styleUrls: []
+  templateUrl: './addition-choice.component.html'
 })
 export class AdditionChoiceComponent {
 
   constructor(private router: Router) { }
 
   routeToAddition(difficulty: number) {
-    console.log("AdditionChoiceComponent:difficulty="+difficulty);
-    this.router.navigateByUrl("/gamesmanager/add/"+difficulty);
+    console.log('AdditionChoiceComponent:difficulty='+difficulty);
+    this.router.navigateByUrl('/gamesmanager/add/'+difficulty);
   }
 
 }

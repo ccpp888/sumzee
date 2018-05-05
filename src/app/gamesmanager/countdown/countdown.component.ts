@@ -14,6 +14,7 @@ import { isNull } from 'util';
 import { SumbaseComponent } from '../../shared/sumbase.component';
 import { UtilsService } from '../../shared/utils.service';
 import { ResultDialogComponent } from './result-dialog.component';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-timed',
@@ -23,35 +24,30 @@ import { ResultDialogComponent } from './result-dialog.component';
 
 export class CountdownComponent extends SumbaseComponent implements OnInit {
 
-  static count: number = 0;
+  private static count: number = 0;
 
-  symbol: string;
-  durationInSecs: number = 60;
-  countdown: number;
+  public symbol: string;  
+  public countdown: number;
+  private durationInSecs: number = 4;
   
-  number1: number;
-  number2: number;
-  expected: number;
-  actual: number;
-  difficulty: number;
-  
-  timer;
-  subscription;
-  subject = new Subject();
-  unsubscribed: boolean;
-  started: boolean = false;
+  private timer: Observable<number>;
+  private subscription: Subscription;
+  private subject = new Subject();
+  private unsubscribed: boolean;
+  private started: boolean = false;
 
-  returnToMain: boolean = false;
+  private returnToMain: boolean = false;
 
   constructor(fb: FormBuilder, dialog: MatDialog, renderer: Renderer, router: Router, route: ActivatedRoute, utils: UtilsService) { 
     super(fb, dialog, renderer,router, route, utils);
   }
 
   ngOnInit() {
-    console.log('In CountdownComponent ngInit');
-    this.initFormAndNumbers();      
+    console.log('In CountdownComponent ngInit');    
+    this.initFormAndNumbers();  
+    this.guessForm.disable(); 
   }
-
+ 
   initFormAndNumbers() {    
     let calc = Math.floor(Math.random() * 8);
     console.log('calc for sum type='+calc)
@@ -113,7 +109,8 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
     this.expected = this.number1 / this.number2;
   }
 
-  startCountdownTimer() {
+  startCountdownTimer() {    
+
     this.unsubscribed = false;
     const interval = 1000;
     const duration = this.durationInSecs * 1000;
@@ -127,6 +124,7 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
     this.subscription = this.timer.subscribe(value => this.countdown = value);
 
     this.started = true;
+    this.guessForm.enable();    
     this.setFocusOnInput();
   }
 
@@ -145,9 +143,14 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
     return this.started;
   }
 
+  tryDifferentSum() {
+    this.initFormAndNumbers();
+    this.setFocusOnInput();
+  }
+
   checkInError(c: AbstractControl): void {
     this.errorMessage = '';
-    //console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
+    console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
 
     if (!this.started) {
       this.errorMessage = 'Start the countdown!';
@@ -206,7 +209,8 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
         if (this.returnToMain) {
           this.returnToMenu();
         } else {
-          this.ngOnInit();
+          this.ngOnDestroy(); 
+          this.ngOnInit();          
         }
       }
     });
@@ -227,6 +231,7 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
 
   ngOnDestroy() {
     console.log('= In ngOnDestroy =');
+    this.started = false;
     if (this.subscription == null) {
       console.log('-- this.subscription==null');
     } else {

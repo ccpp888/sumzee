@@ -19,7 +19,7 @@ import { FailureDialogComponent } from './bonds/failure-dialog.component';
 import { BondsChoiceComponent } from './bonds/bonds-choice.component';
 import { HelpDialogComponent } from './table-generic/help-dialog.component';
 import { DecimalsComponent } from './decimals/decimals.component';
-import { CongratsDialogComponent } from './decimals/congrats-dialog.component';
+import { CongratsDialogComponent } from '../shared/congrats-dialog/congrats-dialog.component';
 import { AdditionComponent } from './addition/addition.component';
 import { SubtractionComponent } from './subtraction/subtraction.component';
 import { DivisionComponent } from './division/division.component';

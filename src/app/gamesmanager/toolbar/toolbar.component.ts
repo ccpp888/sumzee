@@ -11,11 +11,7 @@ export class ToolbarComponent implements OnInit {
 
   @Output() toggleTheme = new EventEmitter<void>();
   
-  constructor(
-    private dialog: MatDialog, 
-    private snackBar: MatSnackBar,
-    private router: Router) { }
-
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
   }

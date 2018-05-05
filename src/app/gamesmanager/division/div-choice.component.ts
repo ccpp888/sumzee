@@ -11,8 +11,8 @@ export class DivChoiceComponent {
   constructor(private router: Router) { }
 
   routeTo(level: number) {
-    console.log("DivChoiceComponent:level="+level);
-    this.router.navigateByUrl("/gamesmanager/divide/"+level);
+    console.log('DivChoiceComponent:level='+level);
+    this.router.navigateByUrl('/gamesmanager/divide/'+level);
   }
 
 }

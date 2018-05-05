@@ -11,7 +11,7 @@ export class SubtractChoiceComponent {
   constructor(private router: Router) { }
 
   routeTo(level: number) {   
-    this.router.navigateByUrl("/gamesmanager/subtract/"+level);
+    this.router.navigateByUrl('/gamesmanager/subtract/'+level);
   }
 
 }
