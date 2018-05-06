@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({  
+@Component({
   template: `  
-    <app-sidenav></app-sidenav>        
+    <app-sp-sidenav></app-sp-sidenav>        
   `,
   styles: []
 })
-export class GamesmanagerAppComponent {
+export class SpellmanagerAppComponent {
 
   constructor(public router: Router) {   
 
-      this.router.navigate(['/gamesmanager/menu']);
-   }
-  
+    this.router.navigate(['/spellmanager/spmenu']);
+ }
+
+
 }

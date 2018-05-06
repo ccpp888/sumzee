@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
-  selector: 'app-toolbar',
+  selector: 'app-sp-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
@@ -16,8 +16,8 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  switchToSpellzee() {    
-    this.router.navigateByUrl('/spellmanager/spmenu');
+  switchToSumzee() {
+    this.router.navigateByUrl('/gamesmanager/menu');
   }
 
 }

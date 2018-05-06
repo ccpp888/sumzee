@@ -6,7 +6,7 @@ import { MatSidenav } from '@angular/material';
 const SMALL_WIDTH_BREAKPOINT = 720;
 
 @Component({
-  selector: 'app-sidenav',
+  selector: 'app-sp-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
@@ -15,7 +15,7 @@ export class SidenavComponent implements OnInit {
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
-  isDarkTheme: boolean = false;
+  isDarkTheme: boolean = true;
 
   constructor(
     zone: NgZone,
@@ -38,7 +38,6 @@ export class SidenavComponent implements OnInit {
   }
 
   toggleTheme() {
-    console.log('In SidenavComponent toggleTheme');
     this.isDarkTheme = !this.isDarkTheme;
   }
 

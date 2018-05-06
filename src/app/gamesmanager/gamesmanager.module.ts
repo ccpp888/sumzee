@@ -38,8 +38,8 @@ import { UtilsService } from '../shared/utils.service';
 
 const routes: Routes = [
   { path: '', component: GamesmanagerAppComponent,
-    children: [      
-      { path: 'bondsc', component: BondsChoiceComponent },         
+    children: [                     
+      { path: 'bondsc', component: BondsChoiceComponent },  
       { path: 'bonds/:id', component: BondsComponent },         
       { path: 'tablec', component: TableChoiceComponent },
       { path: 'decimals', component: DecimalsComponent },
@@ -56,7 +56,8 @@ const routes: Routes = [
       { path: 'timed', component: TimedSumComponent },
       { path: 'menu', component: MenuComponent }
     ] },      
-  { path: '**', redirectTo: 'menu' }
+  { path: 'spellmanager', redirectTo: '/spellmanager/spmenu' },
+  { path: '**', redirectTo: 'menu' },  
 ];
 
 @NgModule({

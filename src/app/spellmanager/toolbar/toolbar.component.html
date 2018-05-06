@@ -4,15 +4,15 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <span class="titlefont">SUMZEE  -  Fun with numbers!</span>
+  <span class="titlefont">SPELLZEE  -  Fun with words!</span>
 
   <span class="example-spacer"></span>
 
   <button mat-button [matMenuTriggerFor]="menu">
-    <mat-icon>menu</mat-icon><span class="titlefont2">Spellzee</span>
+    <mat-icon>menu</mat-icon><span class="titlefont2">Sumzee</span>
   </button>
-  <mat-menu #menu="matMenu">       
-    <button mat-menu-item (click)="switchToSpellzee()">Play Spellzee</button>     
+  <mat-menu #menu="matMenu">    
+    <button mat-menu-item (click)="switchToSumzee()">Play Sumzee</button>    
     <button mat-menu-item (click)="toggleTheme.emit()">Toggle theme</button>   
   </mat-menu>
 

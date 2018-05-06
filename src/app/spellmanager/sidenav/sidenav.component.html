@@ -1,0 +1,48 @@
+<mat-sidenav-container class="app-sidenav-container" [class.dark-theme]="isDarkTheme">
+  <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10" [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+    <mat-toolbar color="primary">
+      <div class="titlefont2">Options</div>
+    </mat-toolbar>
+
+    <mat-nav-list>
+
+
+      <mat-list-item>
+        <a matLine routerLink="/spellmanager/spmenu">
+          <mat-icon>view_comfy</mat-icon>&nbsp;&nbsp;Main Menu
+        </a>
+      </mat-list-item>
+
+    </mat-nav-list>
+
+    <mat-divider></mat-divider>
+
+    <mat-nav-list>
+
+      <mat-list-item>
+        <a matLine routerLink="/spellmanager/spelling1">
+          <mat-icon>filter_vintage</mat-icon>&nbsp;&nbsp;Spelling 1
+        </a>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <div class="app-sidenav-content">
+    <app-sp-toolbar (toggleTheme)="toggleTheme()"></app-sp-toolbar>
+    <div class="wrapper">
+
+      <!--<div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">-->
+      <router-outlet></router-outlet>
+
+      <!--</div>-->
+
+    </div>
+  </div>
+
+</mat-sidenav-container>
