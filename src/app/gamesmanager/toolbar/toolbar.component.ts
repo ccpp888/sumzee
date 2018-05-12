@@ -16,7 +16,7 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  switchToSpellzee() {    
+  switchToSpelzee() {    
     this.router.navigateByUrl('/spellmanager/spmenu');
   }
 

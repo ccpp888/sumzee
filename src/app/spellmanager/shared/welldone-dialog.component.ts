@@ -18,17 +18,15 @@ export class WelldoneDialogComponent implements OnInit {
 
   ngOnInit() {    
     let filenum = getRandom(1,2);
-    this.image_url = '/assets/spimages/congrats/ani' + filenum + '.gif';    
+    this.image_url = '/assets/words/congrats/ani' + filenum + '.gif';    
   }
 
-  continue() {
-    console.log("IN CONTINUE dialog");
+  continue() {    
     this.dialogRef.close('Continue');
   }
 
 
-  closeDialog() {
-    console.log('In closeDialog')
+  closeDialog() {    
     this.dialogRef.close('Main');
   }
 

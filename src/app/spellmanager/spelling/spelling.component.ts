@@ -12,10 +12,10 @@ function wordMatch(exp: string): ValidatorFn {
     if (c.value == undefined || c.value == '') {
       return null;
     }
-
+        
     console.log('In wordMatch exp=%s, control.value=%s', exp, c.value);
 
-    if (c.value != exp) {
+    if (c.value.toLowerCase() != exp) {
       console.log('wordMatch func returning true (in error)');
       return { 'expected': true }
     }
@@ -35,17 +35,17 @@ export class SpellingComponent implements OnInit {
   //picture words]
   static objectList: string[] = ['ball', 'bed', 'bicycle', 'cake', 'chair', 'flowers', 'hammer', 'house', 'knife', 'moon', 'scissors', 'scooter', 'spoon', 'table', 'train', 'tree', 'window'];
   static animalList: string[] = ['butterfly', 'camel', 'dog', 'dolphin', 'duck', 'elephant', 'giraffe', 'gorilla', 'horse', 'kangaroo', 'koala', 'lion', 'monkey', 'snake', 'spider', 'swan', 'tiger', 'whale', 'zebra'];
-  static colourList: string[] = ['blue','green','orange','red','yellow','brown','purple','pink'];
-  static numberList: string[] = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
-  static shoppingList: string[] = ['apple','banana','cabbage','tomato','potato','lemon', 'bread', 'cheese', 'milk'];
+  static colourList: string[] = ['blue', 'green', 'orange', 'red', 'yellow', 'brown', 'purple', 'pink'];
+  static numberList: string[] = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
+  static shoppingList: string[] = ['apple', 'banana', 'cabbage', 'tomato', 'potato', 'lemon', 'bread', 'cheese', 'milk'];
 
   //audio words
-  static calendarList: string[] = ['April','August','December','February','Friday','January','July','June','March','May','Monday','month','November','October','Saturday','September','Sunday','Thursday','Tuesday','Wednesday','year'];
-  static warmList: string[] = ['about','after','again','another','because','brother','called','could','first','half','laugh','little','name','night','once','people','school','should','sister','take','there','these','water','your'];
-  static warmerList: string[] = ['again','bite','blade','boil','caught','close','clothes','coin','earth','farmyard','father','flew','floor','friends','garden','important','light','money','moon','mother','neat','noisy','rain','round','scare','shade','share','show','something','soon','sound','spade','sport','stood','swimming','toilet','tune','turkey','white'];
-  static hotList: string[] = ['across','almost','always','around','asked','balloon','before','began','being','below','better','between','birthday','brought','change','children','different','during','following','found','great','half','heard','inside','jumped','knew','might','morning','much','never','number','often','only','opened','outside','second','sometimes','started','still','stopped','suddenly','think','today','together','told','until','upon','walked','watch','while','without','woken','year','young'];
-  static hottestList: string[] = ['accompany','according','achieve','actually','aggressive','although','amateur','analysis','ancient','apparent','appreciate','argument','assessment','attached','audible','audience','autumn','available','average','awkward','bargain','beginning','believe','beneath','bruise','business','category','caught','cemetery','chocolate','column','committee','communicate','competition','concentration','conclusion','consequence','continuous','contribute','controversy','convenience','correspond','creation','criticise','curiosity','daughter','decision','definite','design','desperate','development','dictionary','disappointing','disastrous','embarrass','engagement','enquire','environment','equipment','especially','essential','evaluation','evidence','exaggerate','excellent','existence','explanation','familiar','fierce','frequently','furthermore','government','guarantee','guard','happened','height','hindrance','imaginary','immediately','improvise','individual','industrial','interference','interruption','jealous','knowledge','language','leisure','lightning','listening','marriage','marvellous','material','meanwhile','mischief','mischievous','murmur','muscle','necessary','neighbour','nervous','nuisance','occupation','opportunity','original','parallel','parliament','participation','peaceful','permanent','persuade','physical','possession','potentially','preparation','prioritise','privilege','profession','pronunciation','proportion','proposition','queue','receive','recognise','recommend','reference','relevant','relief','remember','research','restaurant','rhyme','rhythm','sacrifice','science','secondary','secretary','separate','sequence','shoulder','signature','sincere','skilful','soldier','stomach','straight','strategy','strength','success','sufficient','suggest','symbol','system','technique','technology','temperature','thorough','unfortunately','valuable','variety','vegetable','vehicle','weight','yacht'];
-  static monsterList: string[] = ['accommodate','acknowledge','acquire','aggravate','appropriate','assassin','atmosphere','ballerina','commission','compatible','conscience','conscious','courteous','criticism','deterrent','disappearance','disastrous','dissatisfied','efficient','embarrassment','encyclopedia','equipped','erroneous','especially','exception','exercise','fascinate','feasible','foreign','fulfilled','grievance','guardian','humorous','hypocrisy','illuminate','incidentally','indispensable','irrelevant','irreparable','irresistible','liaison','maintenance','manoeuvre','miniature','miscellaneous','mortgage','negotiable','occasional','omitted','outrageous','penicillin','preceding','questionnaire','seize','symmetrical','tendency','unconscious'];
+  static calendarList: string[] = ['April', 'August', 'December', 'February', 'Friday', 'January', 'July', 'June', 'March', 'May', 'Monday', 'month', 'November', 'October', 'Saturday', 'September', 'Sunday', 'Thursday', 'Tuesday', 'Wednesday', 'year'];
+  static warmList: string[] = ['about', 'after', 'again', 'another', 'because', 'brother', 'called', 'could', 'first', 'half', 'laugh', 'little', 'name', 'night', 'once', 'people', 'school', 'should', 'sister', 'take', 'there', 'these', 'water', 'your'];
+  static warmerList: string[] = ['again', 'bite', 'blade', 'boil', 'caught', 'close', 'clothes', 'coin', 'earth', 'farmyard', 'father', 'flew', 'floor', 'friends', 'garden', 'important', 'light', 'money', 'moon', 'mother', 'neat', 'noisy', 'rain', 'round', 'scare', 'shade', 'share', 'show', 'something', 'soon', 'sound', 'spade', 'sport', 'stood', 'swimming', 'toilet', 'tune', 'turkey', 'white'];
+  static hotList: string[] = ['across', 'almost', 'always', 'around', 'asked', 'balloon', 'before', 'began', 'being', 'below', 'better', 'between', 'birthday', 'brought', 'change', 'children', 'different', 'during', 'following', 'found', 'great', 'half', 'heard', 'inside', 'jumped', 'knew', 'might', 'morning', 'much', 'never', 'number', 'often', 'only', 'opened', 'outside', 'second', 'sometimes', 'started', 'still', 'stopped', 'suddenly', 'think', 'today', 'together', 'told', 'until', 'upon', 'walked', 'watch', 'while', 'without', 'woken', 'year', 'young'];
+  static hottestList: string[] = ['accompany', 'according', 'achieve', 'actually', 'aggressive', 'although', 'amateur', 'analysis', 'ancient', 'apparent', 'appreciate', 'argument', 'assessment', 'attached', 'audible', 'audience', 'autumn', 'available', 'average', 'awkward', 'bargain', 'beginning', 'believe', 'beneath', 'bruise', 'business', 'category', 'caught', 'cemetery', 'chocolate', 'column', 'committee', 'communicate', 'competition', 'concentration', 'conclusion', 'consequence', 'continuous', 'contribute', 'controversy', 'convenience', 'correspond', 'creation', 'criticise', 'curiosity', 'daughter', 'decision', 'definite', 'design', 'desperate', 'development', 'dictionary', 'disappointing', 'disastrous', 'embarrass', 'engagement', 'enquire', 'environment', 'equipment', 'especially', 'essential', 'evaluation', 'evidence', 'exaggerate', 'excellent', 'existence', 'explanation', 'familiar', 'fierce', 'frequently', 'furthermore', 'government', 'guarantee', 'guard', 'happened', 'height', 'hindrance', 'imaginary', 'immediately', 'improvise', 'individual', 'industrial', 'interference', 'interruption', 'jealous', 'knowledge', 'language', 'leisure', 'lightning', 'listening', 'marriage', 'marvellous', 'material', 'meanwhile', 'mischief', 'mischievous', 'murmur', 'muscle', 'necessary', 'neighbour', 'nervous', 'nuisance', 'occupation', 'opportunity', 'original', 'parallel', 'parliament', 'participation', 'peaceful', 'permanent', 'persuade', 'physical', 'possession', 'potentially', 'preparation', 'prioritise', 'privilege', 'profession', 'pronunciation', 'proportion', 'proposition', 'queue', 'receive', 'recognise', 'recommend', 'reference', 'relevant', 'relief', 'remember', 'research', 'restaurant', 'rhyme', 'rhythm', 'sacrifice', 'science', 'secondary', 'secretary', 'separate', 'sequence', 'shoulder', 'signature', 'sincere', 'skilful', 'soldier', 'stomach', 'straight', 'strategy', 'strength', 'success', 'sufficient', 'suggest', 'symbol', 'system', 'technique', 'technology', 'temperature', 'thorough', 'unfortunately', 'valuable', 'variety', 'vegetable', 'vehicle', 'weight', 'yacht'];
+  static monsterList: string[] = ['accommodate', 'acknowledge', 'acquire', 'aggravate', 'appropriate', 'assassin', 'atmosphere', 'ballerina', 'commission', 'compatible', 'conscience', 'conscious', 'courteous', 'criticism', 'deterrent', 'disappearance', 'disastrous', 'dissatisfied', 'efficient', 'embarrassment', 'encyclopedia', 'equipped', 'erroneous', 'especially', 'exception', 'exercise', 'fascinate', 'feasible', 'foreign', 'fulfilled', 'grievance', 'guardian', 'humorous', 'hypocrisy', 'illuminate', 'incidentally', 'indispensable', 'irrelevant', 'irreparable', 'irresistible', 'liaison', 'maintenance', 'manoeuvre', 'miniature', 'miscellaneous', 'mortgage', 'negotiable', 'occasional', 'omitted', 'outrageous', 'penicillin', 'preceding', 'questionnaire', 'seize', 'symmetrical', 'tendency', 'unconscious'];
 
   //picture words or audio words based on route selection
   isAudio = false;
@@ -53,7 +53,7 @@ export class SpellingComponent implements OnInit {
   maxCorrect: number = 8;
   wordList: string[];
   index: number;
-  
+
   guessedCorrectly: boolean;
   guessForm: FormGroup;
   guessControl: AbstractControl;
@@ -68,11 +68,23 @@ export class SpellingComponent implements OnInit {
 
   selected_id: any;
 
+  globalListenFunc: Function;
+
+
   constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
     console.log('In SpellingComponent ngOnInit, index=%s', this.index);
+
+    //play the word if up key pressed
+    this.globalListenFunc = this.renderer.listen('document', 'keyup', e => {
+      console.log('onkeyup e.key=%s, e=%s', e.key, e);
+      if (e.key == 'ArrowUp') {
+        this.play();
+      }
+
+    });
 
     this.route.params.subscribe(params => {
       this.selected_id = params['id'];
@@ -213,10 +225,12 @@ export class SpellingComponent implements OnInit {
   }
 
   play() {
-    var audio = new Audio();    
-    audio.src = this.file_location;
-    audio.load();
-    audio.play();
+    if (this.isAudio) {
+      var audio = new Audio();
+      audio.src = this.file_location;
+      audio.load();
+      audio.play();      
+    }
     this.setFocusOnInput();
   }
 
@@ -234,7 +248,7 @@ export class SpellingComponent implements OnInit {
   returnToMenu() {
     this.router.navigateByUrl('/spellmanager/spmenu');
   }
-  
+
   openCongratsDialog() {
     let dialogRef = this.dialog.open(WelldoneDialogComponent, {
       height: '480px',
@@ -242,7 +256,7 @@ export class SpellingComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('dialog.afterClosed result=%s', result);
-      if (result=='Main') {        
+      if (result == 'Main') {
         this.returnToMenu();
       } else {
         this.resetCount();
@@ -277,7 +291,7 @@ export class SpellingComponent implements OnInit {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
         if (this.getCount() >= this.maxCorrect) {
-          this.resetCount();          
+          this.resetCount();
           this.openCongratsDialog();
         }
         else {
@@ -323,9 +337,9 @@ export class SpellingComponent implements OnInit {
 
   ngOnDestroy() {
     console.log("* SpellingComponent in ngOnDestory *");
-    if (this.selected_id != null) {      
+    if (this.selected_id != null) {
       this.selected_id.unsubscribe;
-    }    
+    }
     this.resetCount();
     //this.resetIndex();
   }
