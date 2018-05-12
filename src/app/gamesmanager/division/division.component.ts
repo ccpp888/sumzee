@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { UtilsService } from '../../shared/utils.service';
 import { SumbaseComponent } from '../../shared/sumbase.component';
+import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({  
   templateUrl: './division.component.html'
@@ -86,6 +87,14 @@ export class DivisionComponent extends SumbaseComponent implements OnInit {
     //     counter++;
     //   }     
     // }
+  }
+
+  get divisionUrl(): string {
+    if (SidenavComponent.emitDark) {
+      return '/assets/images/divide-sign-48.png';
+    } else {
+      return '/assets/images/divide-sign-48B.png';
+    }
   }
 
   doLevelHottest() {

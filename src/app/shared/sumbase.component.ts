@@ -16,8 +16,8 @@ function matchesExpected(exp: number): ValidatorFn {
     }
 
     if ((isNaN(c.value) || c.value != exp)) {
-      console.log("In matchesExpected func returning true (in error) ==");
-      return { "expected": true }
+      console.log('In matchesExpected func returning true (in error) ==');
+      return { 'expected': true }
     }
     return null;
   }
@@ -36,7 +36,7 @@ export abstract class SumbaseComponent {
   public guessControl: AbstractControl;
 
   public title: string;
-  public validationMessage = "Try again";
+  public validationMessage = 'Try again';
   public errorMessage: string;
 
   constructor(protected fb: FormBuilder, protected dialog: MatDialog, protected renderer: Renderer, protected router: Router, protected route: ActivatedRoute, protected utils: UtilsService) { }
@@ -49,12 +49,12 @@ export abstract class SumbaseComponent {
   getLevel(): number {
     const param = this.route.snapshot.paramMap.get('id');
     if (param) {
-      //console.log("param==" + param);
+      //console.log('param==' + param);
       let id = +param //cast to number from string
       return id;
     }
     else {
-      console.error("no param for id found");
+      console.error('no param for id found');
       return 0;
     }
   }

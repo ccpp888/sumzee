@@ -1,3 +1,165 @@
-<p>
-  menu works!
-</p>
+<div [ngStyle]="{'background-image':'url(/assets/words/background.jpg)', 'background-repeat': 'no-repeat', 'height':'1000px', 'background-size': '60% 800px', 'background-position': 'center' }">
+
+
+  <mat-grid-list cols="4">
+
+    <mat-grid-tile (click)="routeChoice(0)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">motorcycle</mat-icon>&nbsp;&nbsp;Objects
+          </mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words1.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(1)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">pets</mat-icon>&nbsp;&nbsp;Animals</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words2.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(2)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">palette</mat-icon>&nbsp;&nbsp;Colours</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words3.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(3)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">filter_9_plus</mat-icon>&nbsp;&nbsp;Numbers</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words2.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(4)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">shopping_cart</mat-icon>&nbsp;&nbsp;Shopping</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words3.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(5)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">chat</mat-icon>&nbsp;&nbsp;Calendar</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words2.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(6)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon class="warm600">comment</mat-icon>&nbsp;&nbsp;Warm words</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words1.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(7)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon class="warmer600">comment</mat-icon>&nbsp;&nbsp;Warmer words</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words2.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(8)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon class="hot600">comment</mat-icon>&nbsp;&nbsp;Hot words</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words3.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(9)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon class="hottest600">comment</mat-icon>&nbsp;&nbsp;Hottest words</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words1.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="routeChoice(10)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon class="red600">comment</mat-icon>&nbsp;&nbsp;Monster words</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words2.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+
+
+  </mat-grid-list>
+
+</div>

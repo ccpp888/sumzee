@@ -15,13 +15,12 @@ export class SidenavComponent implements OnInit {
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
-  isDarkTheme: boolean = true;
+  isDarkTheme: boolean = false;
 
-  constructor(
-    zone: NgZone,
-    private router: Router) {
+  constructor(zone: NgZone, private router: Router) {
     this.mediaMatcher.addListener(mql =>
       zone.run(() => this.mediaMatcher = mql));
+    
   }
 
   @ViewChild(MatSidenav) sidenav: MatSidenav;
@@ -40,5 +39,15 @@ export class SidenavComponent implements OnInit {
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
   }
+
+  routeChoice(choice: number) {
+    console.log('SidenavComponent:choice=' + choice);
+    this.router.navigateByUrl('/spellmanager/spelling/' + choice);
+  }
+
+  // highFreq(choice: number) {
+  //   console.log('SidenavComponent:highFreq:choice=' + choice);
+  //   this.router.navigateByUrl('/spellmanager/hf1' + choice);
+  // }
 
 }

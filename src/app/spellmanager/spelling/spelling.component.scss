@@ -1,0 +1,50 @@
+img {
+    width:inherit;
+}
+
+.item {
+    border:1px solid white;
+    width: 200px;
+    float: left;
+    margin: 3px;
+    padding: 3px;
+}
+
+.mat-input-wrapper{
+    width:400px !important;
+  }
+
+.inputfont {
+    font-family: 'Comic Sans MS', Helvetica, sans-serif;      
+    font-size: 40px;    
+    width: 100%;    
+}
+
+.displayfont {
+    font-family: 'Comic Sans MS', Helvetica, sans-serif;      
+    font-size: 35px;    
+    width: 100%;
+    color: rgb(18, 201, 18);
+}
+
+.r-position {
+    position: absolute;
+    right: 0px;
+}
+  
+.l-position {
+    position: absolute;
+    left: 0px;    
+}
+
+.button-play {
+    background-color: rgb(73, 167, 76); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block; 
+    font-family: 'Comic Sans MS', Helvetica, sans-serif;     
+    font-size: 21px;
+}

@@ -12,10 +12,12 @@ const SMALL_WIDTH_BREAKPOINT = 720;
 })
 export class SidenavComponent implements OnInit {
 
+  public static emitDark: boolean = true;
+
   private mediaMatcher: MediaQueryList =
     matchMedia(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`);
 
-  isDarkTheme: boolean = false;
+  isDarkTheme: boolean = true;
 
   constructor(
     zone: NgZone,
@@ -40,6 +42,7 @@ export class SidenavComponent implements OnInit {
   toggleTheme() {
     console.log('In SidenavComponent toggleTheme');
     this.isDarkTheme = !this.isDarkTheme;
+    SidenavComponent.emitDark = this.isDarkTheme;
   }
 
 }

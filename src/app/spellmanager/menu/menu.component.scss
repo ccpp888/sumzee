@@ -1,0 +1,30 @@
+.example-card {
+    max-width: 220px;
+  }
+
+  .title-text {
+    font-weight: bold;
+    font-size: large;
+  }   
+
+  .fontlarge {
+    font-size: 16px;    
+  }
+
+  mat-card img { 
+    object-fit: cover; /*this makes de image in src fit to the size of specified below*/
+    width: 220px; /* Here you can use wherever you want to specify the width and also the height of the <img>*/
+    height: 100px;
+  }
+
+.centered {
+  align-content: center;
+}
+
+.white-icon {
+  color: white;
+}
+.menu-bg {
+  background : url('/assets/spimages/background.jpg');
+  background-position: center;
+}

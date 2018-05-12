@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router)  { }
 
   ngOnInit() {
+  }
+
+  routeChoice(choice: number) {
+    console.log('MenuComponent:routeChoice:choice=' + choice);
+    this.router.navigateByUrl('/spellmanager/spelling/' + choice);
   }
 
 }

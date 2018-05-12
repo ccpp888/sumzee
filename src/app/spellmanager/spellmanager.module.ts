@@ -6,21 +6,23 @@ import { MaterialModule } from '../shared/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { UtilsService } from '../shared/utils.service';
 import { SpellmanagerAppComponent } from './spellmanager-app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MenuComponent } from './menu/menu.component';
-import { Spelling1Component } from './spelling1/spelling1.component';
+import { SpellingComponent } from './spelling/spelling.component';
+import { WelldoneDialogComponent } from './shared/welldone-dialog.component';
 
 const routes: Routes = [  
   { path: '', component: SpellmanagerAppComponent,
     children: [                     
-      { path: 'spelling1', component: Spelling1Component },
+      { path: 'spelling', component: SpellingComponent },
+      { path: 'spelling/:id', component: SpellingComponent },     
       { path: 'spmenu', component: MenuComponent }
     ] },          
   { path: '**', redirectTo: 'spmenu' }
 ];
-
 
 @NgModule({
   imports: [
@@ -31,11 +33,16 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
+  providers: [UtilsService],
   declarations: [
     SpellmanagerAppComponent, 
     ToolbarComponent,     
-    SidenavComponent, ToolbarComponent, MenuComponent, Spelling1Component
+    SidenavComponent, 
+    ToolbarComponent, 
+    MenuComponent,    
+    WelldoneDialogComponent,
+    SpellingComponent
   ],
-  entryComponents: []
+  entryComponents: [WelldoneDialogComponent]
 })
 export class SpellmanagerModule { }

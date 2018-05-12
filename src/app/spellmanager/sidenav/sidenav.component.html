@@ -6,12 +6,11 @@
 
     <mat-nav-list>
 
-
-      <mat-list-item>
-        <a matLine routerLink="/spellmanager/spmenu">
+      <a matLine routerLink="/spellmanager/spmenu">
+        <mat-list-item>
           <mat-icon>view_comfy</mat-icon>&nbsp;&nbsp;Main Menu
-        </a>
-      </mat-list-item>
+        </mat-list-item>
+      </a>
 
     </mat-nav-list>
 
@@ -19,15 +18,71 @@
 
     <mat-nav-list>
 
-      <mat-list-item>
-        <a matLine routerLink="/spellmanager/spelling1">
-          <mat-icon>filter_vintage</mat-icon>&nbsp;&nbsp;Spelling 1
-        </a>
+      <mat-list-item (click)="routeChoice(0)">
+        <mat-icon color="primary">motorcycle</mat-icon>&nbsp;&nbsp;Objects
       </mat-list-item>
 
       <mat-divider></mat-divider>
 
-      
+      <mat-list-item (click)="routeChoice(1)">
+        <mat-icon color="primary">pets</mat-icon>&nbsp;&nbsp;Animals
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(2)">
+        <mat-icon color="primary">palette</mat-icon>&nbsp;&nbsp;Colours
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(3)">
+        <mat-icon color="primary">filter_9_plus</mat-icon>&nbsp;&nbsp;Numbers
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(4)">
+        <mat-icon color="primary">shopping_cart</mat-icon>&nbsp;&nbsp;Shopping
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(5)">
+        <mat-icon color="primary">chat</mat-icon>&nbsp;&nbsp;Calendar
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(6)">
+        <mat-icon class="warm600">chat</mat-icon>&nbsp;&nbsp;Warm words
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(7)">
+        <mat-icon class="warmer600">comment</mat-icon>&nbsp;&nbsp;Warmer words
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(8)">
+        <mat-icon class="hot600">speaker_notes</mat-icon>&nbsp;&nbsp;Hot words
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(9)">
+        <mat-icon class="hottest600">comment</mat-icon>&nbsp;&nbsp;Hottest words
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <mat-list-item (click)="routeChoice(10)">
+        <mat-icon class="red600">chat</mat-icon>&nbsp;&nbsp;Monster words
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
 
     </mat-nav-list>
 
@@ -36,12 +91,7 @@
   <div class="app-sidenav-content">
     <app-sp-toolbar (toggleTheme)="toggleTheme()"></app-sp-toolbar>
     <div class="wrapper">
-
-      <!--<div [ngStyle]="{'background' : 'url(/assets/images/sumzee2.png)'}">-->
       <router-outlet></router-outlet>
-
-      <!--</div>-->
-
     </div>
   </div>
 
