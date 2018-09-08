@@ -13,12 +13,14 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MenuComponent } from './menu/menu.component';
 import { SpellingComponent } from './spelling/spelling.component';
 import { WelldoneDialogComponent } from './shared/welldone-dialog.component';
+import { WeeklyComponent } from './weekly/weekly.component';
 
 const routes: Routes = [  
   { path: '', component: SpellmanagerAppComponent,
     children: [                     
       { path: 'spelling', component: SpellingComponent },
       { path: 'spelling/:id', component: SpellingComponent },     
+      { path: 'weekly/:id', component: WeeklyComponent },     
       { path: 'spmenu', component: MenuComponent }
     ] },          
   { path: '**', redirectTo: 'spmenu' }
@@ -41,7 +43,8 @@ const routes: Routes = [
     ToolbarComponent, 
     MenuComponent,    
     WelldoneDialogComponent,
-    SpellingComponent
+    SpellingComponent,
+    WeeklyComponent
   ],
   entryComponents: [WelldoneDialogComponent]
 })

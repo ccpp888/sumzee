@@ -3,6 +3,21 @@
 
   <mat-grid-list cols="4">
 
+    <mat-grid-tile (click)="weeklyChoice(0)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="accent">school</mat-icon>&nbsp;&nbsp;Weekly spelling
+          </mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words3.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
     <mat-grid-tile (click)="routeChoice(0)">
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>

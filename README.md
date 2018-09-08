@@ -1,4 +1,9 @@
-# Angularmaterial
+# Sumzee - Fun with numbers
+
+This web app was written for my daughters, to help with maths and spelling. 
+Select the menu item 'Play Spelzee' to switch from maths to spelling.
+
+[Access the website here](http://sumzee.net)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.3.
 

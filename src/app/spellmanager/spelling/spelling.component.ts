@@ -165,7 +165,7 @@ export class SpellingComponent implements OnInit {
         this.title = 'Monster words!';
         this.wordList = SpellingComponent.monsterList;
         break;
-      }
+      }      
       default: {
         //default to Objects
         this.title = 'Objects';
@@ -206,7 +206,7 @@ export class SpellingComponent implements OnInit {
     this.displayWord = false;
     this.incrementIndex();
     this.word = this.wordList[this.index];
-    var suffix = (this.isAudio) ? ".wav" : ".png";
+    var suffix = (this.isAudio) ? ".wav" : ".png";    
     this.file_location = "/assets/words/" + this.selected_id + '/' + this.word + suffix;
     console.log('generateWord using index=%s, word=%s, file_location=%s, isAudio=%s', this.index, this.word, this.file_location, this.isAudio);
     this.setFocusOnInput();
@@ -288,7 +288,7 @@ export class SpellingComponent implements OnInit {
       this.setFocusOnInput();
     }
     else {
-      console.log('checkInError not in error')
+      console.log('checkInError not in error, getCount=%s, maxCorrect=%s', this.getCount, this.maxCorrect)
       if (this.guessedCorrectly) {
         if (this.getCount() >= this.maxCorrect) {
           this.resetCount();

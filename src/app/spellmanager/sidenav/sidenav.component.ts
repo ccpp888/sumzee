@@ -45,9 +45,8 @@ export class SidenavComponent implements OnInit {
     this.router.navigateByUrl('/spellmanager/spelling/' + choice);
   }
 
-  // highFreq(choice: number) {
-  //   console.log('SidenavComponent:highFreq:choice=' + choice);
-  //   this.router.navigateByUrl('/spellmanager/hf1' + choice);
-  // }
-
+  weeklyChoice(choice: number) {
+    console.log('SidenavComponent:choice=' + choice);
+    this.router.navigateByUrl('/spellmanager/weekly/' + choice);
+  }
 }

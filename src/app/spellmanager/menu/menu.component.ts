@@ -18,4 +18,9 @@ export class MenuComponent implements OnInit {
     this.router.navigateByUrl('/spellmanager/spelling/' + choice);
   }
 
+  weeklyChoice(choice: number) {
+    console.log('MenuComponent:weeklyChoice:choice=' + choice);
+    this.router.navigateByUrl('/spellmanager/weekly/' + choice);
+  }
+
 }
