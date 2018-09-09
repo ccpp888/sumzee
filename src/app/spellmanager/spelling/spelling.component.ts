@@ -30,11 +30,8 @@ function wordMatch(exp: string): ValidatorFn {
 })
 export class SpellingComponent implements OnInit {
 
-  static count: number = 0;
-
   //picture words]
-  static objectList: string[] = ['ball', 'bed', 'bicycle', 'cake', 'chair', 'flowers', 'hammer', 'house', 'knife', 'moon', 'scissors', 'scooter', 'spoon', 'table', 'train', 'tree', 'window'];
-  static animalList: string[] = ['butterfly', 'camel', 'dog', 'dolphin', 'duck', 'elephant', 'giraffe', 'gorilla', 'horse', 'kangaroo', 'koala', 'lion', 'monkey', 'snake', 'spider', 'swan', 'tiger', 'whale', 'zebra'];
+  static objectAnimalList: string[] = ['ball', 'bed', 'bicycle', 'cake', 'chair', 'flowers', 'hammer', 'house', 'knife', 'moon', 'scissors', 'scooter', 'spoon', 'table', 'train', 'tree', 'window', 'butterfly', 'camel', 'dog', 'dolphin', 'duck', 'elephant', 'giraffe', 'gorilla', 'horse', 'kangaroo', 'koala', 'lion', 'monkey', 'snake', 'spider', 'swan', 'tiger', 'whale', 'zebra'];  
   static colourList: string[] = ['blue', 'green', 'orange', 'red', 'yellow', 'brown', 'purple', 'pink'];
   static numberList: string[] = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
   static shoppingList: string[] = ['apple', 'banana', 'cabbage', 'tomato', 'potato', 'lemon', 'bread', 'cheese', 'milk'];
@@ -46,46 +43,29 @@ export class SpellingComponent implements OnInit {
   static hotList: string[] = ['across', 'almost', 'always', 'around', 'asked', 'balloon', 'before', 'began', 'being', 'below', 'better', 'between', 'birthday', 'brought', 'change', 'children', 'different', 'during', 'following', 'found', 'great', 'half', 'heard', 'inside', 'jumped', 'knew', 'might', 'morning', 'much', 'never', 'number', 'often', 'only', 'opened', 'outside', 'second', 'sometimes', 'started', 'still', 'stopped', 'suddenly', 'think', 'today', 'together', 'told', 'until', 'upon', 'walked', 'watch', 'while', 'without', 'woken', 'year', 'young'];
   static hottestList: string[] = ['accompany', 'according', 'achieve', 'actually', 'aggressive', 'although', 'amateur', 'analysis', 'ancient', 'apparent', 'appreciate', 'argument', 'assessment', 'attached', 'audible', 'audience', 'autumn', 'available', 'average', 'awkward', 'bargain', 'beginning', 'believe', 'beneath', 'bruise', 'business', 'category', 'caught', 'cemetery', 'chocolate', 'column', 'committee', 'communicate', 'competition', 'concentration', 'conclusion', 'consequence', 'continuous', 'contribute', 'controversy', 'convenience', 'correspond', 'creation', 'criticise', 'curiosity', 'daughter', 'decision', 'definite', 'design', 'desperate', 'development', 'dictionary', 'disappointing', 'disastrous', 'embarrass', 'engagement', 'enquire', 'environment', 'equipment', 'especially', 'essential', 'evaluation', 'evidence', 'exaggerate', 'excellent', 'existence', 'explanation', 'familiar', 'fierce', 'frequently', 'furthermore', 'government', 'guarantee', 'guard', 'happened', 'height', 'hindrance', 'imaginary', 'immediately', 'improvise', 'individual', 'industrial', 'interference', 'interruption', 'jealous', 'knowledge', 'language', 'leisure', 'lightning', 'listening', 'marriage', 'marvellous', 'material', 'meanwhile', 'mischief', 'mischievous', 'murmur', 'muscle', 'necessary', 'neighbour', 'nervous', 'nuisance', 'occupation', 'opportunity', 'original', 'parallel', 'parliament', 'participation', 'peaceful', 'permanent', 'persuade', 'physical', 'possession', 'potentially', 'preparation', 'prioritise', 'privilege', 'profession', 'pronunciation', 'proportion', 'proposition', 'queue', 'receive', 'recognise', 'recommend', 'reference', 'relevant', 'relief', 'remember', 'research', 'restaurant', 'rhyme', 'rhythm', 'sacrifice', 'science', 'secondary', 'secretary', 'separate', 'sequence', 'shoulder', 'signature', 'sincere', 'skilful', 'soldier', 'stomach', 'straight', 'strategy', 'strength', 'success', 'sufficient', 'suggest', 'symbol', 'system', 'technique', 'technology', 'temperature', 'thorough', 'unfortunately', 'valuable', 'variety', 'vegetable', 'vehicle', 'weight', 'yacht'];
   static monsterList: string[] = ['accommodate', 'acknowledge', 'acquire', 'aggravate', 'appropriate', 'assassin', 'atmosphere', 'ballerina', 'commission', 'compatible', 'conscience', 'conscious', 'courteous', 'criticism', 'deterrent', 'disappearance', 'disastrous', 'dissatisfied', 'efficient', 'embarrassment', 'encyclopedia', 'equipped', 'erroneous', 'especially', 'exception', 'exercise', 'fascinate', 'feasible', 'foreign', 'fulfilled', 'grievance', 'guardian', 'humorous', 'hypocrisy', 'illuminate', 'incidentally', 'indispensable', 'irrelevant', 'irreparable', 'irresistible', 'liaison', 'maintenance', 'manoeuvre', 'miniature', 'miscellaneous', 'mortgage', 'negotiable', 'occasional', 'omitted', 'outrageous', 'penicillin', 'preceding', 'questionnaire', 'seize', 'symmetrical', 'tendency', 'unconscious'];
-
-  //picture words or audio words based on route selection
+  
   isAudio = false;
-
-  maxCorrect: number = 8;
+  
   wordList: string[];
   index: number;
-
   guessedCorrectly: boolean;
   guessForm: FormGroup;
   guessControl: AbstractControl;
-
   title: string;
   validationMessage = 'Try again';
   errorMessage: string;
   displayWord: boolean;
-
   word: string;
   file_location: string;
-
   selected_id: any;
-
-  globalListenFunc: Function;
-
-
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router) {
+  
+  constructor(private fb: FormBuilder, private dialog: MatDialog, 
+              private renderer: Renderer, private route: ActivatedRoute, 
+              private router: Router) {
   }
 
   ngOnInit() {
     console.log('In SpellingComponent ngOnInit, index=%s', this.index);
-
-    //play the word if up key pressed
-    this.globalListenFunc = this.renderer.listen('document', 'keyup', e => {
-      console.log('onkeyup e.key=%s, e=%s', e.key, e);
-      if (e.key == 'ArrowUp') {
-        this.play();
-      }
-
-    });
-
     this.route.params.subscribe(params => {
       this.selected_id = params['id'];
       console.log('route params subscribed to for selected_id=%s', this.selected_id);
@@ -93,7 +73,12 @@ export class SpellingComponent implements OnInit {
       this.loadWords();
       this.doNewWord();
     });
-
+  }
+  
+  //'up' key triggers audio play
+  onKeydown(event) {
+    console.log(event);
+    this.play();
   }
 
   loadWords() {
@@ -102,40 +87,22 @@ export class SpellingComponent implements OnInit {
     switch (this.getChoice()) {
       case 0: {
         this.isAudio = false;
-        this.title = 'Objects';
-        this.wordList = SpellingComponent.objectList;
+        this.title = 'Objects & Animals';
+        this.wordList = SpellingComponent.objectAnimalList;
         break;
-      }
-      case 1: {
-        this.isAudio = false;
-        this.title = 'Animals';
-        this.wordList = SpellingComponent.animalList;
-        break;
-      }
+      }      
       case 2: {
         this.isAudio = false;
-        this.title = 'Colours';
+        this.title = 'Colours & Numbers';
         this.wordList = SpellingComponent.colourList;
         break;
-      }
-      case 3: {
-        this.isAudio = false;
-        this.title = 'Numbers';
-        this.wordList = SpellingComponent.numberList;
-        break;
-      }
+      }      
       case 4: {
         this.isAudio = false;
         this.title = 'Shopping';
         this.wordList = SpellingComponent.shoppingList;
         break;
-      }
-      case 5: {
-        this.isAudio = true;
-        this.title = 'Days & Months';
-        this.wordList = SpellingComponent.calendarList;
-        break;
-      }
+      }      
       case 6: {
         this.isAudio = true;
         this.title = 'Warm words';
@@ -168,8 +135,8 @@ export class SpellingComponent implements OnInit {
       }      
       default: {
         //default to Objects
-        this.title = 'Objects';
-        this.wordList = SpellingComponent.objectList;
+        this.title = 'Objects & Animals';
+        this.wordList = SpellingComponent.objectAnimalList;
         break;
       }
     }
@@ -189,8 +156,7 @@ export class SpellingComponent implements OnInit {
     }
   }
 
-  doNewWord() {
-    this.incrementCount();
+  doNewWord() {    
     this.generateWord();
     this.setupForm();
     this.setFocusOnInput();
@@ -249,22 +215,6 @@ export class SpellingComponent implements OnInit {
     this.router.navigateByUrl('/spellmanager/spmenu');
   }
 
-  openCongratsDialog() {
-    let dialogRef = this.dialog.open(WelldoneDialogComponent, {
-      height: '480px',
-      width: '480px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog.afterClosed result=%s', result);
-      if (result == 'Main') {
-        this.returnToMenu();
-      } else {
-        this.resetCount();
-        this.doNewWord();
-      }
-    });
-  }
-
   save() {
     const guessControl = this.guessForm.get('actual');
     this.checkInError(guessControl);
@@ -288,15 +238,9 @@ export class SpellingComponent implements OnInit {
       this.setFocusOnInput();
     }
     else {
-      console.log('checkInError not in error, getCount=%s, maxCorrect=%s', this.getCount, this.maxCorrect)
+      console.log('checkInError not in error');
       if (this.guessedCorrectly) {
-        if (this.getCount() >= this.maxCorrect) {
-          this.resetCount();
-          this.openCongratsDialog();
-        }
-        else {
-          this.doNewWord();
-        }
+        this.doNewWord();
       }
       else {
         console.log('checkInError setting guessedCorrectly, disabling');
@@ -311,19 +255,7 @@ export class SpellingComponent implements OnInit {
     this.displayWord = !this.displayWord;
     this.setFocusOnInput();
   }
-
-  getCount() {
-    return SpellingComponent.count;
-  }
-
-  resetCount() {
-    SpellingComponent.count = 0;
-  }
-
-  incrementCount() {
-    SpellingComponent.count++;
-  }
-
+ 
   incrementIndex() {
     if (this.index >= (this.wordList.length - 1)) {
       console.log('setting index to zero');
@@ -339,9 +271,6 @@ export class SpellingComponent implements OnInit {
     console.log("* SpellingComponent in ngOnDestory *");
     if (this.selected_id != null) {
       this.selected_id.unsubscribe;
-    }
-    this.resetCount();
-    //this.resetIndex();
+    }    
   }
-
 }

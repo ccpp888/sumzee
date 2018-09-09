@@ -1,10 +1,12 @@
-import { Component, OnInit, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer, Renderer2, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { isNull } from 'util';
 import { CongratsDialogComponent } from '../../shared/congrats-dialog/congrats-dialog.component';
 import { WelldoneDialogComponent } from '../shared/welldone-dialog.component';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 function wordMatch(exp: string): ValidatorFn {
 
@@ -12,11 +14,7 @@ function wordMatch(exp: string): ValidatorFn {
     if (c.value == undefined || c.value == '') {
       return null;
     }
-
-    console.log('In wordMatch exp=%s, control.value=%s', exp, c.value);
-
     if (c.value.toLowerCase() != exp) {
-      console.log('wordMatch func returning true (in error)');
       return { 'expected': true }
     }
     return null;
@@ -26,87 +24,84 @@ function wordMatch(exp: string): ValidatorFn {
 @Component({
   selector: 'app-weekly',
   templateUrl: './weekly.component.html',
-  styleUrls: ['./weekly.component.scss']
+  styleUrls: ['./weekly.component.scss']  
 })
+
+
 
 export class WeeklyComponent implements OnInit {
 
   static count: number = 0;
 
   //Elodie Year2 words
-  static week1List: string[] = ['baseball','after','every'];
-  
+  static eList: string[] = ['garden', 'flower', 'grass'];
+
+  //Isla Year4 words
+  static iList: string[] = ['sausages', 'wonderful', 'infrastructure'];
+
   wordList: string[];
   index: number;
-
   guessedCorrectly: boolean;
   guessForm: FormGroup;
   guessControl: AbstractControl;
-
   title: string;
   validationMessage = 'Try again';
   errorMessage: string;
   displayWord: boolean;
-
   word: string;
   file_location: string;
+  selected_id: any;  
 
-  selected_id: any;
-
-  globalListenFunc: Function;
-
-
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private renderer: Renderer, private route: ActivatedRoute, private router: Router) {
+  constructor(private fb: FormBuilder, private dialog: MatDialog, 
+              private renderer: Renderer2, private route: ActivatedRoute, 
+              private router: Router) {
   }
 
   ngOnInit() {
-    console.log('In SpellingComponent ngOnInit, index=%s', this.index);
-
-    //play the word if up key pressed
-    this.globalListenFunc = this.renderer.listen('document', 'keyup', e => {
-      //console.log('onkeyup e.key=%s, e=%s', e.key, e);
-      if (e.key == 'ArrowUp') {
-        this.play();
-      }
-
-    });
-
+    console.log('* WeeklyComponent ngOnInit *');
     this.route.params.subscribe(params => {
       this.selected_id = params['id'];
       console.log('route params subscribed to for selected_id=%s', this.selected_id);
-      this.displayWord = false;
       this.loadWords();
-      this.doNewWord();
     });
 
+    this.displayWord = false;
+  }
+
+  //'up' key triggers audio play
+  onKeydown(event) {
+    console.log(event);
+    this.play();
   }
 
   loadWords() {
-    console.log('In loadWords for choice=%s', this.getChoice());
-
-    switch (this.getChoice()) {
-      case 0: {        
-        this.title = 'Week 1 words!';
-        this.wordList = WeeklyComponent.week1List;
+    var chosenid = this.getChoice();
+    console.log('In loadWords for choice=%s', chosenid);
+    switch (chosenid) {      
+      case 1: {
+        this.title = 'Kingfishers - class spellings this week';
+        this.wordList = WeeklyComponent.iList;      
         break;
       }
-      default: {        
-        this.title = 'Week 1 words!';
-        this.wordList = WeeklyComponent.week1List;
+      default: {
+        console.log('Default routine for chosenid=%s', chosenid);    
+        this.title = 'Canaries - class spellings this week';
+        this.wordList = WeeklyComponent.eList;      
         break;
-      }
-    }    
+      }      
+    }
+    this.resetCount();
+    this.doNewWord();
   }
 
   getChoice(): number {
-    const param = this.route.snapshot.paramMap.get('id');
-    console.log('getChoice found param=%s', param);
+    const param = this.route.snapshot.paramMap.get('id');    
     if (param) {
       let id = +param //cast to number from string
       return id;
     }
     else {
-      console.error('no param for id found');
+      console.error('no param for id found [defaulting to zero]');
       return 0;
     }
   }
@@ -120,13 +115,12 @@ export class WeeklyComponent implements OnInit {
 
   setIndex() {    
     this.index = WeeklyComponent.count;
-    console.log('Set index=%s', this.index);
+    console.log('Post set index=%s', this.index);
   }
 
   generateWord() {
-    this.displayWord = false;
-   
-    this.word = this.wordList[this.index-1];
+    this.file_location = null;    
+    this.word = this.wordList[this.index - 1];
     var suffix = ".m4a";
     this.file_location = "/assets/words/weekly/" + this.selected_id + '/' + this.word + suffix;
     console.log('generateWord using index=%s, word=%s, file_location=%s', this.index, this.word, this.file_location);
@@ -146,6 +140,7 @@ export class WeeklyComponent implements OnInit {
   }
 
   play() {
+    console.log('playing:%s', this.file_location)
     var audio = new Audio();
     audio.src = this.file_location;
     audio.load();
@@ -164,7 +159,7 @@ export class WeeklyComponent implements OnInit {
     setTimeout(() => element.focus(), 0);
   }
 
-  returnToMenu() {
+  returnToMenu() {    
     this.router.navigateByUrl('/spellmanager/spmenu');
   }
 
@@ -189,19 +184,16 @@ export class WeeklyComponent implements OnInit {
     this.checkInError(guessControl);
   }
 
-  checkInError(c: AbstractControl) {
-    console.log('checkInError value=%s, pristine=%s, touched=%s, dirty=%s, errors=%s, valid=%s', c.value, c.pristine, c.touched, c.dirty, c.errors, c.valid);
+  checkInError(c: AbstractControl) {    
     this.errorMessage = '';
 
-    if (c.pristine || isNull(c.value) || (c.value == '')) {
-      console.log('checkInError found pristine');
+    if (c.pristine || isNull(c.value) || (c.value == '')) {      
       this.errorMessage = 'Enter a word';
       this.setFocusOnInput();
       return;
     }
 
-    if ((c.touched || c.dirty) && c.errors) {
-      console.log('checkInError is in error');
+    if ((c.touched || c.dirty) && c.errors) {      
       this.errorMessage = this.validationMessage;
       this.guessedCorrectly = false;
       this.setFocusOnInput();
@@ -246,12 +238,11 @@ export class WeeklyComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log("* SpellingComponent in ngOnDestory *");
+    console.log("* WeeklyComponent in ngOnDestory *");
     if (this.selected_id != null) {
-      this.selected_id.unsubscribe;
-    }
+      this.selected_id.unsubscribe;  
+    }    
     this.resetCount();    
   }
-
 }
 

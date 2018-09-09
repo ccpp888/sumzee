@@ -31,7 +31,7 @@
       <mat-grid-tile>
         <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
           <mat-form-field class="inputfont" style="width:400px !important;">
-            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" type="text" formControlName="actual"
+            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" type="text" formControlName="actual" (keydown.arrowup)="onKeydown($event)"
             />
           </mat-form-field>
         </form>

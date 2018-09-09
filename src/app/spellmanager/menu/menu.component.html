@@ -7,11 +7,26 @@
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
           <mat-card-title class="title-text">
-            <mat-icon color="accent">school</mat-icon>&nbsp;&nbsp;Weekly spelling
+            <mat-icon color="accent">school</mat-icon>&nbsp;&nbsp;Canaries
           </mat-card-title>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="/assets/words/words3.png">
+        <mat-card-actions>
+          <button mat-raised-button class="fontlarge">PLAY</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="weeklyChoice(1)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="accent">school</mat-icon>&nbsp;&nbsp;Kingfishers
+          </mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/words/words2.png">
         <mat-card-actions>
           <button mat-raised-button class="fontlarge">PLAY</button>
         </mat-card-actions>
@@ -22,7 +37,7 @@
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
           <mat-card-title class="title-text">
-            <mat-icon color="primary">motorcycle</mat-icon>&nbsp;&nbsp;Objects
+            <mat-icon color="primary">motorcycle</mat-icon>&nbsp;&nbsp;Objects & Animals
           </mat-card-title>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         </mat-card-header>
@@ -33,42 +48,14 @@
       </mat-card>
     </mat-grid-tile>
 
-    <mat-grid-tile (click)="routeChoice(1)">
-      <mat-card class="example-card mat-elevation-z24">
-        <mat-card-header>
-          <mat-card-title class="title-text">
-            <mat-icon color="primary">pets</mat-icon>&nbsp;&nbsp;Animals</mat-card-title>
-          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="/assets/words/words2.png">
-        <mat-card-actions>
-          <button mat-raised-button class="fontlarge">PLAY</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-
     <mat-grid-tile (click)="routeChoice(2)">
       <mat-card class="example-card mat-elevation-z24">
         <mat-card-header>
           <mat-card-title class="title-text">
-            <mat-icon color="primary">palette</mat-icon>&nbsp;&nbsp;Colours</mat-card-title>
+            <mat-icon color="primary">palette</mat-icon>&nbsp;&nbsp;Colours & Numbers</mat-card-title>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="/assets/words/words3.png">
-        <mat-card-actions>
-          <button mat-raised-button class="fontlarge">PLAY</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile (click)="routeChoice(3)">
-      <mat-card class="example-card mat-elevation-z24">
-        <mat-card-header>
-          <mat-card-title class="title-text">
-            <mat-icon color="primary">filter_9_plus</mat-icon>&nbsp;&nbsp;Numbers</mat-card-title>
-          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="/assets/words/words2.png">
         <mat-card-actions>
           <button mat-raised-button class="fontlarge">PLAY</button>
         </mat-card-actions>
@@ -80,20 +67,6 @@
         <mat-card-header>
           <mat-card-title class="title-text">
             <mat-icon color="primary">shopping_cart</mat-icon>&nbsp;&nbsp;Shopping</mat-card-title>
-          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="/assets/words/words3.png">
-        <mat-card-actions>
-          <button mat-raised-button class="fontlarge">PLAY</button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile (click)="routeChoice(5)">
-      <mat-card class="example-card mat-elevation-z24">
-        <mat-card-header>
-          <mat-card-title class="title-text">
-            <mat-icon color="primary">chat</mat-icon>&nbsp;&nbsp;Calendar</mat-card-title>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image src="/assets/words/words2.png">

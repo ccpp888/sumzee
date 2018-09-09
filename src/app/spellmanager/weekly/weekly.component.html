@@ -1,7 +1,7 @@
 <mat-card>
 
-  <mat-card-title class="comicfont">Spelling - {{title}}</mat-card-title> 
-  <mat-card-subtitle>turn your speakers on, listen to the word, then spell it</mat-card-subtitle>
+  <mat-card-title class="comicfont">{{title}}</mat-card-title> 
+  <mat-card-subtitle>turn your speakers on, listen to the word (press Play or use the 'Up arrow' key)</mat-card-subtitle>
   
   <mat-card-content>
 
@@ -23,7 +23,7 @@
       <mat-grid-tile>
         <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
           <mat-form-field class="inputfont" style="width:400px !important;">
-            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" type="text" formControlName="actual"
+            <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" type="text" formControlName="actual" (keydown.arrowup)="onKeydown($event)"
             />
           </mat-form-field>
         </form>

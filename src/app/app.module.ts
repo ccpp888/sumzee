@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   { path: 'gamesmanager', loadChildren: './gamesmanager/gamesmanager.module#GamesmanagerModule' },    
   { path: 'spellmanager', loadChildren: './spellmanager/spellmanager.module#SpellmanagerModule' },
-  { path: '**', redirectTo: 'gamesmanager' }
+  { path: '**', redirectTo: 'spellmanager' }
 ];
 
 @NgModule({
