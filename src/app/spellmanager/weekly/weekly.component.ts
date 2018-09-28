@@ -1,12 +1,10 @@
-import { Component, OnInit, Renderer, Renderer2, HostListener } from '@angular/core';
+import { Component, OnInit, Renderer2  } from '@angular/core';
 import { FormBuilder, FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { isNull } from 'util';
-import { CongratsDialogComponent } from '../../shared/congrats-dialog/congrats-dialog.component';
 import { WelldoneDialogComponent } from '../shared/welldone-dialog.component';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { UtilsService } from '../../shared/utils.service';
 
 function wordMatch(exp: string): ValidatorFn {
 
@@ -14,7 +12,8 @@ function wordMatch(exp: string): ValidatorFn {
     if (c.value == undefined || c.value == '') {
       return null;
     }
-    if (c.value.toLowerCase() != exp) {
+    //if (c.value.toLowerCase() != exp) {
+    if (c.value != exp) {  
       return { 'expected': true }
     }
     return null;
@@ -27,14 +26,12 @@ function wordMatch(exp: string): ValidatorFn {
   styleUrls: ['./weekly.component.scss']  
 })
 
-
-
 export class WeeklyComponent implements OnInit {
 
   static count: number = 0;
 
   //Elodie Year2 words
-  static eList: string[] = ['garden', 'flower', 'grass'];
+  static eList: string[] = ['when', 'where', 'there', 'walking', 'wheels', 'today', 'why'];
 
   //Isla Year4 words
   static iList: string[] = ['sausages', 'wonderful', 'infrastructure'];
@@ -54,7 +51,7 @@ export class WeeklyComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private dialog: MatDialog, 
               private renderer: Renderer2, private route: ActivatedRoute, 
-              private router: Router) {
+              private router: Router, private utils: UtilsService) {
   }
 
   ngOnInit() {
@@ -80,16 +77,18 @@ export class WeeklyComponent implements OnInit {
     switch (chosenid) {      
       case 1: {
         this.title = 'Kingfishers - class spellings this week';
-        this.wordList = WeeklyComponent.iList;      
+        this.wordList = WeeklyComponent.iList;             
         break;
       }
       default: {
         console.log('Default routine for chosenid=%s', chosenid);    
-        this.title = 'Canaries - class spellings this week';
-        this.wordList = WeeklyComponent.eList;      
+        this.title = 'Canaries - Days of the week';
+        this.wordList = WeeklyComponent.eList;         
         break;
       }      
     }
+    // ensure words randomised each run
+    this.utils.shuffleInPlace(this.wordList);         
     this.resetCount();
     this.doNewWord();
   }

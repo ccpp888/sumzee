@@ -1,0 +1,40 @@
+<div>
+
+  <mat-grid-list cols="2">
+
+   
+
+    <mat-grid-tile (click)="siteChoice(0)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="primary">school</mat-icon>&nbsp;&nbsp;SPELZEE
+          </mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/images/cwords.png">
+        <mat-card-actions>
+          <button mat-raised-button color="primary" class="fontlarge">Go to Spelzee</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile (click)="siteChoice(1)">
+      <mat-card class="example-card mat-elevation-z24">
+        <mat-card-header>
+          <mat-card-title class="title-text">
+            <mat-icon color="accent">school</mat-icon>&nbsp;&nbsp;SUMZEE
+          </mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="/assets/images/cnumbers.png">
+        <mat-card-actions>
+          <button mat-raised-button color="accent" class="fontlarge">Go to Sumzee</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+
+    
+  </mat-grid-list>
+
+</div>
