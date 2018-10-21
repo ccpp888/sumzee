@@ -12,8 +12,8 @@ function wordMatch(exp: string): ValidatorFn {
     if (c.value == undefined || c.value == '') {
       return null;
     }
-    //if (c.value.toLowerCase() != exp) {
-    if (c.value != exp) {  
+    if (c.value.toLowerCase() != exp) {
+    //if case is important:  if (c.value != exp) {  
       return { 'expected': true }
     }
     return null;
@@ -30,11 +30,17 @@ export class WeeklyComponent implements OnInit {
 
   static count: number = 0;
 
-  //Elodie Year2 words
-  static eList: string[] = ['when', 'where', 'there', 'walking', 'wheels', 'today', 'why'];
+  //UK schools weekly and high frequency words (up to year2)
+  static weeklyWords: string[] = ['children', 'coming', 'could', 'crying', 'doing', 'here', 'keep', 'making', 'must', 'people', 'shoes', 'sighing', 'sleep', 'some', 'stop', 'these', 'those', 'what', 'whose', 'why', 'wishing'];
 
-  //Isla Year4 words
-  static iList: string[] = ['sausages', 'wonderful', 'infrastructure'];
+  static hfReception: string[] = ['I', 'go', 'come', 'want', 'up', 'you', 'day', 'was', 'look', 'are', 'the', 'of', 'we', 'this', 'dog', 'me', 'like', 'going', 'big', 'she', 'and', 'they', 'my', 'see', 'on', 'away', 'mum', 'it', 'at', 'play', 'no', 'yes', 'for', 'a', 'dad', 'can', 'he', 'am', 'all', 'is', 'cat', 'get', 'said', 'to', 'in'];
+
+  static hfYear1: string[] = ['has','had','an','as','bed','but','did','from','got','school','him','his','if','jump','not','of','want','one','little','there','do','off','could','put','than','that','them','then','us','when','low','new','about','another','because','by',"can't",'down','half','home','just','live','after','back','been','called','first','have','house','last','made','again','ball','brother','came',"don't",'good','her','how','laugh','make','many','much','next','old'];
+
+  static hfYear2: string[] = ['out','seen','so','their','time','tree','who','were','may','must','night','once','over','should','some','these','too','water','what','would','more','name','now','our','people','sister','take','took','very','way','where','your','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday','day','week','January','February','March','April','May','June','July','August','September','October','November','December','month','year','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','number','red','orange','green','blue','black','white','brown','pink','purple','grey'];
+
+  static hfNext200: string[] = ['water','bear','find','these','live','away',"can't",'more','began','say','good','again',"I'll",'boy','soon','want','cat','round','animals','night','over','long','tree','never','narrator','how','things','magic','next','small','did','new','shouted','first','car','man','after','us','work',"couldn't",'going','wanted','other','lots','three','where','eat','food','need','head','would','everyone','fox',"'that's",'king','or','our','through','baby','town','took','two','way','fish',"I've",'school','has','been','gave','around','think','yes','stop','mouse','every','home','play','must','something','garden','who','take','red','bed','fast',"didn't",'thought','door','may','only','ran','dog','right','still','many','know','well','sea','found','laughed',"let's",'fun','any','better','lived','much','place','under','hot','birds','suddenly','mother','hat','sun','duck','told','sat','snow','across','horse','another','boat','air','gone','rabbit','great','window','tree','hard','white','why','sleep','bad','floppy','coming','cried','feet','tea','really',"he's",'keep','morning','top','wind','river','room','queen','eyes','wish','liked','last','each','fell','eggs','giant','jumped','book','friends','once','looks','because','its','box','please','use','even','green','dark','thing','along','am','different','grandad','stopped','plants','before','let',"there's",'ever','dragon','gran','girl','looking','miss','pulled','clothes','which','end','most',"we're",'tell','inside','than','cold','fly','key','run','best','park','grow'];
+  
 
   wordList: string[];
   index: number;
@@ -75,15 +81,36 @@ export class WeeklyComponent implements OnInit {
     var chosenid = this.getChoice();
     console.log('In loadWords for choice=%s', chosenid);
     switch (chosenid) {      
+      case 0: {
+        console.log('Case 0');    
+        this.title = 'Canaries - Days of the week';
+        this.wordList = WeeklyComponent.weeklyWords;         
+        break;
+      }
       case 1: {
-        this.title = 'Kingfishers - class spellings this week';
-        this.wordList = WeeklyComponent.iList;             
+        this.title = 'High frequency words - Reception';
+        this.wordList = WeeklyComponent.hfReception;             
+        break;
+      }
+      case 2: {
+        this.title = 'High frequency words - Year1';
+        this.wordList = WeeklyComponent.hfYear1;             
+        break;
+      }
+      case 3: {
+        this.title = 'High frequency words - Year2';
+        this.wordList = WeeklyComponent.hfYear2;             
+        break;
+      }
+      case 4: {
+        this.title = 'High frequency words - 200 words';
+        this.wordList = WeeklyComponent.hfNext200;             
         break;
       }
       default: {
         console.log('Default routine for chosenid=%s', chosenid);    
         this.title = 'Canaries - Days of the week';
-        this.wordList = WeeklyComponent.eList;         
+        this.wordList = WeeklyComponent.weeklyWords;         
         break;
       }      
     }
@@ -120,7 +147,7 @@ export class WeeklyComponent implements OnInit {
   generateWord() {
     this.file_location = null;    
     this.word = this.wordList[this.index - 1];
-    var suffix = ".m4a";
+    var suffix = ".mp3";
     this.file_location = "/assets/words/weekly/" + this.selected_id + '/' + this.word + suffix;
     console.log('generateWord using index=%s, word=%s, file_location=%s', this.index, this.word, this.file_location);
     this.setFocusOnInput();
