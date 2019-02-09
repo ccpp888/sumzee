@@ -1,0 +1,17 @@
+#specify a base image (nodejs image, alpine means the smallest possible)
+FROM node:alpine
+
+#set container working dir and copy files from local dir to container
+WORKDIR /app
+
+COPY ./package.json ./
+COPY ./.angular-cli.json ./
+
+#install dependencies - will only re-build image if package.json has changed 
+#will use cached version if re-building otherwise
+RUN npm install 
+
+COPY ./ ./
+
+#default command
+CMD ["npm", "start"]

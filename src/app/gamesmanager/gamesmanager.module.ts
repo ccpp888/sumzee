@@ -98,7 +98,7 @@ const routes: Routes = [
     ResultDialogComponent, 
     MultiplicationComponent,
     MultiChoiceComponent,
-    PreDialogComponent
+    PreDialogComponent    
   ],
   entryComponents: [
     SuccessDialogComponent,

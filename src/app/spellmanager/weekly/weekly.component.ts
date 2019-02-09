@@ -31,7 +31,7 @@ export class WeeklyComponent implements OnInit {
   static count: number = 0;
 
   //UK schools weekly and high frequency words (up to year2)
-  static weeklyWords: string[] = ['children', 'coming', 'could', 'crying', 'doing', 'here', 'keep', 'making', 'must', 'people', 'shoes', 'sighing', 'sleep', 'some', 'stop', 'these', 'those', 'what', 'whose', 'why', 'wishing'];
+  static weeklyWords: string[] = ['shouldn\'t', 'money', 'wouldn\'t', 'grass', 'can\'t', 'prove', 'parents', 'won\'t', 'clothes', 'haven\'t', 'break'];
 
   static hfReception: string[] = ['I', 'go', 'come', 'want', 'up', 'you', 'day', 'was', 'look', 'are', 'the', 'of', 'we', 'this', 'dog', 'me', 'like', 'going', 'big', 'she', 'and', 'they', 'my', 'see', 'on', 'away', 'mum', 'it', 'at', 'play', 'no', 'yes', 'for', 'a', 'dad', 'can', 'he', 'am', 'all', 'is', 'cat', 'get', 'said', 'to', 'in'];
 
@@ -52,6 +52,7 @@ export class WeeklyComponent implements OnInit {
   errorMessage: string;
   displayWord: boolean;
   word: string;
+  suffix = ".mp3";
   file_location: string;
   selected_id: any;  
 
@@ -84,33 +85,39 @@ export class WeeklyComponent implements OnInit {
       case 0: {
         console.log('Case 0');    
         this.title = 'Canaries - Days of the week';
-        this.wordList = WeeklyComponent.weeklyWords;         
+        this.wordList = WeeklyComponent.weeklyWords;  
+        this.suffix='.m4a';       
         break;
       }
       case 1: {
         this.title = 'High frequency words - Reception';
-        this.wordList = WeeklyComponent.hfReception;             
+        this.wordList = WeeklyComponent.hfReception;  
+        this.suffix='.mp3';           
         break;
       }
       case 2: {
         this.title = 'High frequency words - Year1';
-        this.wordList = WeeklyComponent.hfYear1;             
+        this.wordList = WeeklyComponent.hfYear1;    
+        this.suffix='.mp3';              
         break;
       }
       case 3: {
         this.title = 'High frequency words - Year2';
-        this.wordList = WeeklyComponent.hfYear2;             
+        this.wordList = WeeklyComponent.hfYear2; 
+        this.suffix='.mp3';                 
         break;
       }
       case 4: {
         this.title = 'High frequency words - 200 words';
-        this.wordList = WeeklyComponent.hfNext200;             
+        this.wordList = WeeklyComponent.hfNext200;   
+        this.suffix='.mp3';               
         break;
       }
       default: {
         console.log('Default routine for chosenid=%s', chosenid);    
         this.title = 'Canaries - Days of the week';
-        this.wordList = WeeklyComponent.weeklyWords;         
+        this.wordList = WeeklyComponent.weeklyWords; 
+        this.suffix='.m4a';               
         break;
       }      
     }
@@ -147,8 +154,7 @@ export class WeeklyComponent implements OnInit {
   generateWord() {
     this.file_location = null;    
     this.word = this.wordList[this.index - 1];
-    var suffix = ".mp3";
-    this.file_location = "/assets/words/weekly/" + this.selected_id + '/' + this.word + suffix;
+    this.file_location = "/assets/words/weekly/" + this.selected_id + '/' + this.word + this.suffix;
     console.log('generateWord using index=%s, word=%s, file_location=%s', this.index, this.word, this.file_location);
     this.setFocusOnInput();
   }
