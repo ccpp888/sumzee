@@ -2,8 +2,10 @@ sudo: required
 services: 
   - docker
 
+env:
+  - MOZ_HEADLESS=1
 addons:
-  chrome: stable
+  firefox: latest
   
 before_install:
   - export CHROME_BIN=chromium-browser
