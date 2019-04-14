@@ -1,12 +1,13 @@
 #build phase
 FROM node:alpine as builder
 WORKDIR '/app'
-COPY package.json .
+COPY ./package.json ./
 RUN npm install
-COPY . . 
+COPY . .
 RUN npm run build
 
 #run phase (nginx started up automatically on container start)
 FROM nginx
-EXPOSE 80
-COPY --from=builder /app/dist /usr/share/nginx/html
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html

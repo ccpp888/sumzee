@@ -24,13 +24,13 @@ export class AdditionComponent extends SumbaseComponent implements OnInit {
     switch (this.getLevel()) {
       case 0: {
         this.title = 'Warm sums';
-        this.number1 = this.utils.getRandom(1, 10);
-        this.number2 = this.utils.getRandom(1, 20);
+        this.number1 = this.utils.getRandom(2, 10);
+        this.number2 = this.utils.getRandom(2, 20);
         break;
       }
       case 1: {
         this.title = 'Hot sums';
-        this.number1 = this.utils.getRandom(1, 10);
+        this.number1 = this.utils.getRandom(2, 10);
         this.number2 = this.utils.getRandom(10, 100);
         break;
       }

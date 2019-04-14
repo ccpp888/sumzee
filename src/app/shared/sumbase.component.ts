@@ -25,7 +25,7 @@ function matchesExpected(exp: number): ValidatorFn {
 
 export abstract class SumbaseComponent {
 
-  protected maxCorrect: number = 8;
+  protected maxCorrect: number = 10;
 
   public number1: number;
   public number2: number;

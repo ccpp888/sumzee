@@ -12,8 +12,11 @@ function wordMatch(exp: string): ValidatorFn {
     if (c.value == undefined || c.value == '') {
       return null;
     }
-    if (c.value.toLowerCase() != exp) {
-    //if case is important:  if (c.value != exp) {  
+    exp = exp.toLowerCase();
+    var cToLower = c.value.toLowerCase();
+    if (cToLower != exp) {
+      console.log('function wordMatch returning true [in error] cToLower=%s, exp=%s', cToLower, exp);
+      //if case is important:  if (c.value != exp) {  
       return { 'expected': true }
     }
     return null;

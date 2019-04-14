@@ -2,5 +2,16 @@ sudo: required
 services: 
   - docker
 
-script: 
+before_install:
   - docker build -t ccpp888/sumzee .
+
+script:
+  - docker ps
+
+after_success:
+
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take image and push to docker hub
+  - docker push ccpp888/sumzee
+  
