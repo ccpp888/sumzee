@@ -1,0 +1,83 @@
+<mat-card>
+
+  <mat-card-title class="comicfont">BOGGLE</mat-card-title>
+  <mat-card-subtitle>Start the timer and try and get as many words as possible in 3 minutes</mat-card-subtitle>
+
+
+  <mat-card-content>
+
+<div class="table-container mat-elevation-z8">
+            
+    <mat-table #table [dataSource]="dataSource">
+        
+        <ng-container matColumnDef="C1">
+          
+          <mat-cell class="centre-align" *matCellDef="let element"> {{element.C1}} </mat-cell>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="C2">
+          
+          <mat-cell class="centre-align" *matCellDef="let element"> {{element.C2}} </mat-cell>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="C3">
+          
+          <mat-cell class="centre-align" *matCellDef="let element"> {{element.C3}} </mat-cell>
+        </ng-container>
+    
+        
+        <ng-container matColumnDef="C4">
+          
+          <mat-cell class="centre-align" *matCellDef="let element"> {{element.C4}} </mat-cell>
+        </ng-container>
+    
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+
+  </mat-card-content>
+
+</mat-card>
+
+<div>&nbsp;</div>
+
+<mat-card>
+
+    <mat-card-title class="comicfont">3 minute timer</mat-card-title>
+  
+    <mat-card-content>
+  
+      <mat-grid-list cols="2" [rowHeight]="80">
+  
+        <mat-grid-tile>
+  
+          <div class="comicfont">
+            <button autofocus mat-fab [disabled]="countdownStarted()" (click)="startCountdownTimer()">Start</button>
+          </div>
+  
+        </mat-grid-tile>
+  
+        <mat-grid-tile>
+  
+          <div class="comicfont">
+            <div>
+              <h1>Countdown:
+                <span class="countdown-font"> {{countdown}} </span>
+              </h1>
+            </div>
+          </div>
+  
+        </mat-grid-tile>
+  
+        <!-- <mat-grid-tile>
+          <span class="r-position">Correct so far: <b>{{count}}</b></span>
+        </mat-grid-tile> -->
+  
+      </mat-grid-list>
+  
+    </mat-card-content>
+  
+  </mat-card>
+  

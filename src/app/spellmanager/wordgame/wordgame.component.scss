@@ -1,0 +1,20 @@
+.table-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    min-width: 400px;
+}
+
+.mat-cell {
+    color: blue;
+    font-weight: bold;
+    font-size: 1.8em; 
+}
+
+.centre-align {
+  padding: 10px;
+  border: 1px solid rgb(223, 220, 220);
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
