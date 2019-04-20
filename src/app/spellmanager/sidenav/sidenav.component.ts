@@ -41,12 +41,17 @@ export class SidenavComponent implements OnInit {
   }
 
   routeChoice(choice: number) {
-    console.log('SidenavComponent:choice=' + choice);
+    console.log('SidenavComponent:routeChoice=' + choice);
     this.router.navigateByUrl('/spellmanager/spelling/' + choice);
   }
 
   weeklyChoice(choice: number) {
-    console.log('SidenavComponent:choice=' + choice);
+    console.log('SidenavComponent:weeklyChoice=' + choice);
     this.router.navigateByUrl('/spellmanager/weekly/' + choice);
+  }
+
+  wordGameChoice(choice: number) {
+    console.log('SidenavComponent:wordGameChoice=' + choice);
+    this.router.navigateByUrl('/spellmanager/wordgame');
   }
 }

@@ -31,8 +31,8 @@ export class WordgameComponent implements OnInit {
   displayedColumns: string[] = ['C1', 'C2', 'C3', 'C4'];
   dataSource: Element[];
 
-  //length=56
-  alphabet: string[] = ['t', 'o', 'e', 's', 's', 'i', 'd', 'r', 'x', 'i', 'l', 'e', 't', 't', 'o', 'a', 'w', 'a', 'o', 'm', 't', 'o', 'i', 'u', 'c', 'o', 'n', 'qu', 'n', 'm', 'i', 'h', 'l', 'r', 'n', 'h', 'z', 'e', 'n', 'g', 'e', 'a', 'a', 'e', 'a', 's', 'p', 'k', 'f', 'a', 'y', 'y', 'g', 'h', 'f', 'a'];
+  //55 letters
+  alphabet: string[] = ['t', 'o', 'e', 's', 's', 'i', 'd', 'r', 'x', 'i', 'l', 'e', 't', 't', 'o', 'a', 'w', 'a', 'o', 'm', 't', 'o', 'i', 'u', 'c', 'o', 'n', 'qu', 'n', 'm', 'i', 'h', 'l', 'r', 'n', 'h', 'z', 'e', 'n', 'g', 'e', 'a', 'e', 'a', 's', 'p', 'k', 'f', 'a', 'y', 'y', 'g', 'h', 'f', 'a'];
 
   public countdown: number;
   private durationInSecs: number = 180; //3 mins
@@ -107,7 +107,7 @@ export class WordgameComponent implements OnInit {
   openDialog(): void {
     console.log('In openDialog()');
 
-    this.playAudio();
+    this.playAlarm();
 
     let dialogRef = this.dialog.open(EndDialogComponent, {
       height: '320px',
@@ -136,9 +136,11 @@ export class WordgameComponent implements OnInit {
     this.router.navigateByUrl('/spellmanager/spmenu');
   }
 
-  playAudio(){
-    let audio = new Audio();
-    audio.src = "/assets/bikehorn.wav";
+  playAlarm(){
+    var audio = new Audio();
+    var file_alarm = "/assets/alarms/rooster.mp3";
+    console.log('playing alarm for file: %s', file_alarm);
+    audio.src = file_alarm;
     audio.load();
     audio.play();
   }

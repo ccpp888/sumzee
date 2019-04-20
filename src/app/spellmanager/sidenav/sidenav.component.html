@@ -1,5 +1,6 @@
 <mat-sidenav-container class="app-sidenav-container" [class.dark-theme]="isDarkTheme">
-  <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10" [opened]="!isScreenSmall()" [mode]="isScreenSmall() ? 'over' : 'side'">
+  <mat-sidenav #sidenav class="app-sidenav mat-elevation-z10" [opened]="!isScreenSmall()"
+    [mode]="isScreenSmall() ? 'over' : 'side'">
     <mat-toolbar color="primary">
       <div class="titlefont2">Options</div>
     </mat-toolbar>
@@ -18,10 +19,16 @@
 
     <mat-nav-list>
 
+      <mat-list-item (click)="wordGameChoice(0)">
+        <mat-icon [ngStyle]="{'color':'orange'}">border_all</mat-icon>&nbsp;&nbsp;BOGGLE!
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
       <mat-list-item (click)="weeklyChoice(0)">
         <mat-icon color="accent">school</mat-icon>&nbsp;&nbsp;Canaries - weekly
       </mat-list-item>
-      
+
       <mat-list-item (click)="weeklyChoice(1)">
         <mat-icon color="accent">school</mat-icon>&nbsp;&nbsp;HF - reception
       </mat-list-item>
