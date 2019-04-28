@@ -47,24 +47,19 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
   }
  
   initFormAndNumbers() {    
-    let calc = Math.floor(Math.random() * 8);
+    let calc = Math.floor(Math.random() * 6);
     console.log('calc for sum type='+calc)
 
-    switch(calc) {
+    //REMOVED division on request! this.doDivision();
 
-    }
     switch (calc) {
-      case 0: {
-        this.doDivision();
-        break;
-      }
-      case 1:
-      case 2: {
+      case 0:
+      case 1: {
         this.doSubtraction();
         break;
       }
-      case 3:
-      case 4: {
+      case 2:
+      case 3: {
         this.doMultiplication();
         break;
       }
@@ -79,22 +74,27 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
 
   doAddition() {
     this.symbol = '+';
-    this.number1 = Math.floor(Math.random() * 15) + 4;
-    this.number2 = Math.floor(Math.random() * 60) + 10;
+    this.number1 = Math.floor(Math.random() * 10) + 3;
+    this.number2 = Math.floor(Math.random() * 18) + 2;
     this.expected = this.number1 + this.number2;
   }
 
   doSubtraction() {
     this.symbol = '-';
-    this.number1 = Math.floor(Math.random() * 30) + 11;
-    this.number2 = Math.floor(Math.random() * 10) + 3;
+    this.number1 = Math.floor(Math.random() * 20) + 1;
+    this.number2 = Math.floor(Math.random() * 8) + 1;
+    if (this.number2 > this.number1) {
+      var tmp = this.number2;
+      this.number2=this.number1;
+      this.number1=tmp;
+    }
     this.expected = this.number1 - this.number2;
   }
 
   doMultiplication() {
     this.symbol = 'x';
-    this.number1 = Math.floor(Math.random() * 5) + 1;
-    this.number2 = Math.floor(Math.random() * 17) + 3;
+    this.number1 = Math.floor(Math.random() * 5) + 2;
+    this.number2 = Math.floor(Math.random() * 8) + 3;
     this.expected = this.number1 * this.number2;
   }
 
@@ -141,7 +141,7 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
     return this.started;
   }
 
-  tryDifferentSum() {
+  nextSum() {
     this.initFormAndNumbers();
     this.setFocusOnInput();
   }
@@ -170,17 +170,20 @@ export class CountdownComponent extends SumbaseComponent implements OnInit {
     else {
       console.log('checkInError not in error')
       if (this.guessedCorrectly) {
-        this.initFormAndNumbers();
-        this.setFocusOnInput();
+        this.nextSum();
       }
       else {
         console.log('checkInError setting guessedCorrectly');
         this.guessedCorrectly = true;
-        this.guessControl.disable();
-        document.getElementById('go1').focus();
+        //Commenting out next 2 lines and adding call to nextSum(): 
+        // as Isla requested we go straight to next sum display (not press 'enter' key after 'success')
+        //this.guessControl.disable();
+        //document.getElementById('go1').focus();
         CountdownComponent.count++;
         this.setFocusOnInput();
         console.log('count==' + CountdownComponent.count);
+        
+        this.nextSum();
       }
     }
   }
