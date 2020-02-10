@@ -2,19 +2,19 @@
 
   <mat-card-title class="comicfont">Spelling - {{title}}</mat-card-title>
   <mat-card-subtitle *ngIf="!isAudio">Spell the word from the picture you see</mat-card-subtitle>
-  <mat-card-subtitle *ngIf="isAudio">Turn your speakers on, listen to the word, then spell it</mat-card-subtitle>
+  <mat-card-subtitle *ngIf="isAudio">Turn your speakers on. Press Play or use the <b>Up arrow</b> key</mat-card-subtitle>
   
 
   <mat-card-content>
 
-    <mat-grid-list cols="4">
-
+    <mat-grid-list cols="3">
+<!--
       <mat-grid-tile>
         <div *ngIf="displayWord">
           <span class="displayfont">{{word}}</span>
         </div>
       </mat-grid-tile>
-
+-->
 
       <mat-grid-tile>
 
@@ -29,8 +29,8 @@
       </mat-grid-tile>
 
       <mat-grid-tile>
-        <form id='guessForm' class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
-          <mat-form-field class="inputfont" style="width:400px !important;">
+        <form id='guessForm' spellcheck="false" class="example-form" (ngSubmit)=save() [formGroup]="guessForm">
+          <mat-form-field class="inputfont" style="width:800px !important;">
             <input id="input1" matInput cssSelector="#input1" autocomplete="off" placeholder="?" type="text" formControlName="actual" (keydown.arrowup)="onKeydown($event)"
             />
           </mat-form-field>
@@ -57,15 +57,40 @@
 <div>&nbsp;</div>
 
 <mat-card>
-
+<!--
   <mat-card-content>
     <mat-grid-list cols="1" [rowHeight]="40">
       <mat-grid-tile>
         <button *ngIf="!displayWord" mat-raised-button color="primary" class="l-position" (click)="toggleDisplay()">Show word</button>
         <button *ngIf="displayWord" mat-raised-button color="primary" class="l-position" (click)="toggleDisplay()">Hide word</button>
+        <div *ngIf="displayWord">
+          <span class="displayfont">{{word}}</span>
+        </div>
         <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-card-content>
+-->
+  <mat-card-content>
+    <mat-grid-list cols="3" [rowHeight]="40">
+    
+
+      <mat-grid-tile>
+          <button *ngIf="!displayWord" mat-raised-button color="primary" class="l-position" (click)="toggleDisplay()">Show word</button>
+          <button *ngIf="displayWord" mat-raised-button color="primary" class="l-position" (click)="toggleDisplay()">Hide word</button>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+          <div *ngIf="displayWord">
+              <span class="displayfont">{{word}}</span>
+            </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <button id="go1" mat-raised-button color="accent" type='submit' form="guessForm">Go</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+
 
 </mat-card>

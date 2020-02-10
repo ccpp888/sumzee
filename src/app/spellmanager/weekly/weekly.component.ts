@@ -33,8 +33,8 @@ export class WeeklyComponent implements OnInit {
 
   static count: number = 0;
 
-  //UK schools weekly and high frequency words (up to year2)
-  static weeklyWords: string[] = ['shouldn\'t', 'money', 'wouldn\'t', 'grass', 'can\'t', 'prove', 'parents', 'won\'t', 'clothes', 'haven\'t', 'break'];
+  //UK schools weekly and high frequency words (Sep 2019)
+  static weeklyWords: string[] = ['grey', 'prey', 'obey', 'they', 'whey', 'survey', 'purvey', 'convey', 'disobey'];
 
   static hfReception: string[] = ['I', 'go', 'come', 'want', 'up', 'you', 'day', 'was', 'look', 'are', 'the', 'of', 'we', 'this', 'dog', 'me', 'like', 'going', 'big', 'she', 'and', 'they', 'my', 'see', 'on', 'away', 'mum', 'it', 'at', 'play', 'no', 'yes', 'for', 'a', 'dad', 'can', 'he', 'am', 'all', 'is', 'cat', 'get', 'said', 'to', 'in'];
 
@@ -87,7 +87,7 @@ export class WeeklyComponent implements OnInit {
     switch (chosenid) {      
       case 0: {
         console.log('Case 0');    
-        this.title = 'Canaries - Days of the week';
+        this.title = 'Greenjays - Days of the week';
         this.wordList = WeeklyComponent.weeklyWords;  
         this.suffix='.m4a';       
         break;

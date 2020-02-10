@@ -16,14 +16,17 @@ img {
 
 .inputfont {
     font-family: 'Comic Sans MS', Helvetica, sans-serif;      
-    font-size: 40px;    
+    font-size: 28px;    
     width: 100%;    
 }
 
 .displayfont {
     font-family: 'Comic Sans MS', Helvetica, sans-serif;      
-    font-size: 35px;    
+    font-size: 20px;    
     width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block; 
     color: rgb(18, 201, 18);
 }
 
@@ -41,10 +44,10 @@ img {
     background-color: rgb(73, 167, 76); /* Green */
     border: none;
     color: white;
-    padding: 15px 25px;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block; 
     font-family: 'Comic Sans MS', Helvetica, sans-serif;     
-    font-size: 21px;
+    font-size: 17px;
 }
